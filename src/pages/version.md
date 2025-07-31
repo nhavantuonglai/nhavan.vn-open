@@ -7,7 +7,7 @@ _Thông qua nhiều hình thức và nội dung trình bày, nhavantuonglai th�
 
 ## Giới thiệu dự án
 
-Website [nhavantuonglai.com](https://nhavantuonglai.com/) đang sử dụng mã nguồn tự phát triển [article-open](https://info.nhavantuonglai.com/article-open) để vận hành. Giao diện đang sử dụng là phiên bản mới nhất, được tối ưu và cập nhật sửa lỗi thường xuyên.
+Website [nhavantuonglai.com](https://nhavantuonglai.com/) đang sử dụng mã nguồn tự phát triển [article-open](https://github.com/nhavantuonglai/themes-open) để vận hành. Giao diện đang sử dụng là phiên bản mới nhất, được tối ưu và cập nhật sửa lỗi thường xuyên.
 
 ## Đặc điểm nổi bật
 
@@ -64,6 +64,8 @@ Phiên bản 25.01 kế thừa và phát triển toàn diện từ v24.09, tập
 – 05/03/2025: Tối ưu cấu trúc code tổng thể.
 
 #### Cải tiến kỹ thuật
+
+– 04/07/2025: Tối ưu tốc độ tải trang.
 
 – 13/06/2025: Tối ưu cấu trúc code và logic trang.
 

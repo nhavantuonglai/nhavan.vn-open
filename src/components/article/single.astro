@@ -1,7 +1,8 @@
 ---
 import PostTags from '~/components/article/tags.astro';
 import { getFormattedDate } from '~/utils/utils';
-import type { Post } from '~/types';
+import { findImage } from '~/utils/images';
+import type { Post, ImageMetadata } from '~/types';
 
 export interface Props {
 	post: Post;
@@ -10,23 +11,24 @@ export interface Props {
 
 const { post, url } = Astro.props;
 const { Content } = post;
-const commonClasses = "max-w-3xl mx-auto text-justify";
+const single = "max-w-3xl mx-auto text-justify";
 ---
 
 <section class="max-w-8xl mx-auto py-20 px-4 sm:px-6 pb-10">
+
 	<article>
 
 		<header>
 
-			<h1 class={`${commonClasses} text-4xl md:text-5xl font-bold text-primary leading-tighter tracking-tighter font-heading mt-4 mb-6`}>
+			<h1 class={`${single} text-4xl md:text-5xl font-bold text-primary leading-tighter tracking-tighter font-heading mt-4 mb-6`}>
 				{post.title}
 			</h1>
 
-			<p class={`${commonClasses} text-xl md:text-2xl mt-4 mb-6`}>
+			<p class={`${single} text-xl md:text-2xl mt-4 mb-6`}>
 				{post.description}
 			</p>
 
-			<div class={`${commonClasses} text-xl md:text-2xl flex justify-between flex-col sm:flex-row mt-4 mb-6 sm:items-center`}>
+			<div class={`${single} text-xl md:text-2xl flex justify-between flex-col sm:flex-row mt-4 mb-6 sm:items-center`}>
 
 				<p>
 
@@ -62,21 +64,22 @@ const commonClasses = "max-w-3xl mx-auto text-justify";
 
 		</header>
 
-		<div class={`${commonClasses} mt-4 mb-6`}>
+		<div class={`${single} mt-4 mb-6`}>
 			<div id="index"></div>
 		</div>
 
-		<div class={`${commonClasses} prose prose-xl md:text-2xl prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:text-primary prose-h2:font-bold prose-h3:font-bold prose-h3:italic prose-h4:italic prose-a:font-bold prose-a:text-primary prose-a:target-blank prose-img:rounded-md prose-img:w-full prose-img:h-auto mt-4 mb-6 prose-headings:scroll-mt-[20px]`}>
+		<div class={`${single} prose prose-xl md:text-2xl prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:text-primary prose-h2:font-bold prose-h3:font-bold prose-h3:italic prose-h4:italic prose-a:font-bold prose-a:text-primary prose-a:target-blank prose-img:rounded-md prose-img:w-full prose-img:h-auto mt-4 mb-6 prose-headings:scroll-mt-[20px]`}>
 
 			{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
 
 		</div>
 
-		<div class={`${commonClasses} flex justify-between flex-col sm:flex-row mt-4 mb-6`}>
+		<div class={`${single} flex justify-between flex-col sm:flex-row mt-4 mb-6`}>
 			<PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
 		</div>
 
 	</article>
+
 </section>
 
 <script type="module">

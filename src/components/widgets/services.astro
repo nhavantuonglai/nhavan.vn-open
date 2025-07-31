@@ -19,19 +19,19 @@ const {
 	bg = await Astro.slots.render('bg'),
 } = Astro.props;
 
-const containerClasses = "max-w-7xl mx-auto";
-const contentClasses = "max-w-3xl mx-auto";
+const container = "max-w-7xl mx-auto";
+const contenter = "max-w-3xl mx-auto";
 ---
 
 <section class="relative md:-mt-[76px] not-prose">
 	<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-	<div class={containerClasses}>
+	<div class={container}>
 
 		<div class="pt-0 md:pt-[120px] pointer-events-none"></div>
 
 		<Container
 			id={id}
-			containerClass={`${containerClasses} ${classes?.container ?? ''}`}
+			containerClass={`${container} ${classes?.container ?? ''}`}
 			bg={bg}
 		>
 
@@ -41,8 +41,8 @@ const contentClasses = "max-w-3xl mx-auto";
 				tagline={tagline}
 				classes={{
 					container: 'max-w-xl sm:mx-auto lg:max-w-2xl',
-					title: contentClasses,
-					subtitle: `${contentClasses} sm:text-center text-2xl text-muted`,
+					title: contenter,
+					subtitle: `${contenter} sm:text-center text-2xl text-muted`,
 				}}
 			/>
 
@@ -50,32 +50,43 @@ const contentClasses = "max-w-3xl mx-auto";
 				<div class={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} grid gap-6 md:grid-cols-2 lg:grid-cols-2`}>
 
 					<div class="md:basis-1/2">
+
 						{content && <Fragment set:html={content.trim()} />}
+
 						{callToAction && <Button class="btn" variant="link" {...callToAction} />}
+
 						{items && items.length > 0 && (
 							<div class="mt-10 relative">
 								<div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary to-primary-700 h-full"></div>
+
 								{items.map((item, index) => (
 									<div class="flex mb-8 items-start">
 										<div class="flex-shrink-0 bg-primary text-white rounded-full h-8 w-8 flex items-center justify-center mr-4 z-10"></div>
 										<div class="w-full">
-											<h4>{item.title}</h4> {/* Dùng style từ @layer base h4 */}
-											{item.description && <p>{item.description}</p>} {/* Dùng style từ @layer base p */}
+
+											<h4>{item.title}</h4>
+
+											{item.description && <p>{item.description}</p>}
+
 											{item.callToAction && (
 												<div class="mt-3">
 													<a href={item.callToAction?.href} class="text-primary" target="_blank">
 														{item.callToAction?.text}
-													</a> {/* Dùng style từ @layer base a */}
+													</a>
 												</div>
 											)}
+
 										</div>
 									</div>
 								))}
+
 							</div>
 						)}
+
 					</div>
 
 					<div aria-hidden="true" class="mt-10 md:mt-0 md:basis-1/2">
+
 						{image && (
 							<div class="relative m-auto max-w-4xl">
 								<Image
@@ -85,6 +96,7 @@ const contentClasses = "max-w-3xl mx-auto";
 								/>
 							</div>
 						)}
+
 					</div>
 
 				</div>

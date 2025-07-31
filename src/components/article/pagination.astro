@@ -20,13 +20,13 @@ const commonClasses = "btn";
 
 			{prevUrl && (
 				<Button href={getPermalink(prevUrl)} class={commonClasses} variant="link">
-					<span class="ml-2">{prevText}</span>
+					{prevText}
 				</Button>
 			)}
 
 			{nextUrl && (
 				<Button href={getPermalink(nextUrl)} class={commonClasses} variant="link">
-					<span class="mr-2">{nextText}</span>
+					{nextText}
 				</Button>
 			)}
 

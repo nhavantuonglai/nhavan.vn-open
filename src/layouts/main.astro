@@ -1,6 +1,5 @@
 ---
 import { I18N } from 'nhavantuonglai:config';
-
 import '~/assets/tailwind.css';
 
 import Meta from '~/components/common/meta.astro';
@@ -10,12 +9,9 @@ import Analytics from '~/components/javascript/analytics.astro';
 import Opentab from '~/components/javascript/opentab.astro';
 
 import Anticopy from '~/components/article/anticopy.astro';
-
 import Notification from '~/components/content/main/notification.astro';
-
 import BasicScripts from '~/components/javascript/basic.astro';
-
-import { useState, useEffect } from "react";
+import { getCanonical } from '~/utils/permalinks';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -27,8 +23,6 @@ const { metadata = {} } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
-<!doctype html>
-
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
 
 	<head>
@@ -37,7 +31,10 @@ const { language, textDirection } = I18N;
 
 		<Metadata {...metadata}/>
 
-		<Schema/>
+		<link rel="icon" type="image/x-icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico"/>
+		<link rel="icon" type="image/svg+xml" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.svg"/>
+		<link rel="apple-touch-icon" sizes="180x180" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.png"/>
+		<link rel="shortcut icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico"/>
 
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
@@ -52,35 +49,45 @@ const { language, textDirection } = I18N;
 
 	<body class="antialiased text-default bg-page tracking-tight">
 
-		<slot/>
+		<main>
 
-		<Notification/>
+			<slot/>
 
-		<Opentab/>
+			<Notification/>
 
-		<BasicScripts/>
+			<Schema/>
 
-		<noscript>
+			<Analytics/>
 
-			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WN6L7TJP"
-			
-				height="0" width="0" style="display:none;visibility:hidden">
+			<Anticopy/>
 
-			</iframe>
+			<Opentab/>
 
-		</noscript>
+			<BasicScripts/>
 
-		<amp-auto-ads type="adsense"
+			<noscript>
 
-				data-ad-client="ca-pub-1056697946796503">
+				<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WN6L7TJP"
+				
+					height="0" width="0" style="display:none;visibility:hidden">
 
-		</amp-auto-ads>
+				</iframe>
 
-		<style is:global>
-			img {
-				content-visibility: auto;
-			}
-		</style>
+			</noscript>
+
+			<amp-auto-ads type="adsense"
+
+					data-ad-client="ca-pub-1056697946796503">
+
+			</amp-auto-ads>
+
+			<style is:global>
+				img {
+					content-visibility: auto;
+				}
+			</style>
+
+		</main>
 
 	</body>
 
