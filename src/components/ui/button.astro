@@ -20,19 +20,19 @@ const {
 	...rest
 } = Astro.props;
 
-const baseClass = twMerge('btn', className);
+const base = twMerge('btn text-2xl', className);
 ---
 
 {text && (
 
 	type === 'submit' ? (
-		<button type="submit" class={baseClass} {...rest}>
+		<button type="submit" class={base} {...rest}>
 			{text}
 		</button>
 	) : href ? (
 		<a
 			href={href}
-			class={baseClass}
+			class={base}
 			target={target}
 			rel={target === '_blank' ? 'noopener noreferrer' : undefined}
 			{...rest}
@@ -40,7 +40,7 @@ const baseClass = twMerge('btn', className);
 			{text}
 		</a>
 	) : (
-		<button type="button" class={baseClass} {...rest}>
+		<button type="button" class={base} {...rest}>
 			{text}
 		</button>
 	)

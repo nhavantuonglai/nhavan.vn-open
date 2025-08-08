@@ -1,0 +1,44 @@
+---
+import Container from '~/components/ui/container.astro';
+
+export interface Props {
+	title: string;
+	items: Array<{
+		title: string;
+		description: string;
+	}>;
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="relative not-prose">
+
+	<Container>
+
+		<h2>{title}</h2>
+
+		<div class="mt-10">
+
+			<div class="relative">
+
+				<div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary to-primary-700 h-full"></div>
+
+				{items.map((item) => (
+					<div class="flex mb-6 items-start">
+						<div class="flex-shrink-0 bg-primary text-white rounded-full h-8 w-8 flex items-center justify-center mr-4 z-10">
+						</div>
+						<div class="w-full">
+							<h3>{item.title}</h3>
+							{item.description && <p>{item.description}</p>}
+						</div>
+					</div>
+				))}
+
+			</div>
+
+		</div>
+
+	</Container>
+
+</section>

@@ -55,6 +55,8 @@ Phiên bản 25.01 kế thừa và phát triển toàn diện từ v24.09, tập
 
 #### Cải tiến giao diện
 
+– 31/07/2025: Tích hợp hiệu ứng động.
+
 – 25/05/2025: Cập nhật bộ màu (#a8c686 / RGB: 168, 198, 134).
 
 – 01/04/2025: Cải tiến toàn bộ giao diện người dùng.
@@ -69,7 +71,7 @@ Phiên bản 25.01 kế thừa và phát triển toàn diện từ v24.09, tập
 
 – 13/06/2025: Tối ưu cấu trúc code và logic trang.
 
-– 12/06/2025: Tắt hiệu ứng, icon, thành phần phụ.
+– 12/06/2025: Tắt icon, thành phần phụ.
 
 – 11/06/2025: Tối ưu kỹ thuật deployments và tải trang.
 
@@ -84,8 +86,6 @@ Phiên bản 25.01 kế thừa và phát triển toàn diện từ v24.09, tập
 – 14/02/2025: Đồng bộ cấu trúc Analytics.
 
 – 09/02/2025: Cải tiến bố cục mục Article.
-
-– 03/02/2025: Tích hợp Framer Motion cho hiệu ứng động.
 
 – 02/02/2025: Đồng bộ thuộc tính CSS.
 

@@ -4,35 +4,18 @@ import { twMerge } from 'tailwind-merge';
 
 export interface Props {
 	title?: string;
-	subtitle?: string;
-	tagline?: string;
-	classes?: Record<string, string>;
 }
 
 const {
 	title = await Astro.slots.render('title'),
-	subtitle = await Astro.slots.render('subtitle'),
-	tagline,
-	classes = {},
 } = Astro.props;
-
-const {
-	container: containerClass = '',
-	title: titleClass = '',
-	subtitle: subtitleClass = '',
-	tagline: taglineClass = 'text-2xl text-muted mb-6',
-} = classes;
 ---
 
-{(title || subtitle || tagline) && (
+{(title) && (
 
-	<div class={twMerge('content-container', containerClass)}>
+	<div>
 
-		{tagline && <p class={taglineClass} set:html={tagline} />}
-
-		{title && <h2 class={titleClass} set:html={title} />}
-
-		{subtitle && <p class={subtitleClass} set:html={subtitle} />}
+		{title && <h2 set:html={title} />}
 
 	</div>
 

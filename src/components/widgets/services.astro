@@ -8,42 +8,26 @@ import Image from '~/components/common/image.astro';
 const {
 	title = await Astro.slots.render('title'),
 	subtitle = await Astro.slots.render('subtitle'),
-	tagline,
 	content = await Astro.slots.render('content'),
 	callToAction,
 	items = [],
 	image,
 	isReversed = false,
-	id,
-	classes = {},
-	bg = await Astro.slots.render('bg'),
 } = Astro.props;
 
-const container = "max-w-7xl mx-auto";
-const contenter = "max-w-3xl mx-auto";
 ---
 
 <section class="relative md:-mt-[76px] not-prose">
 	<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-	<div class={container}>
+	<div>
 
 		<div class="pt-0 md:pt-[120px] pointer-events-none"></div>
 
-		<Container
-			id={id}
-			containerClass={`${container} ${classes?.container ?? ''}`}
-			bg={bg}
-		>
+		<Container>
 
 			<Headline
 				title={title}
 				subtitle={subtitle}
-				tagline={tagline}
-				classes={{
-					container: 'max-w-xl sm:mx-auto lg:max-w-2xl',
-					title: contenter,
-					subtitle: `${contenter} sm:text-center text-2xl text-muted`,
-				}}
 			/>
 
 			<div class="md:mx-auto">
@@ -60,7 +44,7 @@ const contenter = "max-w-3xl mx-auto";
 								<div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary to-primary-700 h-full"></div>
 
 								{items.map((item, index) => (
-									<div class="flex mb-8 items-start">
+									<div class="flex mb-6 items-start">
 										<div class="flex-shrink-0 bg-primary text-white rounded-full h-8 w-8 flex items-center justify-center mr-4 z-10"></div>
 										<div class="w-full">
 

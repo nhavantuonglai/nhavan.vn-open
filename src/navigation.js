@@ -27,6 +27,7 @@ export const headerData = {
 					],
 				},
 				{ text: "Trạng thái", href: "https://nhavantuonglai.openstatus.dev" },
+				{ text: "Liên hệ", href: "https://nhavantuonglai.com/contact" },
 			],
 		},
 
@@ -91,7 +92,6 @@ export const headerData = {
 					href: "https://nhavantuonglai.com/tags/tam-ly-hoc",
 					links: [
 						{ text: "Tham vấn tâm lý", href: "https://nhavantuonglai.com/tags/tham-van-tam-ly" },
-						{ text: "Tội phạm học", href: "https://nhavantuonglai.com/tags/toi-pham-hoc" },
 						{ text: "Vấn đề tâm lý", href: "https://nhavantuonglai.com/tags/van-de-tam-ly" },
 						{ text: "Tâm lý động vật", href: "https://nhavantuonglai.com/tags/tam-ly-dong-vat" },
 					],
@@ -101,7 +101,6 @@ export const headerData = {
 					href: "https://nhavantuonglai.com/tags/ton-giao",
 					links: [
 						{ text: "Phật giáo", href: "https://nhavantuonglai.com/tags/phat-giao" },
-						{ text: "Khổng giáo", href: "https://nhavantuonglai.com/tags/khong-giao" },
 						{ text: "Đạo giáo", href: "https://nhavantuonglai.com/tags/dao-giao" },
 						{ text: "Hồi giáo", href: "https://nhavantuonglai.com/tags/hoi-giao" },
 						{ text: "Thiên chúa", href: "https://nhavantuonglai.com/tags/thien-chua" },
@@ -139,7 +138,7 @@ export const headerData = {
 				},
 				{
 					text: "Phần mềm",
-					href: "https://nhavantuonglai.com/tags/phan-mem",
+					href: "https://nhavantuonglai.com",
 					links: [
 						{ text: "Phần mềm Android", href: "https://nhavantuonglai.com/tags/phan-mem-android" },
 						{ text: "Phần mềm iOS", href: "https://nhavantuonglai.com/tags/phan-mem-ios" },

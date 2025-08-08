@@ -22,7 +22,7 @@ const truncateText = (text: string, maxWords: number, isTitle: boolean = false) 
 ---
 
 {posts && posts.length > 0 && (
-	<div class={layout === 'grid' ? 'grid mb-6 gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-2' : 'list-none'}>
+	<div class={layout === 'grid' ? 'grid mb-6 gap-6 row-gap-5 md:grid-cols-3' : 'list-none'}>
 
 		{posts.map(async (post) => {
 			const image = await findImage(post.image) as ImageMetadata | string | undefined;
@@ -33,7 +33,7 @@ const truncateText = (text: string, maxWords: number, isTitle: boolean = false) 
 				<article
 					class={`mb-6 p-6 rounded-lg w-full bg-white ${
 						layout === 'grid' ? '' : 'text-justify md:mb-62'
-					} ${variant === 'detailed' && image ? 'md:grid md:grid-cols-2 md:gap-8' : ''}`}
+					} ${variant === 'detailed' && image ? 'grid-cols-3 md:gap-8' : ''}`}
 				>
 
 					{image && (
@@ -51,7 +51,7 @@ const truncateText = (text: string, maxWords: number, isTitle: boolean = false) 
 					<div>
 						<h3 class={variant === 'detailed' ? commonClasses : ''}>
 							{APP_BLOG?.post?.isEnabled ? (
-								<a href={link} class="hover:text-primary" target="_blank">
+								<a href={link} class="text-primary" target="_blank">
 									{truncateText(post.title, 60, true)}
 								</a>
 							) : (
@@ -59,7 +59,7 @@ const truncateText = (text: string, maxWords: number, isTitle: boolean = false) 
 							)}
 						</h3>
 						{post.description && (
-							<p class="text-xl">{truncateText(post.description, variant === 'compact' ? 30 : 30)}</p>
+							<p>{truncateText(post.description, variant === 'compact' ? 30 : 30)}</p>
 						)}
 					</div>
 

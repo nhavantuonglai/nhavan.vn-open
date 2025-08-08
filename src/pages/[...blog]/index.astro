@@ -11,6 +11,9 @@ import Related from '~/components/article/featured.astro';
 
 import About from '~/components/content/main/about.astro';
 
+import Form from '~/components/content/main/form.astro';
+import Action from '~/components/content/main/action.astro';
+
 export const prerender = true;
 
 export const getStaticPaths = (async () => {
@@ -46,5 +49,9 @@ const metadata = {
 	<About/>
 
 	<Related post={post}/>
+
+	<Form/>
+
+	<Action/>
 
 </Layout>

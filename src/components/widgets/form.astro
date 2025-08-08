@@ -1,0 +1,127 @@
+---
+import type { Content as Props } from '~/types';
+import Headline from '~/components/ui/headline.astro';
+import Container from '~/components/ui/container.astro';
+import Button from '~/components/ui/button.astro';
+
+const {
+	title = await Astro.slots.render('title'),
+	subtitle = await Astro.slots.render('subtitle'),
+	content = await Astro.slots.render('content'),
+	items = [],
+	formFields = [],
+} = Astro.props;
+---
+
+<section class="relative not-prose">
+
+	<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+	<div>
+
+		<Container>
+
+			<Headline
+				title={title}
+				subtitle={subtitle}
+			/>
+
+			<div class="md:mx-auto">
+				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+
+					<div class="md:basis-1/2">
+
+						{content && <p set:html={content.trim()} />}
+
+					</div>
+
+					<div class="mt-10 md:mt-0 md:basis-1/2">
+
+						<div class="form-wrapper mx-auto max-w-7xl" style="min-height: 360px;">
+
+							<div id="form-container">
+								<form id="newsletter-form" class="mx-auto max-w-7xl" method="post">
+
+									{formFields.map(field => (
+										<div class="mb-6">
+
+											<p>{field.label}</p>
+
+											<input
+												type={field.type}
+												name={field.name}
+												class={`block w-full text-md rounded-lg border border-gray-200 bg-white py-3 px-4`}
+												required={field.required}
+											/>
+
+										</div>
+									))}
+
+									<Button type="submit" class="mb-6">Đăng ký</Button>
+
+								</form>
+
+							</div>
+
+							<div id="success-message" class="hidden">
+
+								<p class="mb-6">Cảm ơn bạn đã điền, thông tin đã được ghi lại.</p>
+
+								<Button id="reset-form" class="mb-6">Quay lại</Button>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</Container>
+
+	</div>
+
+	<script>
+		const formContainer = document.getElementById('form-container');
+		const successMessage = document.getElementById('success-message');
+		const form = document.getElementById('newsletter-form');
+		const resetButton = document.getElementById('reset-form');
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+
+			const formData = new FormData(form);
+			const data = {
+				'entry.778952885': formData.get('ho-va-ten'),
+				'entry.321884196': formData.get('email'),
+				'entry.306172217': formData.get('noi-dung')
+			};
+
+			try {
+				const response = await fetch('https://docs.google.com/forms/d/e/1FAIpQLSe0e33z0LrEatvA145qVx7V3oyLzTiFKj3jUOwNP733xwfBGw/formResponse', {
+					method: 'POST',
+					mode: 'no-cors',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					body: new URLSearchParams(data).toString()
+				});
+				formContainer.classList.add('hidden');
+				successMessage.classList.remove('hidden');
+				form.reset();
+			} catch (error) {
+				console.error('Lỗi khi gửi dữ liệu:', error);
+				success.CSS
+				successMessage.innerHTML = '<p class="text-xl mb-4">Có lỗi xảy ra, vui lòng thử lại.</p><button id="reset-form" class="text-2xl mb-6">Điền lại</button>';
+				successMessage.classList.remove('hidden');
+				formContainer.classList.add('hidden');
+			}
+		});
+
+		resetButton.addEventListener('click', () => {
+			formContainer.classList.remove('hidden');
+			successMessage.classList.add('hidden');
+		});
+	</script>
+
+</section>

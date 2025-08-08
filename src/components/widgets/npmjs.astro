@@ -1,0 +1,141 @@
+---
+const charts = [
+	{
+		title: 'Contributions Github gần đây',
+		dataUrl: 'https://raw.githubusercontent.com/nhavantuonglai/analytics/main/datanow/kiem-tra-github.json',
+		chartId: 'github-chart',
+	},
+	{
+		title: 'Lượt tải NPMJS gần đây',
+		dataUrl: 'https://raw.githubusercontent.com/nhavantuonglai/analytics/main/datanow/kiem-tra-npmjs.json',
+		chartId: 'npmjs-chart',
+	},
+];
+---
+
+{charts.map(chart => (
+	<div class="mb-6 md:mb-62 relative mx-auto max-w-7xl px-4 md:px-6 text-default" data-chart-id={chart.chartId} data-url={chart.dataUrl}>
+		<h2>{chart.title}</h2>
+		<div class="p-4 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+			<div id={chart.chartId}></div>
+		</div>
+	</div>
+))}
+
+<script>
+
+	import apexcharts from 'apexcharts';
+
+	async function fetchData(url) {
+		const response = await fetch(url);
+		return response.json();
+	}
+
+	function formatDate(dateStr) {
+		const date = new Date(dateStr.slice(0, 4), dateStr.slice(4, 6) - 1, dateStr.slice(6, 8));
+		return date.toLocaleDateString('en-US', { day: '2-digit', month: 'short' });
+	}
+
+	async function renderChart() {
+		document.querySelectorAll('[data-chart-id]').forEach(async (container) => {
+			const chartId = container.getAttribute('data-chart-id');
+			const dataUrl = container.getAttribute('data-url');
+			const data = await fetchData(dataUrl);
+			const dates = Object.keys(data).sort();
+			const downloads = dates.map((date) => data[date]);
+			const formattedDates = dates.map(formatDate);
+
+			const options = {
+				chart: {
+					height: 420,
+					type: 'area',
+					foreColor: 'var(--aw-color-muted)',
+					toolbar: { show: false },
+					zoom: { enabled: false },
+				},
+				series: [
+					{
+						name: chartId === 'github-chart' ? 'Contributions' : 'Lượt tải',
+						data: downloads,
+						color: 'var(--aw-color-primary)',
+					},
+				],
+				xaxis: {
+					categories: formattedDates,
+					labels: {
+						style: {
+							colors: 'var(--aw-color-muted)',
+							fontWeight: 500,
+						},
+					},
+					axisBorder: {
+						color: document.documentElement.classList.contains('dark') ? '#374151' : '#F3F4F6',
+					},
+					axisTicks: {
+						color: document.documentElement.classList.contains('dark') ? '#374151' : '#F3F4F6',
+					},
+				},
+				yaxis: {
+					labels: {
+						style: {
+							colors: 'var(--aw-color-muted)',
+							fontSize: '14px',
+							fontWeight: 500,
+						},
+						formatter: (value) => value.toLocaleString(),
+					},
+				},
+				fill: {
+					type: 'gradient',
+					gradient: {
+						opacityFrom: document.documentElement.classList.contains('dark') ? 0 : 0.45,
+						opacityTo: document.documentElement.classList.contains('dark') ? 0.15 : 0,
+					},
+				},
+				dataLabels: { enabled: false },
+				tooltip: {
+					style: {
+						fontSize: '14px',
+						fontFamily: 'Inter, sans-serif',
+						colors: ['var(--aw-color-default)'],
+					},
+				},
+				grid: {
+					borderColor: document.documentElement.classList.contains('dark') ? '#374151' : '#F3F4F6',
+					strokeDashArray: 1,
+					padding: { left: 35, bottom: 15 },
+				},
+				markers: {
+					size: 5,
+					strokeColors: '#ffffff',
+				},
+			};
+
+			const chart = new apexcharts(document.getElementById(chartId), options);
+			chart.render();
+
+			document.addEventListener('dark-mode', () => {
+				chart.updateOptions(options);
+			});
+		});
+	}
+
+	renderChart();
+
+</script>
+
+<style is:global>
+
+	.apexcharts-tooltip {
+		@apply bg-white dark:bg-gray-700 text-gray-500 dark:text-gray-400 border-0 rounded-lg shadow-lg !important;
+	}
+
+	.apexcharts-tooltip .apexcharts-tooltip-title {
+		@apply py-2 px-4 bg-gray-100 dark:bg-gray-600 border-b border-gray-200 dark:border-gray-500 !important;
+	}
+
+	.apexcharts-xaxistooltip {
+		@apply text-gray-500 border-0 bg-white dark:bg-gray-700 dark:text-gray-300 rounded-lg shadow-lg !important;
+	}
+
+</style>

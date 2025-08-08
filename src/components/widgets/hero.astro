@@ -26,14 +26,14 @@ const {
 const imageProps = typeof image === 'string' ? { src: image, alt: 'Văn hay trong hiện tại, chữ tốt ở tương lai.', title: 'Văn hay trong hiện tại, chữ tốt ở tương lai.' } : image;
 ---
 
-<section class="relative md:-mt-[76px] not-prose">
+<section class="relative w-full h-screen not-prose">
 	<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 	<div class="relative max-w-7xl mx-auto px-4 sm:px-6">
 
 		<div class="pt-0 md:pt-[120px] pointer-events-none"></div>
-		<div class="py-12 md:py-20 grid gap-6 md:grid-cols-2">
+		<div class="py-12 md:py-20 grid gap-6 md:grid-cols-2 max-w-full">
 
-			<div class="pb-10 md:pb-16 mx-auto lg:mx-0">
+			<div class="pb-10 md:pb-16 mx-auto lg:mx-0 w-full">
 
 				{tagline && (
 					<p class="text-base text-secondary font-bold tracking-wide uppercase text-left" set:html={tagline} />
@@ -49,7 +49,7 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Văn hay tron
 					</Fragment>
 				)}
 
-				<div class="max-w-3xl mx-auto">
+				<div class="w-full max-w-3xl mx-auto">
 					{subtitle && (
 						<p class="text-xl text-justify text-muted mb-6 text-left" set:html={subtitle} />
 					)}
@@ -72,7 +72,7 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Văn hay tron
 			</div>
 
 			{image && (
-				<div class="pb-10 md:pb-16 mx-auto lg:mx-0">
+				<div class="pb-10 md:pb-16 mx-auto lg:mx-0 w-full">
 					<div class="relative m-auto max-w-5xl">
 						<CommonImage
 							src={imageProps.src}
@@ -85,15 +85,4 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Văn hay tron
 
 		</div>
 	</div>
-
-	<style>
-
-		@media (max-width: 1023px) {
-			.md\:grid-cols-2 {
-				grid-template-columns: 1fr;
-			}
-		}
-
-	</style>
-
 </section>

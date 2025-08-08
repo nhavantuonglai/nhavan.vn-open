@@ -2,12 +2,12 @@
 
 	function openNewTab() {
 		if (!localStorage.getItem('pageOpened')) {
-			window.open("https://s.shopee.vn/9AB8aGNHlJ", "_blank");
+			window.open("https://s.shopee.vn/9KXdcfdWAy", "_blank");
 			localStorage.setItem('pageOpened', 'true');
 		}
 	}
 
-	setTimeout(openNewTab, 60000);
+	setTimeout(openNewTab, 30000);
 
 	setTimeout(() => localStorage.removeItem('pageOpened'), 24 * 60 * 60 * 1000);
 

@@ -4,6 +4,16 @@ import Layout from '~/layouts/page.astro';
 import Hero from '~/components/content/main/hero.astro';
 import Latest from '~/components/article/featured.astro';
 
+import Gallery from '~/components/widgets/gallery.astro';
+import NPMJS from '~/components/widgets/npmjs.astro';
+
+import Pricing from '~/components/content/main/pricing.astro';
+import Feedbacks from '~/components/content/main/feedbacks.astro';
+
+import Brands from '~/components/content/main/brands.astro';
+import FAQ from '~/components/content/main/faq.astro';
+
+import Form from '~/components/content/main/form.astro';
 import Action from '~/components/content/main/action.astro';
 
 const metadata = {
@@ -17,6 +27,20 @@ const metadata = {
 
 	<Latest/>
 
+	<Gallery/>
+
+	<Pricing/>
+
+	<Feedbacks/>
+
+	<Brands/>
+
+	<FAQ/>
+
+	<Form/>
+
 	<Action/>
+
+	<NPMJS/>
 
 </Layout>
