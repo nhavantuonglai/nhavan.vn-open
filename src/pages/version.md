@@ -67,6 +67,8 @@ Phiên bản 25.01 kế thừa và phát triển toàn diện từ v24.09, tập
 
 #### Cải tiến kỹ thuật
 
+– 08/08/2025: Tối ưu trang bài viết.
+
 – 04/07/2025: Tối ưu tốc độ tải trang.
 
 – 13/06/2025: Tối ưu cấu trúc code và logic trang.

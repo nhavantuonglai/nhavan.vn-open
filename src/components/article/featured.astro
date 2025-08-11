@@ -2,73 +2,130 @@
 import { APP_BLOG } from 'nhavantuonglai:config';
 import PostList from '~/components/article/article.astro';
 import Container from '~/components/ui/container.astro';
-import { getBlogPermalink } from '~/utils/permalinks';
-import { findLatestPosts, findPostsByIds, fetchPosts, getRelatedPosts } from '~/utils/blog';
-import type { Widget, Post } from '~/types';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
+import { fetchPosts } from '~/utils/blog';
+import type { Post } from '~/types';
 
-export interface Props extends Widget {
-	title?: string;
+export interface Props {
 	linkText?: string;
 	linkUrl?: string | URL;
 	information?: string;
-	mode?: 'latest' | 'related' | 'highlighted';
-	postIds?: string[];
-	slug?: string;
-	count?: number;
+	id?: string;
+	classes?: Record<string, string>;
+	tags?: string | string[];
+	bg?: any;
 }
 
 const {
-	title = await Astro.slots.render('title') || 'Bài viết gần đây',
 	linkText = 'Xem tất cả',
-	linkUrl = getBlogPermalink(),
 	information = await Astro.slots.render('information'),
-	mode = 'latest',
-	postIds = [],
-	slug,
-	count = 6,
 	id,
 	classes = {},
 	bg = await Astro.slots.render('bg'),
+	tags
 } = Astro.props;
 
 const containerClasses = "relative mx-auto max-w-7xl px-4 md:px-6 text-default";
 
-let posts: Post[] = [];
+const isAll = !tags || (typeof tags === 'string' && tags === '0');
+const isMultiSignal = typeof tags === 'string' && tags === '1';
+const providedTagList = Array.isArray(tags) ? tags.map(String).filter(Boolean) : [];
+
+const key = Astro.url?.pathname || 'global';
+const registry = (globalThis as any).__LATEST_REGISTRY || ((globalThis as any).__LATEST_REGISTRY = new Map());
+let used: Set<string> = registry.get(key) || new Set<string>();
+registry.set(key, used);
+
+let blocks: Array<{ title: string; posts: Post[]; tagSlug?: string }> = [];
+
 if (APP_BLOG.isEnabled) {
-	if (mode === 'latest') {
-		posts = await findLatestPosts({ count });
-	} else if (mode === 'highlighted') {
-		posts = await findPostsByIds(postIds);
-	} else if (mode === 'related' && slug) {
-		const fetchedPosts = await fetchPosts();
-		posts = getRelatedPosts(fetchedPosts, slug).sort(() => Math.random() - 0.5).slice(0, count);
+	const all = await fetchPosts();
+
+	const hasTag = (p: Post, t: string) =>
+		(p.tags || []).map(String).some(x => x.toLowerCase() === t.toLowerCase());
+
+	const pickByTag = (tag: string, limit = 6) => {
+		const out: Post[] = [];
+		for (const p of all) {
+			if (used.has(p.permalink)) continue;
+			if (hasTag(p, tag)) {
+				out.push(p);
+				used.add(p.permalink);
+				if (out.length === limit) break;
+			}
+		}
+		return out;
+	};
+
+	if (isAll) {
+		const posts = all.filter(p => !used.has(p.permalink));
+		posts.forEach(p => used.add(p.permalink));
+		blocks = [{ title: 'Thư viện bài viết', posts }];
+	} else if (isMultiSignal || providedTagList.length > 0) {
+		let sourceTags: string[] = [];
+
+		if (providedTagList.length > 0) {
+			sourceTags = [...new Set(providedTagList)];
+		} else {
+			const current = all.find(p => getPermalink(p.permalink, 'post') === Astro.url.pathname);
+			sourceTags = [...new Set((current?.tags || []).map(String))];
+		}
+
+		if (sourceTags.length === 0) {
+			const freq = new Map<string, number>();
+			all.forEach(p => (p.tags || []).forEach(t => freq.set(String(t), (freq.get(String(t)) || 0) + 1)));
+			sourceTags = Array.from(freq.keys());
+		}
+
+		for (let i = sourceTags.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[sourceTags[i], sourceTags[j]] = [sourceTags[j], sourceTags[i]];
+		}
+		sourceTags = sourceTags.slice(0, 4);
+
+		for (const t of sourceTags) {
+			const subset = pickByTag(t, 6);
+			if (subset.length > 0) blocks.push({ title: `Chuyên mục ${t}`, posts: subset, tagSlug: t });
+		}
+	} else {
+		const tag = String(tags);
+		const filtered = all.filter(p => !used.has(p.permalink) && hasTag(p, tag)).slice(0, 6);
+		filtered.forEach(p => used.add(p.permalink));
+		blocks = [{ title: `Chuyên mục ${tag}`, posts: filtered, tagSlug: tag }];
 	}
 }
 ---
 
-{posts.length > 0 && (
+{blocks.length > 0 && blocks.map(b => {
 
-	<Container id={id} containerClass={`${containerClasses} ${classes?.container || ''}`} bg={bg} class="mb-6 md:mb-62">
+	const tagLink = b.tagSlug ? `https://nhavantuonglai.com/tags/${encodeURIComponent(b.tagSlug)}` : getBlogPermalink();
 
-		<div class="flex flex-col lg:justify-between lg:flex-row mb-6">
+	return (
 
-			<div class="md:max-w-sm">
-				<h2 set:html={title} />
+		<Container id={id} containerClass={`${containerClasses} ${classes?.container || ''}`} bg={bg} class="mb-6 md:mb-62">
 
-				{APP_BLOG.list.isEnabled && linkText && linkUrl && (
-					<a class="hover:text-primary block mb-6 lg:mb-0" href={linkUrl} target="_blank">
-						{linkText} »
-					</a>
-				)}
+			<div class="flex flex-col lg:justify-between lg:flex-row mb-6">
+
+				<div class="md:max-w-sm">
+
+					<h2 set:html={b.title} />
+
+					{APP_BLOG.list.isEnabled && linkText && (
+						<a class="hover:text-primary block mb-6 lg:mb-0" href={tagLink} target="_blank">
+							{linkText} »
+						</a>
+					)}
+
+				</div>
+
+				{information && <p class="text-muted lg:text-sm lg:max-w-md" set:html={information} />}
 
 			</div>
 
-			{information && <p class="text-muted lg:text-sm lg:max-w-md" set:html={information} />}
+			<PostList posts={b.posts} layout="grid" variant="compact" />
 
-		</div>
+		</Container>
 
-		<PostList posts={posts} layout="grid" variant="compact" />
+	);
 
-	</Container>
-
-)}
+})}

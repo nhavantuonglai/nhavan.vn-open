@@ -1,5 +1,9 @@
 ---
 import PostTags from '~/components/article/tags.astro';
+
+import About from '~/components/content/main/about.astro';
+import Latest from '~/components/article/featured.astro';
+
 import { getFormattedDate } from '~/utils/utils';
 import { findImage } from '~/utils/images';
 import type { Post, ImageMetadata } from '~/types';
@@ -11,84 +15,207 @@ export interface Props {
 
 const { post, url } = Astro.props;
 const { Content } = post;
-const single = "max-w-3xl mx-auto text-justify";
+const single = "text-justify text-2xl mt-4 mb-6";
 ---
 
 <section class="max-w-8xl mx-auto py-20 px-4 sm:px-6 pb-10">
 
-	<article>
+	<article class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-		<header>
+		<div class="md:col-span-2">
 
-			<h1 class={`${single} text-4xl md:text-5xl font-bold text-primary leading-tighter tracking-tighter font-heading mt-4 mb-6`}>
-				{post.title}
-			</h1>
+			<header>
 
-			<p class={`${single} text-xl md:text-2xl mt-4 mb-6`}>
-				{post.description}
-			</p>
+				<h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+					{post.title}
+				</h1>
 
-			<div class={`${single} text-xl md:text-2xl flex justify-between flex-col sm:flex-row mt-4 mb-6 sm:items-center`}>
-
-				<p>
-
-					<time datetime={post.pubDatetime} class="inline-block">
-						{`${new Date(post.pubDatetime)
-							.toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' })
-							.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, 'Đăng ngày $1 tháng $2 năm $3')}`}
-					</time>
-
-					{post.readingTime && (
-						<>
-							· <span>{post.readingTime}</span> phút đọc
-						</>
-					)}
-
-					<span id="counter"></span> lượt xem.
-
-					<script client:load>
-						let count = localStorage.getItem('pageCounter');
-						if (count === null) {
-							count = Math.floor(Math.random() * (543 - 74 + 1)) + 45;
-						} else {
-							count = parseInt(count);
-						}
-						count += 1;
-						localStorage.setItem('pageCounter', count);
-						const counterElement = document.getElementById('counter');
-						counterElement.textContent = count;
-					</script>
-
+				<p class={`${single}`}>
+					{post.description}
 				</p>
+
+				<div class={`${single} flex justify-between flex-col sm:flex-row sm:items-center`}>
+
+					<p>
+
+						<time datetime={post.pubDatetime} class="inline-block">
+							{`${new Date(post.pubDatetime)
+								.toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' })
+								.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, 'Đăng ngày $1 tháng $2 năm $3')}`}
+						</time>
+
+						{post.readingTime && (
+							<>
+								| <span>{post.readingTime}</span> phút đọc
+							</>
+						)}
+
+						| <span id="counter"></span> lượt xem.
+
+						<script client:load>
+							let count = localStorage.getItem('pageCounter');
+							if (count === null) {
+								count = Math.floor(Math.random() * (543 - 74 + 1)) + 45;
+							} else {
+								count = parseInt(count);
+							}
+							count += 1;
+							localStorage.setItem('pageCounter', count);
+							const counterElement = document.getElementById('counter');
+							counterElement.textContent = count;
+						</script>
+
+					</p>
+				</div>
+
+				{post.image && (
+					<div class="mb-6">
+						<img src={post.image} alt={post.title} title={post.title} loading="lazy" class="w-full h-auto rounded-md" />
+					</div>
+				)}
+
+			</header>
+
+			<div class={`${single} prose prose-xl prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:text-primary prose-h2:font-bold prose-h3:font-bold prose-h3:italic prose-h4:italic prose-a:font-bold prose-a:text-primary prose-a:target-blank prose-img:rounded-md prose-img:w-full prose-img:h-auto prose-headings:scroll-mt-[20px]`} id="post-content">
+
+				{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
+
 			</div>
 
-		</header>
-
-		<div class={`${single} mt-4 mb-6`}>
-			<div id="index"></div>
-		</div>
-
-		<div class={`${single} prose prose-xl md:text-2xl prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:text-primary prose-h2:font-bold prose-h3:font-bold prose-h3:italic prose-h4:italic prose-a:font-bold prose-a:text-primary prose-a:target-blank prose-img:rounded-md prose-img:w-full prose-img:h-auto mt-4 mb-6 prose-headings:scroll-mt-[20px]`}>
-
-			{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
+			<div class={`${single} flex justify-between flex-col sm:flex-row`}>
+				<PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+			</div>
 
 		</div>
 
-		<div class={`${single} flex justify-between flex-col sm:flex-row mt-4 mb-6`}>
-			<PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+		<div class="md:col-span-1 hidden md:block">
+			<div id="index" class="toc mt-0"></div>
+		</div>
+
+		<div id="reading-progress-container" class="reading-progress-container">
+
+			<div class="reading-progress-inner max-w-8xl mx-auto px-4 sm:px-6 w-full">
+
+				<div class="reading-progress-info">
+					<span id="reading-percentage">0%</span>
+				</div>
+
+				<div class="reading-progress-bar">
+					<div id="reading-progress-fill" class="reading-progress-fill"></div>
+				</div>
+
+			</div>
+
 		</div>
 
 	</article>
 
 </section>
 
+<About/>
+
+<Latest tags="1"/>
+
+<style>
+
+	.toc {
+		position: sticky;
+		top: 30px;
+		max-height: calc(100vh - 40px);
+		overflow-y: auto;
+		scrollbar-width: none;
+	}
+	.toc::-webkit-scrollbar { display: none; }
+	.toc ul { list-style-type: none; padding-left: 1rem; }
+	.toc ul ul { padding-left: 2rem; }
+	.toc a { text-decoration: none; color: #1a73e8; }
+	.toc a:hover { text-decoration: underline; }
+
+	.reading-progress-container {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		background: rgb(255 255 255 / 0.8);
+		backdrop-filter: blur(0.375rem);
+		border-top: 1px solid rgb(229 231 235 / 0.5);
+		padding: 0.125rem 0;
+		z-index: 50;
+		height: 24px;
+		transition: transform 0.3s ease-in-out;
+		transform: translateY(0);
+	}
+	.reading-progress-container.hidden { transform: translateY(100%); }
+
+	.reading-progress-inner {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		height: 100%;
+	}
+
+	.reading-progress-info {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: #374151;
+		white-space: nowrap;
+	}
+	#reading-percentage { font-weight: 600; color: var(--aw-color-primary, #1a73e8); min-width: 28px; }
+
+	.reading-progress-bar {
+		flex: 1;
+		height: 4px;
+		background: #e5e7eb;
+		border-radius: 2px;
+		overflow: hidden;
+		position: relative;
+	}
+	.reading-progress-fill {
+		height: 100%;
+		background: var(--aw-color-primary, #1a73e8);
+		border-radius: 2px;
+		width: 0%;
+		transition: width 0.1s ease-out;
+		position: relative;
+	}
+	.reading-progress-fill::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 16px;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+		border-radius: 2px;
+	}
+
+	@media (max-width: 640px) {
+		.reading-progress-info { font-size: 0.6875rem; }
+		#reading-percentage { min-width: 24px; }
+		.reading-progress-bar { height: 3px; }
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.reading-progress-container { background: rgb(17 24 39 / 0.8); border-top-color: rgb(255 255 255 / 0.1); }
+		.reading-progress-info { color: #d1d5db; }
+		.reading-progress-bar { background: #374151; }
+	}
+
+</style>
+
 <script type="module">
 
 	function generateTOC() {
 		const index = document.getElementById('index');
-		const headings = document.querySelectorAll('h2, h3, h4');
+		const contentElement = document.getElementById('post-content');
+		const headings = contentElement.querySelectorAll('h2, h3, h4');
 		const tocList = document.createElement('ul');
 		let currentParent = null;
+		const tocLinks = [];
 
 		headings.forEach(heading => {
 			const listItem = document.createElement('li');
@@ -96,6 +223,7 @@ const single = "max-w-3xl mx-auto text-justify";
 			anchor.href = `#${heading.id}`;
 			anchor.textContent = heading.textContent;
 			listItem.appendChild(anchor);
+			tocLinks.push({ anchor, heading });
 
 			switch (heading.tagName.toLowerCase()) {
 				case 'h2':
@@ -120,19 +248,133 @@ const single = "max-w-3xl mx-auto text-justify";
 		});
 
 		index.appendChild(tocList);
-		hideLastTOCItems(tocList, 16);
-	}
 
-	function hideLastTOCItems(tocList, count) {
-		const items = tocList.querySelectorAll('li');
-		const totalItems = items.length;
-		const itemsToHide = Math.min(count, totalItems);
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const headingId = entry.target.id;
+						const tocLink = tocLinks.find(link => link.heading.id === headingId);
+						if (tocLink) {
+							const toc = document.getElementById('index');
+							const linkRect = tocLink.anchor.getBoundingClientRect();
+							const tocRect = toc.getBoundingClientRect();
+							const offset = linkRect.top - tocRect.top;
+							toc.scrollBy({ top: offset, behavior: 'smooth' });
+						}
+					}
+				});
+			},
+			{ rootMargin: '-100px 0px -66% 0px', threshold: 0.1 }
+		);
 
-		for (let i = totalItems - itemsToHide; i < totalItems; i++) {
-			items[i].style.display = 'none';
+		headings.forEach(heading => observer.observe(heading));
+
+		function handleScroll() {
+			const toc = document.getElementById('index');
+			const content = document.getElementById('post-content');
+			if (!toc || !content) return;
+			const contentRect = content.getBoundingClientRect();
+			const viewportHeight = window.innerHeight;
+			if (contentRect.bottom < viewportHeight) {
+				toc.style.display = 'none';
+			} else {
+				toc.style.display = 'block';
+			}
 		}
+
+		window.addEventListener('scroll', handleScroll);
+		handleScroll();
 	}
 
-	window.requestAnimationFrame(generateTOC);
+	function initReadingProgress() {
+		const progressContainer = document.getElementById('reading-progress-container');
+		const progressFill = document.getElementById('reading-progress-fill');
+		const progressPercentage = document.getElementById('reading-percentage');
+		const postContent = document.getElementById('post-content');
+
+		if (!progressContainer || !progressFill || !progressPercentage || !postContent) {
+			return;
+		}
+
+		let isContentVisible = false;
+		let lastScrollTop = 0;
+		let ticking = false;
+
+		function updateReadingProgress() {
+			const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+			const contentRect = postContent.getBoundingClientRect();
+			const contentTop = contentRect.top + currentScroll;
+			const contentHeight = contentRect.height;
+			const windowHeight = window.innerHeight;
+			const contentStart = contentTop - windowHeight * 0.2;
+			const contentEnd = contentTop + contentHeight - windowHeight * 0.8;
+
+			let progress = 0;
+			let shouldShow = false;
+
+			if (currentScroll >= contentStart) {
+				shouldShow = true;
+				if (currentScroll >= contentEnd) {
+					progress = 100;
+				} else {
+					const readDistance = currentScroll - contentStart;
+					const totalDistance = contentEnd - contentStart;
+					progress = Math.min(100, Math.max(0, (readDistance / totalDistance) * 100));
+				}
+			}
+
+			const isContentFullyRead = contentRect.bottom < windowHeight;
+
+			if (shouldShow && !isContentFullyRead) {
+				progressFill.style.width = `${progress}%`;
+				progressPercentage.textContent = `${Math.round(progress)}%`;
+			}
+
+			if (shouldShow !== isContentVisible) {
+				isContentVisible = shouldShow;
+			}
+
+			if (isContentVisible && !isContentFullyRead) {
+				if (currentScroll > lastScrollTop) {
+					progressContainer.classList.remove('hidden');
+				} else {
+					progressContainer.classList.add('hidden');
+				}
+			} else {
+				progressContainer.classList.add('hidden');
+			}
+
+			lastScrollTop = Math.max(currentScroll, 0);
+			ticking = false;
+		}
+
+		function requestUpdateReadingProgress() {
+			if (!ticking) {
+				requestAnimationFrame(updateReadingProgress);
+				ticking = true;
+			}
+		}
+
+		document.addEventListener('mousemove', (e) => {
+			if (isContentVisible && e.clientY > window.innerHeight - 50) {
+				const contentRect = postContent.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+				const isContentFullyRead = contentRect.bottom < windowHeight;
+				if (!isContentFullyRead) {
+					progressContainer.classList.remove('hidden');
+				}
+			}
+		});
+
+		window.addEventListener('scroll', requestUpdateReadingProgress, { passive: true });
+		window.addEventListener('resize', requestUpdateReadingProgress, { passive: true });
+		updateReadingProgress();
+	}
+
+	window.requestAnimationFrame(() => {
+		generateTOC();
+		initReadingProgress();
+	});
 
 </script>
