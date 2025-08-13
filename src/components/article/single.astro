@@ -15,10 +15,13 @@ export interface Props {
 
 const { post, url } = Astro.props;
 const { Content } = post;
-const single = "text-justify text-2xl mt-4 mb-6";
+
+const section = "text-2xl mt-6 mb-6";
+const flex = "flex justify-between";
+const container = "px-4 sm:px-6";
 ---
 
-<section class="max-w-8xl mx-auto py-20 px-4 sm:px-6 pb-10">
+<section class={`max-w-8xl mx-auto py-20 ${container} pb-10`}>
 
 	<article class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -26,15 +29,15 @@ const single = "text-justify text-2xl mt-4 mb-6";
 
 			<header>
 
-				<h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+				<h1>
 					{post.title}
 				</h1>
 
-				<p class={`${single}`}>
+				<p>
 					{post.description}
 				</p>
 
-				<div class={`${single} flex justify-between flex-col sm:flex-row sm:items-center`}>
+				<div class={`${flex} flex-col sm:flex-row sm:items-center`}>
 
 					<p>
 
@@ -76,13 +79,11 @@ const single = "text-justify text-2xl mt-4 mb-6";
 
 			</header>
 
-			<div class={`${single} prose prose-xl prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:text-primary prose-h2:font-bold prose-h3:font-bold prose-h3:italic prose-h4:italic prose-a:font-bold prose-a:text-primary prose-a:target-blank prose-img:rounded-md prose-img:w-full prose-img:h-auto prose-headings:scroll-mt-[20px]`} id="post-content">
-
+			<div class={`${section} img`} id="post-content">
 				{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
-
 			</div>
 
-			<div class={`${single} flex justify-between flex-col sm:flex-row`}>
+			<div class={`${section} ${flex} flex-col sm:flex-row`}>
 				<PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
 			</div>
 
@@ -94,7 +95,7 @@ const single = "text-justify text-2xl mt-4 mb-6";
 
 		<div id="reading-progress-container" class="reading-progress-container">
 
-			<div class="reading-progress-inner max-w-8xl mx-auto px-4 sm:px-6 w-full">
+			<div class={`reading-progress-inner max-w-8xl mx-auto ${container} w-full`}>
 
 				<div class="reading-progress-info">
 					<span id="reading-percentage">0%</span>
@@ -125,11 +126,29 @@ const single = "text-justify text-2xl mt-4 mb-6";
 		overflow-y: auto;
 		scrollbar-width: none;
 	}
-	.toc::-webkit-scrollbar { display: none; }
-	.toc ul { list-style-type: none; padding-left: 1rem; }
-	.toc ul ul { padding-left: 2rem; }
-	.toc a { text-decoration: none; color: #1a73e8; }
-	.toc a:hover { text-decoration: underline; }
+	
+	.toc::-webkit-scrollbar { 
+		display: none; 
+	}
+	
+	.toc ul { 
+		list-style-type: none; 
+		padding-left: 0; 
+		margin: 0;
+	}
+	
+	.toc ul ul { 
+		padding-left: 1rem; 
+	}
+	
+	.toc a { 
+		text-decoration: none; 
+		color: #1a73e8;
+	}
+	
+	.toc a:hover { 
+		text-decoration: underline; 
+	}
 
 	.reading-progress-container {
 		position: fixed;
@@ -146,7 +165,10 @@ const single = "text-justify text-2xl mt-4 mb-6";
 		transition: transform 0.3s ease-in-out;
 		transform: translateY(0);
 	}
-	.reading-progress-container.hidden { transform: translateY(100%); }
+	
+	.reading-progress-container.hidden { 
+		transform: translateY(100%); 
+	}
 
 	.reading-progress-inner {
 		display: flex;
@@ -164,7 +186,12 @@ const single = "text-justify text-2xl mt-4 mb-6";
 		color: #374151;
 		white-space: nowrap;
 	}
-	#reading-percentage { font-weight: 600; color: var(--aw-color-primary, #1a73e8); min-width: 28px; }
+	
+	#reading-percentage { 
+		font-weight: 600; 
+		color: var(--aw-color-primary, #1a73e8); 
+		min-width: 28px; 
+	}
 
 	.reading-progress-bar {
 		flex: 1;
@@ -174,6 +201,7 @@ const single = "text-justify text-2xl mt-4 mb-6";
 		overflow: hidden;
 		position: relative;
 	}
+	
 	.reading-progress-fill {
 		height: 100%;
 		background: var(--aw-color-primary, #1a73e8);
@@ -182,6 +210,7 @@ const single = "text-justify text-2xl mt-4 mb-6";
 		transition: width 0.1s ease-out;
 		position: relative;
 	}
+	
 	.reading-progress-fill::after {
 		content: '';
 		position: absolute;
@@ -197,12 +226,6 @@ const single = "text-justify text-2xl mt-4 mb-6";
 		.reading-progress-info { font-size: 0.6875rem; }
 		#reading-percentage { min-width: 24px; }
 		.reading-progress-bar { height: 3px; }
-	}
-
-	@media (prefers-color-scheme: dark) {
-		.reading-progress-container { background: rgb(17 24 39 / 0.8); border-top-color: rgb(255 255 255 / 0.1); }
-		.reading-progress-info { color: #d1d5db; }
-		.reading-progress-bar { background: #374151; }
 	}
 
 </style>
@@ -225,14 +248,8 @@ const single = "text-justify text-2xl mt-4 mb-6";
 			listItem.appendChild(anchor);
 			tocLinks.push({ anchor, heading });
 
-			switch (heading.tagName.toLowerCase()) {
-				case 'h2':
-					break;
-				case 'h3':
-					listItem.style.fontStyle = 'italic';
-					break;
-				case 'h4':
-					break;
+			if (heading.tagName.toLowerCase() === 'h3') {
+				listItem.style.fontStyle = 'italic';
 			}
 
 			if (heading.tagName.toLowerCase() === 'h3' || heading.tagName.toLowerCase() === 'h4') {
@@ -274,13 +291,11 @@ const single = "text-justify text-2xl mt-4 mb-6";
 			const toc = document.getElementById('index');
 			const content = document.getElementById('post-content');
 			if (!toc || !content) return;
+			
 			const contentRect = content.getBoundingClientRect();
 			const viewportHeight = window.innerHeight;
-			if (contentRect.bottom < viewportHeight) {
-				toc.style.display = 'none';
-			} else {
-				toc.style.display = 'block';
-			}
+			
+			toc.style.display = contentRect.bottom < viewportHeight ? 'none' : 'block';
 		}
 
 		window.addEventListener('scroll', handleScroll);
@@ -331,9 +346,7 @@ const single = "text-justify text-2xl mt-4 mb-6";
 				progressPercentage.textContent = `${Math.round(progress)}%`;
 			}
 
-			if (shouldShow !== isContentVisible) {
-				isContentVisible = shouldShow;
-			}
+			isContentVisible = shouldShow;
 
 			if (isContentVisible && !isContentFullyRead) {
 				if (currentScroll > lastScrollTop) {

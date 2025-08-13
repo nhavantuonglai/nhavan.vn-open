@@ -28,6 +28,8 @@ export default defineConfig({
 
 	output: 'static',
 
+	site: 'https://nhavantuonglai.com',
+
 	integrations: [
 
 		react(),

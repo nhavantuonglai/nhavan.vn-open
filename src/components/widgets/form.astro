@@ -64,7 +64,7 @@ const {
 
 							<div id="success-message" class="hidden">
 
-								<p class="mb-6">Cảm ơn bạn đã điền, thông tin đã được ghi lại.</p>
+								<p>Cảm ơn bạn đã điền, thông tin đã được ghi lại.</p>
 
 								<Button id="reset-form" class="mb-6">Quay lại</Button>
 
@@ -112,7 +112,7 @@ const {
 			} catch (error) {
 				console.error('Lỗi khi gửi dữ liệu:', error);
 				success.CSS
-				successMessage.innerHTML = '<p class="text-xl mb-4">Có lỗi xảy ra, vui lòng thử lại.</p><button id="reset-form" class="text-2xl mb-6">Điền lại</button>';
+				successMessage.innerHTML = '<p>Có lỗi xảy ra, vui lòng thử lại.</p><button id="reset-form">Điền lại</button>';
 				successMessage.classList.remove('hidden');
 				formContainer.classList.add('hidden');
 			}

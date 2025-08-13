@@ -15,8 +15,8 @@ const metadata: MetaData = {
 	title: frontmatter?.title,
 };
 
-const base = "max-w-3xl mx-auto";
-const text = "text-justify";
+const base = "mx-auto";
+const text = "text-justify text-2xl";
 ---
 
 <Layout metadata={metadata}>
@@ -27,11 +27,11 @@ const text = "text-justify";
 
 			<header>
 
-				<h1 class={`${base} ${text} text-4xl md:text-5xl font-bold text-primary leading-tighter tracking-tighter font-heading mt-4 mb-6`}>
+				<h1 class={`${base} ${text}`}>
 					{frontmatter.title}
 				</h1>
 
-				<p class={`${base} ${text} text-xl md:text-2xl mt-4 mb-6`}>
+				<p class={`${base} ${text}`}>
 					{frontmatter.description}
 				</p>
 
@@ -41,7 +41,7 @@ const text = "text-justify";
 
 			<div>
 
-				<div class={`${base} ${text} prose prose-xl md:text-2xl prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:text-primary prose-h2:font-bold prose-h3:font-bold prose-h3:italic prose-h4:italic prose-a:font-bold prose-a:text-primary prose-a:target-blank prose-img:rounded-md mt-4 mb-6 prose-headings:scroll-mt-[20px]`}>
+				<div class={`${base} ${text}`}>
 
 					<slot/> 
 

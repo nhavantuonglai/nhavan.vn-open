@@ -7,69 +7,82 @@ import {
 	type ImageProps,
 	type AttributesProps
 } from '~/utils/optimization';
-import type { ImageMetadata } from 'astro';
 
-type Props = ImageProps & {
+interface Props extends ImageProps {
 	class?: string;
 	widths?: number[];
 	sizes?: string;
-};
-
-type ImageType = {
-	src: string;
-	attributes: AttributesProps;
-};
+}
 
 const {
 	src,
 	alt,
 	title,
-	class: className = 'mx-auto rounded-md w-full object-cover mb-6 hover',
-	widths,
-	sizes,
+	class: container = 'mx-auto rounded-md w-full object-cover mb-6',
+	widths = [320, 480, 640, 768, 1024, 1280],
+	sizes = '(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 70vw',
+	loading = 'lazy',
+	decoding = 'async',
+	layout = 'responsive',
 	...props
 } = Astro.props;
 
 if (!alt) throw new Error('Missing alt text for image');
-props.width = typeof props.width === 'string' ? parseInt(props.width) : props.width;
-props.height = typeof props.height === 'string' ? parseInt(props.height) : props.height;
-props.loading = props.loading || 'lazy';
-props.decoding = props.decoding || 'async';
+if (!src) throw new Error('Missing src for image');
+
+const width = typeof props.width === 'string' ? parseInt(props.width) : props.width;
+const height = typeof props.height === 'string' ? parseInt(props.height) : props.height;
+
+const getMaxWidth = (layout: string, width?: number) => {
+	if (layout === 'fixed' && width) return Math.min(width, 1280);
+	if (layout === 'constrained' && width) return Math.min(width, 1536);
+	return layout === 'fullWidth' ? 1920 : 1280;
+};
+
+const maxWidth = getMaxWidth(layout, width);
+const optimizedWidths = widths.filter(w => w <= maxWidth);
+
+const imageProps = {
+	...props,
+	width: width ? Math.min(width, maxWidth) : undefined,
+	height,
+	loading,
+	decoding,
+	layout,
+	widths: optimizedWidths,
+	sizes
+};
 
 const _image = await findImage(src);
-let image: ImageType | undefined = undefined;
+let optimizedImage: { src: string; attributes: AttributesProps } | undefined = undefined;
 
 if (_image) {
-	if (typeof _image === 'object') {
-		image = await getImagesOptimized(_image, props, astroAsseetsOptimizer);
-	} else if (typeof _image === 'string' && (_image.startsWith('http://') || _image.startsWith('https://'))) {
-		image = await getImagesOptimized(_image, props, unpicOptimizer);
-	} else {
-		image = await getImagesOptimized(_image, props);
-	}
+	const optimizer = typeof _image === 'object' 
+		? astroAsseetsOptimizer 
+		: typeof _image === 'string' && /^https?:\/\//.test(_image)
+		? unpicOptimizer
+		: undefined;
+	
+	optimizedImage = await getImagesOptimized(_image, imageProps, optimizer);
 }
 
-const defaultWidths = typeof src === 'string' ? undefined : [400, 768, 1024];
-const defaultSizes = typeof src === 'string' ? undefined : '(max-width: 767px) 400px, (max-width: 1023px) 768px, 1024px';
+const fallbackTitle = 'Văn hay trong hiện tại, chữ tốt ở tương lai.';
 ---
 
-{image ? (
+{optimizedImage ? (
 
 	<img
-		title={title || 'Văn hay trong hiện tại, chữ tốt ở tương lai.'}
-		alt={alt || 'Văn hay trong hiện tại, chữ tốt ở tương lai.'}
-		src={image.src}
-		class={className}
+		title={title || fallbackTitle}
+		alt={alt}
+		src={optimizedImage.src}
+		class={container}
 		style="aspect-ratio: 4/3;"
-		width={image.attributes.width}
-		height={image.attributes.height}
-		{...(widths || defaultWidths ? { widths: widths || defaultWidths } : {})}
-		{...(sizes || defaultSizes ? { sizes: sizes || defaultSizes } : {})}
-		{...image.attributes}
+		{...optimizedImage.attributes}
 	/>
-
 ) : (
 
-	<Fragment />
+	<div class={`${container} bg-gray-200 flex items-center justify-center`} style="aspect-ratio: 4/3;">
+		<span class="text-gray-500 text-sm">Image not found</span>
+	</div>
 
 )}
