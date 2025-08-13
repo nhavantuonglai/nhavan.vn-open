@@ -1,0 +1,19 @@
+---
+const { title, description, url, image, author, datePublished, dateModified, tags } = Astro.props;
+---
+
+<script type="application/ld+json">
+
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": { "text": ${JSON.stringify(title)} },
+		"description": ${JSON.stringify(description || '')},
+		"url": ${JSON.stringify(url)},
+		"image": ${JSON.stringify(image ? [image] : [])},
+		"author": { "@type": "Person", "name": "nhavantuonglai"} },
+		"datePublished": ${JSON.stringify(pubDatetime)},
+		"keywords": ${JSON.stringify((tags || []).join(', '))}
+	}
+
+</script>

@@ -4,6 +4,8 @@ import PostTags from '~/components/article/tags.astro';
 import About from '~/components/content/main/about.astro';
 import Latest from '~/components/article/featured.astro';
 
+import Schema from '~/components/javascript/article.astro';
+
 import { getFormattedDate } from '~/utils/utils';
 import { findImage } from '~/utils/images';
 import type { Post, ImageMetadata } from '~/types';
@@ -28,6 +30,17 @@ const container = "px-4 sm:px-6";
 		<div class="md:col-span-2">
 
 			<header>
+
+			<Schema
+				title={frontmatter.title}
+				description={frontmatter.description}
+				url={`https://nhavantuonglai.com${Astro.url.pathname}`}
+				image={frontmatter.cover}
+				author={frontmatter.author}
+				datePublished={frontmatter.date}
+				dateModified={frontmatter.updated}
+				tags={frontmatter.tags}
+			/>
 
 				<h1>
 					{post.title}
