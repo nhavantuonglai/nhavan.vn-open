@@ -7,13 +7,27 @@ const { title, description, url, image, author, datePublished, dateModified, tag
 	{
 		"@context": "https://schema.org",
 		"@type": "Article",
-		"headline": { "text": ${JSON.stringify(title)} },
+		"headline": ${JSON.stringify(title)},
 		"description": ${JSON.stringify(description || '')},
 		"url": ${JSON.stringify(url)},
 		"image": ${JSON.stringify(image ? [image] : [])},
-		"author": { "@type": "Person", "name": "nhavantuonglai"} },
-		"datePublished": ${JSON.stringify(pubDatetime)},
-		"keywords": ${JSON.stringify((tags || []).join(', '))}
+		"author": {
+			"@type": "Person",
+			"name": ${JSON.stringify(author || 'nhavantuonglai')}
+		},
+		"datePublished": ${JSON.stringify(datePublished || new Date().toISOString())},
+		"dateModified": ${JSON.stringify(dateModified || datePublished || new Date().toISOString())},
+		"keywords": ${JSON.stringify((tags || []).join(', '))},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Storytellers Vietnam",
+			"url": "https://nhavantuonglai.com",
+			"logo": "https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico"
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": ${JSON.stringify(url)}
+		}
 	}
 
 </script>
