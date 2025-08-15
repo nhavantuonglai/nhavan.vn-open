@@ -36,7 +36,9 @@ export default defineConfig({
 
 	integrations: [
 
-		react(),
+		react({
+			experimentalReactChildren: true,
+		}),
 		tailwind({
 			applyBaseStyles: false,
 		}),
@@ -60,7 +62,16 @@ export default defineConfig({
 	},
 
 	vite: {
-
+		optimizeDeps: {
+			exclude: ['_astro/*'],
+		},
+		build: {
+			rollupOptions: {
+				output: {
+					inlineDynamicImports: true,
+				},
+			},
+		},
 		resolve: {
 			alias: {
 				'~': path.resolve(__dirname, './src'),
