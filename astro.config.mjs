@@ -28,19 +28,11 @@ export default defineConfig({
 
 	output: 'static',
 
-	site: 'https://nhavan.vn',
-
-	build: {
-		assetsPrefix: '/assets/',
-		inlineStylesheets: 'always',
-	},
+	site: 'https://nhavantuonglai.com',
 
 	integrations: [
 
-		react({
-			experimentalReactChildren: true,
-		}),
-
+		react(),
 		tailwind({
 			applyBaseStyles: false,
 		}),
@@ -48,6 +40,7 @@ export default defineConfig({
 		sitemap(),
 
 		mdx(),
+
 		...whenExternalScripts(() =>
 			partytown({
 				config: { forward: ['dataLayer.push'] },
@@ -64,23 +57,11 @@ export default defineConfig({
 
 	vite: {
 
-		optimizeDeps: {
-			exclude: ['_astro/*'],
-		},
-
-		build: {
-			rollupOptions: {
-				output: {
-					inlineDynamicImports: true,
-				},
-			},
-		},
-
 		resolve: {
 			alias: {
 				'~': path.resolve(__dirname, './src'),
 			},
-			extensions: ['.js', '.ts'],
+			extensions: ['.js', '.ts']
 		},
 
 	},
