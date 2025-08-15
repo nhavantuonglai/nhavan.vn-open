@@ -11,6 +11,5 @@
 				}
 			]
 		}
-	],
-	"ignore": ["dist/_astro/*.css", "dist/_astro/*.js"]
+	]
 }
