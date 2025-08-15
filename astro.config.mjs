@@ -39,6 +39,7 @@ export default defineConfig({
 		react({
 			experimentalReactChildren: true,
 		}),
+
 		tailwind({
 			applyBaseStyles: false,
 		}),
@@ -46,7 +47,6 @@ export default defineConfig({
 		sitemap(),
 
 		mdx(),
-
 		...whenExternalScripts(() =>
 			partytown({
 				config: { forward: ['dataLayer.push'] },
@@ -62,9 +62,11 @@ export default defineConfig({
 	},
 
 	vite: {
+
 		optimizeDeps: {
 			exclude: ['_astro/*'],
 		},
+
 		build: {
 			rollupOptions: {
 				output: {
@@ -72,11 +74,12 @@ export default defineConfig({
 				},
 			},
 		},
+
 		resolve: {
 			alias: {
 				'~': path.resolve(__dirname, './src'),
 			},
-			extensions: ['.js', '.ts']
+			extensions: ['.js', '.ts'],
 		},
 
 	},
