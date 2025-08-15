@@ -23,7 +23,7 @@ const {
 
 const imageProps = openGraph.images?.map((img) => typeof img === 'string' ? {
 	url: img,
-	alt: 'Văn hay trong hiện tại, chữ tốt ở tương lai.',
+	alt: 'Diễn đàn viết lách nhà văn tương lai.',
 	width: 1200,
 	height: 626
 } : img) || [];
@@ -46,7 +46,7 @@ const defaultSeoProps: AstroSeoProps = {
 			url: METADATA?.openGraph?.image?.url || '',
 			width: METADATA?.openGraph?.image?.width,
 			height: METADATA?.openGraph?.image?.height,
-			alt: METADATA?.openGraph?.image?.alt || 'Văn hay trong hiện tại, chữ tốt ở tương lai.',
+			alt: METADATA?.openGraph?.image?.alt || 'Diễn đàn viết lách nhà văn tương lai.',
 		}],
 	},
 	twitter: {

@@ -6,10 +6,9 @@ import { getCanonical, getPermalink } from '~/utils/permalinks';
 import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 
-import Article from '~/components/article/single.astro';
+import Single from '~/components/article/single.astro';
 
 import Form from '~/components/content/main/form.astro';
-import Action from '~/components/content/main/action.astro';
 
 export const prerender = true;
 
@@ -41,10 +40,8 @@ const metadata = {
 
 <Layout metadata={metadata}>
 
-	<Article post={{ ...post, image }} url={url}/>
+	<Single post={{ ...post, image }} url={url}/>
 
 	<Form/>
-
-	<Action/>
 
 </Layout>

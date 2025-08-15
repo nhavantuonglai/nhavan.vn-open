@@ -1,14 +1,10 @@
 ---
-import PostTags from '~/components/article/tags.astro';
-
-import About from '~/components/content/main/about.astro';
-import Latest from '~/components/article/featured.astro';
-
-import Schema from '~/components/javascript/article.astro';
-
+import type { Post, ImageMetadata } from '~/types';
 import { getFormattedDate } from '~/utils/utils';
 import { findImage } from '~/utils/images';
-import type { Post, ImageMetadata } from '~/types';
+
+import Tagslist from '~/components/article/tagslist.astro';
+import Catalogue from '~/components/article/catalogue.astro';
 
 export interface Props {
 	post: Post;
@@ -21,26 +17,18 @@ const { Content } = post;
 const section = "text-2xl mt-6 mb-6";
 const flex = "flex justify-between";
 const container = "px-4 sm:px-6";
+
 ---
 
 <section class={`max-w-8xl mx-auto py-20 ${container} pb-10`}>
+
+	</script>
 
 	<article class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
 		<div class="md:col-span-2">
 
 			<header>
-
-			<Schema
-				title={frontmatter.title}
-				description={frontmatter.description}
-				url={`https://nhavantuonglai.com${Astro.url.pathname}`}
-				image={frontmatter.cover}
-				author={frontmatter.author}
-				datePublished={frontmatter.date}
-				dateModified={frontmatter.updated}
-				tags={frontmatter.tags}
-			/>
 
 				<h1>
 					{post.title}
@@ -82,6 +70,7 @@ const container = "px-4 sm:px-6";
 						</script>
 
 					</p>
+
 				</div>
 
 				{post.image && (
@@ -93,17 +82,23 @@ const container = "px-4 sm:px-6";
 			</header>
 
 			<div class={`${section} img`} id="post-content">
+
 				{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
+
 			</div>
 
 			<div class={`${section} ${flex} flex-col sm:flex-row`}>
-				<PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+
+				<Tagslist tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+
 			</div>
 
 		</div>
 
 		<div class="md:col-span-1 hidden md:block">
+
 			<div id="index" class="toc mt-0"></div>
+
 		</div>
 
 		<div id="reading-progress-container" class="reading-progress-container">
@@ -126,9 +121,7 @@ const container = "px-4 sm:px-6";
 
 </section>
 
-<About/>
-
-<Latest tags="1"/>
+<Catalogue tags="1"/>
 
 <style>
 

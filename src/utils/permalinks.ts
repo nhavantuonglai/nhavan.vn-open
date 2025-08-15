@@ -21,7 +21,7 @@ export const cleanSlug = (text = ''): string =>
 
 export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
-export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `https://nhavantuonglai.com/article/%slug%`);
+export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `https://nhavan.vn/article/%slug%`);
 
 export const getCanonical = (path = ''): string => {
 	const url = String(new URL(path, SITE.site));

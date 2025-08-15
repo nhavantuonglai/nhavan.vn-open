@@ -1,15 +1,14 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 
 import Layout from '~/layouts/page.astro';
 import Article from '~/components/content/blog/article.astro';
 
-import BlogList from '~/components/article/article.astro';
+import Articlelist from '~/components/article/articlelist.astro';
 import Pagination from '~/components/article/pagination.astro';
 
-import Action from '~/components/content/main/action.astro';
-
-import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import Form from '~/components/content/main/form.astro';
 
 export const prerender = true;
 
@@ -43,12 +42,12 @@ const metadata = {
 
 		<h2>Bài viết trang số {currentPage}:<h2/>
 
-		<BlogList posts={page.data}/>
+		<Articlelist posts={page.data}/>
 
 		<Pagination prevUrl={page.url.prev} nextUrl={page.url.next}/>
 
 	</section>
 
-	<Action/>
+	<Form/>
 
 </Layout>

@@ -5,10 +5,10 @@ import { blogTagRobots, getStaticPathsBlogTag } from '~/utils/blog';
 import Layout from '~/layouts/page.astro';
 import Tag from '~/components/content/blog/tag.astro';
 
-import BlogList from '~/components/article/article.astro';
+import Articlelist from '~/components/article/articlelist.astro';
 import Pagination from '~/components/article/pagination.astro';
 
-import Action from '~/components/content/main/action.astro';
+import Form from '~/components/content/main/form.astro';
 
 export const prerender = true;
 
@@ -40,12 +40,12 @@ const metadata = {
 
 		<h2>Thẻ bài viết {tag}, trang số {currentPage}:<h2/>
 
-		<BlogList posts={page.data}/>
+		<Articlelist posts={page.data}/>
 
 		<Pagination prevUrl={page.url.prev} nextUrl={page.url.next}/>
 
 	</section>
 
-	<Action/>
+	<Form/>
 
 </Layout>

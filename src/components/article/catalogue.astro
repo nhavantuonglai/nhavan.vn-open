@@ -1,10 +1,11 @@
 ---
-import { APP_BLOG } from 'nhavantuonglai:config';
-import PostList from '~/components/article/article.astro';
-import Container from '~/components/ui/container.astro';
+import type { Post } from '~/types';
 import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
 import { fetchPosts } from '~/utils/blog';
-import type { Post } from '~/types';
+import { APP_BLOG } from 'nhavantuonglai:config';
+
+import Articlelist from '~/components/article/articlelist.astro';
+import Container from '~/components/ui/container.astro';
 
 export interface Props {
 	linkText?: string;
@@ -25,7 +26,7 @@ const {
 	tags
 } = Astro.props;
 
-const containerClasses = "relative mx-auto max-w-7xl px-4 md:px-6 text-default";
+const container = "relative mx-auto max-w-7xl px-4 md:px-6 text-default";
 
 const isAll = !tags || (typeof tags === 'string' && tags === '0');
 const isMultiSignal = typeof tags === 'string' && tags === '1';
@@ -81,7 +82,7 @@ if (APP_BLOG.isEnabled) {
 			const j = Math.floor(Math.random() * (i + 1));
 			[sourceTags[i], sourceTags[j]] = [sourceTags[j], sourceTags[i]];
 		}
-		sourceTags = sourceTags.slice(0, 4);
+		sourceTags = sourceTags.slice(0, 3);
 
 		for (const t of sourceTags) {
 			const subset = pickByTag(t, 6);
@@ -98,15 +99,15 @@ if (APP_BLOG.isEnabled) {
 
 {blocks.length > 0 && blocks.map(b => {
 
-	const tagLink = b.tagSlug ? `https://nhavantuonglai.com/tags/${encodeURIComponent(b.tagSlug)}` : getBlogPermalink();
+	const tagLink = b.tagSlug ? `https://nhavan.vn/tags/${encodeURIComponent(b.tagSlug)}` : getBlogPermalink();
 
 	return (
 
-		<Container id={id} containerClass={`${containerClasses} ${classes?.container || ''}`} bg={bg} class="mb-6 md:mb-62">
+		<Container id={id} containerClass={`${container} ${classes?.container || ''}`} bg={bg} class="mb-6 md:mb-62">
 
 			<div class="flex flex-col lg:justify-between lg:flex-row mb-6">
 
-				<div class="md:max-w-sm">
+				<div>
 
 					<h2 set:html={b.title} />
 
@@ -122,7 +123,7 @@ if (APP_BLOG.isEnabled) {
 
 			</div>
 
-			<PostList posts={b.posts} layout="grid" variant="compact" />
+			<Articlelist posts={b.posts} layout="grid" variant="compact" />
 
 		</Container>
 

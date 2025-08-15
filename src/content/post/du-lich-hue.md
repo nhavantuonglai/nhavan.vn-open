@@ -8,7 +8,7 @@ tags:
   - viet lach
   - doan van
   - cam nang du lich
-  - du lich mien trung
+  - du lich mien trung du lich mien trung du lich mien trung du lich mien trung
   - du lich hue
   - di choi hue
   - cam nang du lich hue

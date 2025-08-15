@@ -1,9 +1,10 @@
 ---
-import Image from '~/components/common/image.astro';
+import { getPermalink } from '~/utils/permalinks';
 import { APP_BLOG } from 'nhavantuonglai:config';
 import type { Post, ImageMetadata } from '~/types';
-import { getPermalink } from '~/utils/permalinks';
 import { findImage } from '~/utils/images';
+
+import Image from '~/components/common/image.astro';
 
 export interface Props {
 	posts: Array<Post>;
@@ -31,7 +32,7 @@ const truncateText = (text: string, maxWords: number, isTitle: boolean = false) 
 			return (
 
 				<article
-					class={`mb-6 p-6 rounded-lg w-full bg-white ${
+					class={`${
 						layout === 'grid' ? '' : 'text-justify md:mb-62'
 					} ${variant === 'detailed' && image ? 'grid-cols-3 md:gap-8' : ''}`}
 				>

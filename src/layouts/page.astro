@@ -1,5 +1,5 @@
 ---
-import { headerData, footerData } from '~/navigation';
+import { headerData } from '~/navigation';
 
 import Layout from '~/layouts/main.astro';
 
@@ -18,15 +18,21 @@ const { metadata } = Astro.props;
 <Layout metadata={metadata}>
 
 	<slot name="header">
-		<Header {...headerData} isSticky showToggleTheme/>
+
+		<Header {...headerData}/>
+
 	</slot>
 
 	<main>
+
 		<slot/>
+
 	</main>
 
 	<slot name="footer">
-		<Footer {...footerData}/>
+
+		<Footer/>
+
 	</slot>
 
 </Layout>

@@ -9,8 +9,7 @@ import Analytics from '~/components/javascript/analytics.astro';
 import Opentab from '~/components/javascript/opentab.astro';
 
 import Anticopy from '~/components/article/anticopy.astro';
-import Notification from '~/components/content/main/notification.astro';
-import BasicScripts from '~/components/javascript/basic.astro';
+
 import { getCanonical } from '~/utils/permalinks';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -29,15 +28,17 @@ const { language, textDirection } = I18N;
 
 		<Meta/>
 
-		<Metadata {...metadata}/>
+		<link rel="shortcut icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico">
+		<link rel="icon" type="image/x-icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico" sizes="16x16 32x32 48x48">
+		<link rel="icon" type="image/svg+xml" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.svg">
+		<link rel="apple-touch-icon" sizes="180x180" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.png">
+		<link rel="preload" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico" as="image" type="image/x-icon" crossorigin="anonymous">
 
-		<link rel="icon" type="image/x-icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico"/>
-		<link rel="icon" type="image/svg+xml" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.svg"/>
-		<link rel="apple-touch-icon" sizes="180x180" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.png"/>
-		<link rel="shortcut icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico"/>
+		<Metadata {...metadata}/>
 
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
 
 		<script async custom-element="amp-auto-ads"
 
@@ -53,11 +54,13 @@ const { language, textDirection } = I18N;
 
 			<slot/>
 
-			<Notification/>
-
 			<Schema/>
 
-			<BasicScripts/>
+			<Analytics/>
+
+			<Anticopy/>
+
+			<Opentab/>
 
 			<noscript>
 

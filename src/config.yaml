@@ -1,14 +1,14 @@
 site:
-  name: nhavantuonglai
-  site: "https://nhavantuonglai.com"
+  name: Diễn đàn viết lách nhà văn tương lai
+  site: "https://nhavan.vn"
   base: "/"
   trailingSlash: false
 
 metadata:
   title:
-    default: nhavantuonglai
+    default: Diễn đàn viết lách nhà văn tương lai
     template: "%s | nhavantuonglai"
-  description: "Viết là nuôi dưỡng niềm đam mê, chữ để ươm mầm điều yêu thích. Học và hoàn thiện kỹ năng mỗi ngày không mong gì hơn đó là điều duy nhất người ta nhớ để nhắc về."
+  description: "Nhà văn tương lai là diễn đàn dành cho các bạn trẻ đam mê thực hành viết lách. Đây là không gian tự do, thoải mái chia sẻ và khơi gợi niềm vui khi viết."
   robots:
     index: true
     follow: true
@@ -17,16 +17,16 @@ metadata:
     type: website
     locale: vi_VN
     image:
-      url: "https://images.pexels.com/photos/32839477/pexels-photo-32839477.jpeg"
+      url: "https://banmaixanh.vercel.app/image/cover/001-737.jpg"
       width: 1200
       height: 630
-      alt: "Viết là nuôi dưỡng niềm đam mê, chữ để ươm mầm điều yêu thích. Học và hoàn thiện kỹ năng mỗi ngày không mong gì hơn đó là điều duy nhất người ta nhớ để nhắc về."
+      alt: "Nhà văn tương lai là diễn đàn dành cho các bạn trẻ đam mê thực hành viết lách. Đây là không gian tự do, thoải mái chia sẻ và khơi gợi niềm vui khi viết."
   twitter:
     card: summary_large_image
     site: "@nhavantuonglai"
     creator: "@nhavantuonglai"
-    image: "https://images.pexels.com/photos/32839477/pexels-photo-32839477.jpeg"
-    description: "Viết là nuôi dưỡng niềm đam mê, chữ để ươm mầm điều yêu thích. Học và hoàn thiện kỹ năng mỗi ngày không mong gì hơn đó là điều duy nhất người ta nhớ để nhắc về."
+    image: "https://banmaixanh.vercel.app/image/cover/001-737.jpg"
+    description: "Nhà văn tương lai là diễn đàn dành cho các bạn trẻ đam mê thực hành viết lách. Đây là không gian tự do, thoải mái chia sẻ và khơi gợi niềm vui khi viết."
 
 i18n:
   language: vi
