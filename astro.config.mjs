@@ -28,7 +28,11 @@ export default defineConfig({
 
 	output: 'static',
 
-	site: 'https://nhavantuonglai.com',
+	site: 'https://nhavan.vn',
+
+	build: {
+		inlineStylesheets: 'always',
+	},
 
 	integrations: [
 
