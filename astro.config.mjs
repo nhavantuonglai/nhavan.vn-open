@@ -25,51 +25,64 @@ const whenExternalScripts = (items = []) =>
 		: [];
 
 export default defineConfig({
+
 	output: 'static',
+
 	site: 'https://nhavan.vn',
+
 	build: {
-		assetsPrefix: '/assets/', // Gom các tệp tĩnh vào thư mục /assets/
-		inlineStylesheets: 'always', // Nhúng CSS trực tiếp vào HTML
+		assetsPrefix: '/assets/',
+		inlineStylesheets: 'always',
 	},
+
 	integrations: [
+
 		react({
-			experimentalReactChildren: true, // Tối ưu hóa React để giảm JS riêng biệt
+			experimentalReactChildren: true,
 		}),
+
 		tailwind({
 			applyBaseStyles: false,
 		}),
+
 		sitemap(),
+
 		mdx(),
 		...whenExternalScripts(() =>
 			partytown({
 				config: { forward: ['dataLayer.push'] },
 			})
 		),
+
 		astrowind(),
 	],
+
 	markdown: {
 		remarkPlugins: [readingTimeRemarkPlugin],
 		rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
 	},
+
 	vite: {
+
 		optimizeDeps: {
-			exclude: ['_astro/*'], // Ngăn Vite tạo tệp JS riêng trong _astro
+			exclude: ['_astro/*'],
 		},
+
 		build: {
 			rollupOptions: {
 				output: {
-					// Gộp các chunk JS nhỏ thành ít tệp hơn
-					manualChunks: {
-						'client': ['src/client'], // Gộp các script liên quan đến client
-					},
+					inlineDynamicImports: true,
 				},
 			},
 		},
+
 		resolve: {
 			alias: {
 				'~': path.resolve(__dirname, './src'),
 			},
 			extensions: ['.js', '.ts'],
 		},
+
 	},
+
 });
