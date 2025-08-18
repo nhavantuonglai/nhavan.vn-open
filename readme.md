@@ -1,265 +1,255 @@
-## 🚀 A comprehensive introduction to the template website /article-open
+# 🚀 Article Open – Modern website template
 
-## Project deployment guide in English (Original Vietnamese below)
+## Version English (Original Vietnamese below)
 
-_Article Open_ is the open source version of _Article,_ the core code of [nhavantuonglai.com](https://nhavantuonglai.com/). This project is developed using Astro 5.0 and Tailwind CSS, creating a modern website template that is user-friendly and optimized for SEO.
+Welcome to Article Open, the open-source version of Article, the core code powering [nhavan.vn](https://nhavan.vn/). Built with Astro 5.0 and Tailwind CSS, this template delivers a sleek, SEO-optimized, and user-friendly website ready for your next big project.
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-01.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+![Vercel Website Deploy](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-01.jpg)
 
-### ✨ Key Features
+### ✨ Why choose Article Open?
 
-– Optimized code structure: Simple, accessible, and easy to maintain.
+– Clean & maintainable code: Streamlined structure for easy updates and scalability.
 
-– Synchronized components: Consistent structure, implementation, and effects, making everything coherent and uniform.
+– Unified components: Consistent design and effects for a polished, cohesive look.
 
-– SEO optimization: Standard schema, meta tag generator for each page and article, helping the website to be easily indexed and achieve better rankings.
+– SEO powerhouse: Built-in schema and meta tag generation for better search engine rankings.
 
-– Motion effects: Creating a modern and user-friendly interface.
+– Dynamic motion effects: Smooth animations for a modern, engaging user experience.
 
-– Impressive PageSpeed Insights: Ensuring optimal page loading speed.
+– Blazing fast: Optimized for toptier PageSpeed Insights scores.
 
-– Dark Mode: Supporting dark mode to enhance user experience.
+– Dark mode support: Seamless toggle for enhanced accessibility and comfort.
 
-– Starfield: Beautiful starry background effect.
+– Stunning visuals: Features a starry Starfield background and a futuristic Supernova loading effect.
 
-– Supernova: Modern and impressive supernova loading effect.
+### 🛠️ Built with the best tools
 
-### 🛠️ Operational Resources
+– Framework: Astro + Tailwind CSS for rapid, responsive development.
 
-– Framework: [Astro](https://nhavantuonglai.com/article/astro) combined with Tailwind CSS.
+– Hosting: Vercel for effortless deployment.
 
-– Hosting: [Vercel](https://nhavantuonglai.com/article/vercel).
+– Data Management: GitHub for version control and collaboration.
 
-– Data management: GitHub.
+– Monitoring: Openstatus for realtime performance tracking.
 
-– Status monitoring: Openstatus.
+– Copyright Protection: DMCA for content security.
 
-– Copyright protection: DMCA.
+These tools ensure a robust, costefficient, and stable website with minimal overhead.
 
-Resources are utilized to optimize resource usage, ensure stable website operation, and minimize costs as much as possible.
+![Vercel Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-02.jpg)
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-02.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+### 🚀 Get started: Deployment guide
 
-### 🚀 Deployment Guide
+#### Option 1: Instant deployment with Vercel
 
-#### Direct Deployment via Vercel
+The fastest way to see Article Open in action:
 
-This is the fastest way to experience \article-open:
+1. [Sign up and log in to Vercel](https://vercel.com/new).
 
-1. [Register and log in to Vercel](https://vercel.com/new).
-
-2. Select New Project → Import Git Repository.
+2. Click New Project → Import Git Repository.
 
 3. Enter the repository URL:
 
 ```
-https://github.com/nhavantuonglai/article-open.git
+https://github.com/nhavantuonglai/themes-open.git
 ```
 
-4. Vercel will automatically create a new repository in your GitHub and deploy the website.
+4. Vercel will create a GitHub repository and deploy your site in minutes.
 
-> Note: This method helps you quickly experience the interface, but update and maintenance capabilities will be limited.
+> Note: This method is great for quick previews but limits customization and updates.
 
-#### Indirect Deployment via GitHub (Recommended)
+#### Option 2: Full control with GitHub (Recommended)
 
-This method allows you full control over the source code:
+Take charge of your project with complete code ownership:
 
-1. Clone the repository to your personal GitHub account:
+1. Clone the repository to your GitHub account:
 
 ```
-gh repo clone nhavantuonglai/article-open
+gh repo clone nhavantuonglai/themes-open
 ```
 
-2. Log in to Vercel with your GitHub account.
+2. Log in to Vercel using your GitHub account.
 
-3. Select Import Repository and choose the repository you just cloned.
+3. Select Import Repository and choose your cloned repo.
 
-4. After deployment, customize the subdomain or assign a custom domain in the Domain section.
+4. After deployment, customize your subdomain or add a custom domain in the Domain settings.
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-03.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+![GitHub Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-03.jpg)
 
-### 💻 Local Development Guide
+### 💻 Local development setup
 
-#### Install necessary tools:
+#### Prerequisites
 
-– [Visual Studio Code](https://code.visualstudio.com/).
+– [Visual Studio Code](https://code.visualstudio.com/)
 
-– [Node.js](https://nodejs.org/).
+– [Node.js](https://nodejs.org/)
 
-#### Install dependencies:
+#### Steps
+
+1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-#### Run development environment:
+2. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-#### Access the local website at:
+3. Open your browser and visit:
 
 ```
 http://localhost:4321/
 ```
 
-To update displayed content, find the corresponding file and folder to adjust. After saving, the interface will automatically update.
+Edit files in the project folder to update content. Changes reflect instantly upon saving.
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-04.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+![Local Development](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
 
-### 📜 Development History
+### 📜 Project evolution
 
-The \article-open project is an open version of \article, developed through several stages:
+Article Open has grown through multiple milestones:
 
-– v25.04.xx (Current): Second interface overhaul version.
+– Version 25.08: Under development.
 
-– v24.0x.xx: First interface overhaul version, integrating Astro 5.0, Tailwind, and Vercel.
+– Version 24.09: Development completed, source code unusable.
 
-– v23.12.xx: First dynamic website version, integrating Astro and Firebase.
+– Version 24.04: Development completed, source code unusable.
 
-– v23.11.xx: Static website version.
+View more [version](https://nhavan.vn/version).
 
-– v23.10.0x: Initial version, focusing on the CMS library.
+### 📞 Need help?
 
-### 📞 Contact & Support
+– Email: [info@nhavan.vn](mailto:info@nhavan.vn)
 
-– Email: [info@nhavantuonglai.com](mailto:info@nhavantuonglai.com).
+– Website: [nhavan.vn](https://nhavan.vn/)
 
-– Website: [nhavantuonglai.com](https://nhavantuonglai.com/).
+## Phiên bản tiếng Việt
 
-If you have any questions or suggestions, don't hesitate to contact us for the quickest support.
+Chào mừng bạn đến với Article Open, phiên bản mã nguồn mở của Article, nền tảng cốt lõi của [nhavan.vn](https://nhavan.vn/). Được xây dựng bằng Astro 5.0 và Tailwind CSS, mẫu website này mang đến trải nghiệm thân thiện, tối ưu SEO và sẵn sàng cho dự án tiếp theo của bạn.
 
-⭐ Don't forget to star this repository if you find it useful!
+![Vercel Website Deploy](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-01.jpg)
 
-## Hướng dẫn triển khai dự án (bằng tiếng Việt)
+### ✨ Tại sao chọn Article Open?
 
-_Article Open_ là phiên bản mã nguồn mở của _Article_ (mã nguồn chính của [nhavantuonglai.com](https://nhavantuonglai.com/)). Dự án này được phát triển bằng Astro 5.0 và Tailwind CSS, tạo nên template website hiện đại, thân thiện với người dùng và công cụ SEO.
+– Mã nguồn tối ưu: Cấu trúc gọn gàng, dễ tiếp cận và bảo trì.
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-01.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+– Đồng bộ thành phần: Thiết kế nhất quán, tạo giao diện liền mạch và chuyên nghiệp.
 
-### ✨ Tính năng nổi bật
+– Tối ưu SEO: Schema chuẩn và meta tag tự động cho từng trang, giúp cải thiện thứ hạng tìm kiếm.
 
-– Cấu trúc code tối ưu: Đơn giản, dễ tiếp cận và dễ bảo trì.
+– Hiệu ứng chuyển động: Giao diện hiện đại, mượt mà, nâng cao trải nghiệm người dùng.
 
-– Components đồng bộ: Đồng nhất cấu trúc, cách triển khai và hiệu ứng, giúp mọi thứ trở nên liền lạc, nhất quán.
+– Tốc độ đỉnh cao: Đạt điểm số ấn tượng trên PageSpeed Insights.
 
-– Tối ưu SEO: Schema tiêu chuẩn, meta tag generator trong từng trang, bài viết giúp website dễ dàng được index và có thứ hạng tốt hơn.
+– Chế độ tối: Hỗ trợ dark mode, tăng cường khả năng sử dụng.
 
-– Hiệu ứng chuyển động: Tạo giao diện hiện đại và thân thiện với người dùng.
+– Hiệu ứng Starfield: Nền sao lấp lánh đẹp mắt.
 
-– PageSpeed Insights ấn tượng: Đảm bảo tốc độ tải trang tối ưu.
+– Hiệu ứng Supernova: Tải trang hiện đại với hiệu ứng siêu tân tinh ấn tượng.
 
-– Dark Mode: Hỗ trợ chế độ tối, tăng trải nghiệm người dùng.
+### 🛠️ Công cụ sử dụng
 
-– Starfield: Hiệu ứng nền sao tỏa sáng đẹp mắt.
+– Framework: Astro kết hợp Tailwind CSS cho phát triển nhanh và responsive.
 
-– Supernova: Hiệu ứng tải Siêu tân tinh sáng hiện đại, ấn tượng.
+– Hosting: Vercel cho triển khai dễ dàng.
 
-### 🛠️ Nguồn lực vận hành
+– Quản lý dữ liệu: GitHub để quản lý phiên bản và cộng tác.
 
-– Framework: [Astro](https://nhavantuonglai.com/article/astro) kết hợp với Tailwind CSS.
+– Theo dõi trạng thái: Openstatus để giám sát hiệu suất thời gian thực.
 
-– Hosting: [Vercel](https://nhavantuonglai.com/article/vercel).
+– Bảo vệ bản quyền: DMCA đảm bảo an toàn nội dung.
 
-– Quản lý dữ liệu: GitHub.
+Các công cụ được tối ưu để giảm chi phí, đảm bảo website vận hành ổn định và hiệu quả.
 
-– Theo dõi trạng thái: Openstatus.
-
-– Bảo vệ bản quyền: DMCA.
-
-Nguồn lực được khai thác, sử dụng nhằm tối ưu tài nguyên sử dụng, đảm bảo website vận hành ổn định và ít tiêu hao chi phí nhất có thể.
-
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-02.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+![Vercel Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-02.jpg)
 
 ### 🚀 Hướng dẫn triển khai
 
-#### Triển khai trực tiếp qua Vercel
+#### Cách 1: Triển khai nhanh qua Vercel
 
-Đây là cách nhanh nhất để trải nghiệm \article-open:
+Cách nhanh nhất để trải nghiệm Article Open:
 
-1. [Đăng ký và đăng nhập Vercel](https://vercel.com/new).
+1. [Đăng ký và đăng nhập vào Vercel](https://vercel.com/new).
 
 2. Chọn New Project → Import Git Repository.
 
-3. Nhập URL repository:
+3. Nhập URL kho lưu trữ:
 
 ```
-https://github.com/nhavantuonglai/article-open.git
+https://github.com/nhavantuonglai/themes-open.git
 ```
 
-4. Vercel sẽ tự động tạo repository mới trong GitHub của bạn và deploy website.
+4. Vercel sẽ tự động tạo kho lưu trữ trên GitHub và triển khai website.
 
-> Lưu ý: Phương pháp này giúp bạn nhanh chóng trải nghiệm giao diện, nhưng khả năng cập nhật và bảo trì sẽ bị hạn chế.
+> Lưu ý: Phương pháp này phù hợp để xem trước giao diện, nhưng khả năng tùy chỉnh và cập nhật sẽ bị hạn chế.
 
-#### Triển khai gián tiếp thông qua GitHub (Khuyến nghị)
+#### Cách 2: Triển Khai Qua GitHub (Khuyến Nghị)
 
-Cách này cho phép bạn kiểm soát đầy đủ mã nguồn:
+Kiểm soát toàn bộ mã nguồn với phương pháp này:
 
-1. Clone repository về tài khoản GitHub cá nhân:
+1. Sao chép kho lưu trữ về tài khoản GitHub của bạn:
 
 ```
-gh repo clone nhavantuonglai/article-open
+gh repo clone nhavantuonglai/themes-open
 ```
 
 2. Đăng nhập Vercel bằng tài khoản GitHub.
 
-3. Chọn Import Repository và chọn repository vừa clone.
+3. Chọn Import Repository và chọn kho vừa sao chép.
 
-4. Sau khi deploy, tùy chỉnh subdomain hoặc gán domain tùy chỉnh trong mục Domain.
+4. Sau khi triển khai, tùy chỉnh subdomain hoặc gán tên miền tùy chỉnh trong mục Domain.
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-03.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+![GitHub Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-03.jpg)
 
-### 💻 Hướng dẫn phát triển local
+### 💻 Hướng dẫn phát triển Local
 
-#### Cài đặt các công cụ cần thiết:
+#### Công cụ cần thiết
 
 – [Visual Studio Code](https://code.visualstudio.com/).
 
 – [Node.js](https://nodejs.org/).
 
-#### Cài đặt dependencies:
+#### Các bước cài đặt
+
+1. Cài đặt dependencies:
 
 ```bash
 npm install
 ```
 
-#### Chạy môi trường phát triển:
+2. Khởi động môi trường phát triển:
 
 ```bash
 npm run dev
 ```
 
-#### Truy cập website local tại:
+3. Truy cập website local tại:
 
 ```
 http://localhost:4321/
 ```
 
-Để cập nhật nội dung hiển thị, tìm đúng file và folder tương ứng để điều chỉnh. Sau khi lưu, giao diện sẽ tự động cập nhật.
+Chỉnh sửa nội dung bằng cách tìm file và thư mục tương ứng. Lưu thay đổi để giao diện tự động cập nhật.
 
-<figure><img src="https://banmaixanh.vercel.app/image/article/ma-nguon-mo-04.jpg" alt="vercel-website-deploy-nhavantuonglai" title="vercel-website-deploy-nhavantuonglai" height=100% width=100%><figcaption><p>vercel-website-deploy-nhavantuonglai</p></figcaption></figure>
+![Local Development](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
 
-### 📜 Lịch sử phát triển
+### 📜 Lịch Sử Phát Triển
 
-Dự án \article-open là phiên bản mở của \article, được phát triển qua nhiều giai đoạn:
+Article Open đã trải qua nhiều giai đoạn phát triển:
 
-– v25.04 (Hiện tại): Phiên bản đại tu giao diện lần 2.
+– Version 25.08: Đang phát triển.
 
-– v24.0x.xx: Phiên bản đại tu giao diện lần 1, kết hợp Astro 5.0, Tailwind và Vercel.
+– Version 24.09: Đã kết thúc phát triển, mã nguồn không thể sử dụng.
 
-– v23.12.xx: Phiên bản website động đầu tiên, kết hợp Astro và Firebase.
+– Version 24.04: Đã kết thúc phát triển, mã nguồn không thể sử dụng.
 
-– v23.11.xx: Phiên bản website tĩnh.
+Xem thông tin [phiên bản](https://nhavan.vn/version).
 
-– v23.10.0x: Phiên bản đầu tiên, tập trung vào thư viện CMS.
+### 📞 Liên hệ & hỗ trợ
 
-### 📞 Liên hệ & Hỗ trợ
+– Email: [info@nhavan.vn](mailto:info@nhavan.vn)
 
-– Email: [info@nhavantuonglai.com](mailto:info@nhavantuonglai.com).
-
-– Website: [nhavantuonglai.com](https://nhavantuonglai.com/).
-
-Nếu bạn có bất kỳ câu hỏi hoặc đề xuất nào, đừng ngần ngại liên hệ với chúng tôi để được hỗ trợ nhanh nhất.
-
-⭐ Đừng quên star repository này nếu bạn thấy nó hữu ích!
+– Website: [nhavan.vn](https://nhavan.vn/)
