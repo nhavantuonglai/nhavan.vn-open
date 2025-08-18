@@ -12,7 +12,7 @@ Welcome to Article Open, the open-source version of Article, the core code power
 
 – Unified components: Consistent design and effects for a polished, cohesive look.
 
-– SEO powerhouse: Built-in schema and meta tag generation for better search engine rankings.
+– SEO powerhouse: Builtin schema and meta tag generation for better search engine rankings.
 
 – Dynamic motion effects: Smooth animations for a modern, engaging user experience.
 
@@ -186,7 +186,7 @@ https://github.com/nhavantuonglai/themes-open.git
 
 > Lưu ý: Phương pháp này phù hợp để xem trước giao diện, nhưng khả năng tùy chỉnh và cập nhật sẽ bị hạn chế.
 
-#### Cách 2: Triển Khai Qua GitHub (Khuyến Nghị)
+#### Cách 2: Triển khai qua GitHub (Khuyến nghị)
 
 Kiểm soát toàn bộ mã nguồn với phương pháp này:
 
@@ -236,7 +236,7 @@ Chỉnh sửa nội dung bằng cách tìm file và thư mục tương ứng. L�
 
 ![Local Development](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
 
-### 📜 Lịch Sử Phát Triển
+### 📜 Lịch sử phát triển
 
 Article Open đã trải qua nhiều giai đoạn phát triển:
 
