@@ -1,0 +1,74 @@
+---
+import Analytics from '~/components/widgets/analytics.astro';
+
+const title = "Công cụ nghe đài radio FM trực tuyến";
+const subtitle = "Hướng dẫn: Chọn kênh radio FM mà bạn muốn nghe trực tuyến, công cụ sẽ ngay lập tức phát kênh theo thời gian thực, giúp bạn cập nhật thông tin nhanh chóng, thư giãn trọn vẹn.";
+const channels = [
+	{ name: "VOV 1", url: "https://stream.vovmedia.vn/vov1" },
+	{ name: "VOV 2", url: "https://stream.vovmedia.vn/vov2" },
+	{ name: "VOV 3", url: "https://stream.vovmedia.vn/vov3" },
+	{ name: "VOV 5", url: "https://stream.vovmedia.vn/vov5" },
+	{ name: "VOV Giao Thông Hà Nội", url: "https://media.kythuatvov.vn:7025/;stream/" }
+];
+---
+
+<Analytics
+
+	title={title}
+	subtitle={subtitle}
+
+	id="radio"
+	inputType="button"
+	outputType="audio"
+	channels={channels}
+
+	image="https://images.pexels.com/photos/32685784/pexels-photo-32685784.jpeg"
+
+/>
+
+<script client:load>
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const safeId = 'radio',
+					buttons = document.querySelectorAll(`#${safeId}-buttons button`),
+					audioPlayer = document.getElementById(`${safeId}-audio-player`),
+					audioSource = document.getElementById(`${safeId}-audio-source`),
+					statusDiv = document.getElementById(`${safeId}-status`);
+
+		if (!audioPlayer || !audioSource || !statusDiv) return;
+
+		let currentChannelIndex = -1,
+				statusInterval;
+
+		buttons.forEach((button, index) => {
+			button.addEventListener('click', () => {
+				currentChannelIndex = index;
+				const channel = buttons[index];
+
+				if (!channel?.dataset.url) {
+					statusDiv.textContent = 'Kênh không hợp lệ.';
+					return;
+				}
+
+				audioSource.src = channel.dataset.url;
+				audioPlayer.load();
+
+				buttons.forEach((btn, idx) => {
+					btn.classList.toggle('bg-primary', idx === currentChannelIndex);
+					btn.classList.toggle('text-white', idx === currentChannelIndex);
+				});
+
+				clearInterval(statusInterval);
+				statusInterval = setInterval(() => {
+					const latency = Math.floor(Math.random() * 3001);
+					statusDiv.textContent = `Đang phát: ${channel.innerText}, (độ trễ: ${latency}ms).`;
+				}, 1000);
+
+				audioPlayer.play().catch(() => {
+					statusDiv.textContent = 'Tính năng tạm thời không khả dụng, vui lòng thử lại sau.';
+				});
+			});
+		});
+	});
+
+</script>

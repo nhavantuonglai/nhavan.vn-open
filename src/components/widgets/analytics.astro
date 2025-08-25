@@ -1,0 +1,82 @@
+---
+import Hero from '~/components/widgets/hero.astro';
+
+export interface Props {
+	title?: string;
+	subtitle?: string;
+	content?: string;
+	image?: string | { src: string; alt?: string; title?: string };
+	id?: string;
+	inputType?: 'text' | 'button' | 'hidden';
+	outputType?: 'text' | 'audio' | 'h1';
+	outputFormat?: 'lowercase' | 'kebab-case' | 'count' | null;
+	placeholder?: string;
+	channels?: Array<{ name: string; url: string }>;
+	headingLevel?: 'h1' | 'h2';
+}
+
+const {
+	title = await Astro.slots.render('title'),
+	subtitle = await Astro.slots.render('subtitle'),
+	content = await Astro.slots.render('content'),
+	image,
+	id = 'default',
+	inputType = 'hidden',
+	outputType = 'text',
+	outputFormat = null,
+	placeholder = '',
+	channels = [],
+	headingLevel = 'h1',
+} = Astro.props;
+
+const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn viết lách nhà văn tương lai.', title: 'Diễn đàn viết lách nhà văn tương lai.' } : image;
+const effectiveOutputType = inputType === 'hidden' ? 'h1' : 'text';
+const safe = id.replace(/[^a-zA-Z0-9_-]/g, '');
+const commonClasses = "w-full text-justify text-lg";
+const input = `${commonClasses} border border-gray-300 p-4 rounded-lg bg-white resize-none h-[150px]`;
+const button = `${commonClasses} btn mb-6 font-medium leading-6 text-center`;
+const container = `${commonClasses} rounded-lg mb-6`;
+---
+
+<Hero title={title} subtitle={subtitle} image={imageProps} headingLevel={headingLevel}>
+
+	<Fragment slot="content">
+
+		<div class={container}>
+
+			{inputType === 'text' && (
+				<textarea id={`${safe}-input`} placeholder={placeholder} class={input}></textarea>
+			)}
+
+			{inputType === 'button' && (
+				<div id={`${safe}-buttons`} class="flex flex-wrap gap-2">
+					{channels.map((channel) => (
+						<button class={button} data-url={channel.url}>{channel.name}</button>
+					))}
+				</div>
+			)}
+
+			<div class={container}>
+
+				{effectiveOutputType === 'text' && (
+					<p id={`${safe}-text-output`} class="text-justify"></p>
+				)}
+
+				{effectiveOutputType === 'h1' && (
+					<h1 id={`${safe}-text-output`} class="text-left"></h1>
+				)}
+
+				{effectiveOutputType === 'audio' && (
+					<div id={`${safe}-audio-output`} class={commonClasses}>
+						<audio id={`${safe}-audio-player`} class="w-full mb-6" controls>
+							<source id={`${safe}-audio-source`} src="" type="audio/mpeg" />
+						</audio>
+						<div id={`${safe}-status`} class={commonClasses}></div>
+					</div>
+				)}
+
+			</div>
+
+	</Fragment>
+
+</Hero>

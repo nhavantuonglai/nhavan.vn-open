@@ -3,12 +3,12 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { blogTagRobots, getStaticPathsBlogTag } from '~/utils/blog';
 
 import Layout from '~/layouts/page.astro';
-import Tag from '~/components/content/blog/tag.astro';
+import Hero from '~/components/widgets/hero.astro';
 
 import Articlelist from '~/components/article/articlelist.astro';
 import Pagination from '~/components/article/pagination.astro';
 
-import Form from '~/components/content/main/form.astro';
+import Form from '~/components/content/form.astro';
 
 export const prerender = true;
 
@@ -23,8 +23,8 @@ const { page, tag } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
 const metadata = {
-	title: `Danh sách bài viết theo thẻ ${tag}${currentPage >1 ? ` | Trang ${currentPage} ` : ''}`,
-	description: `Danh sách bài viết theo thẻ ${tag}${currentPage >1 ? ` | Trang ${currentPage} ` : ''} gồm những bài hiện có, đã và đang xuất bản được phân loại trên website, giúp người đọc nhanh chóng, dễ dàng tìm thấy thông tin mình cần.`,
+	title: `Danh sách theo thẻ ${tag}${currentPage >1 ? ` | Trang ${currentPage} ` : ''}`,
+	description: `Bài viết theo thẻ ${tag}${currentPage >1 ? ` | Trang ${currentPage} ` : ''} được phân loại trên website, giúp người đọc nhanh chóng, dễ dàng tìm thấy thông tin mình cần.`,
 	robots: {
 		index: blogTagRobots?.index,
 		follow: blogTagRobots?.follow,
@@ -34,7 +34,14 @@ const metadata = {
 
 <Layout metadata={metadata}>
 
-	<Tag/>
+	<Hero
+
+		title={metadata.title}
+		subtitle={metadata.description}
+		image="https://image.nhavantuonglai.com/image/cover/001-729.jpg"
+		alt="Diễn đàn viết lách nhà văn tương lai."
+
+	/>
 
 	<section class="relative max-w-7xl mx-auto px-4 sm:px-6">
 

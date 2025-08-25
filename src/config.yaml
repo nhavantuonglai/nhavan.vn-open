@@ -17,7 +17,7 @@ metadata:
     type: website
     locale: vi_VN
     image:
-      url: "https://banmaixanh.vercel.app/image/cover/001-737.jpg"
+      url: "https://image.nhavantuonglai.com/image/cover/001-737.jpg"
       width: 1200
       height: 630
       alt: "Nhà văn tương lai là diễn đàn dành cho các bạn trẻ đam mê thực hành viết lách. Đây là không gian tự do, thoải mái chia sẻ và khơi gợi niềm vui khi viết."
@@ -25,7 +25,7 @@ metadata:
     card: summary_large_image
     site: "@nhavantuonglai"
     creator: "@nhavantuonglai"
-    image: "https://banmaixanh.vercel.app/image/cover/001-737.jpg"
+    image: "https://image.nhavantuonglai.com/image/cover/001-737.jpg"
     description: "Nhà văn tương lai là diễn đàn dành cho các bạn trẻ đam mê thực hành viết lách. Đây là không gian tự do, thoải mái chia sẻ và khơi gợi niềm vui khi viết."
 
 i18n:

@@ -1,0 +1,20 @@
+---
+import Layout from '~/layouts/page.astro';
+
+import Hero from '~/components/content/hero.astro';
+
+import Form from '~/components/content/form.astro';
+
+const metadata = {
+	title: `Danh sách bài viết theo thẻ`,
+	description: `Danh sách bài viết theo thẻ gồm những bài hiện có, đã và đang xuất bản được phân loại trên website, giúp người đọc nhanh chóng, dễ dàng tìm thấy thông tin mình cần.`
+};
+---
+
+<Layout metadata={metadata}>
+
+	<Hero/>
+
+	<Form/>
+
+</Layout>

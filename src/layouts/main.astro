@@ -2,7 +2,6 @@
 import { I18N } from 'nhavantuonglai:config';
 import '~/assets/tailwind.css';
 
-import Meta from '~/components/common/meta.astro';
 import Metadata from '~/components/common/metadata.astro';
 import Schema from '~/components/javascript/schema.astro';
 import Analytics from '~/components/javascript/analytics.astro';
@@ -26,25 +25,9 @@ const { language, textDirection } = I18N;
 
 	<head>
 
-		<Meta/>
-
-		<link rel="shortcut icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico">
-		<link rel="icon" type="image/x-icon" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico" sizes="16x16 32x32 48x48">
-		<link rel="icon" type="image/svg+xml" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.svg">
-		<link rel="apple-touch-icon" sizes="180x180" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.png">
-		<link rel="preload" href="https://banmaixanh.vercel.app/image/favicon/favicon-a8c686.ico" as="image" type="image/x-icon" crossorigin="anonymous">
+		<Analytics/>
 
 		<Metadata {...metadata}/>
-
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-
-
-		<script async custom-element="amp-auto-ads"
-
-				src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-
-		</script>
 
 	</head>
 
@@ -55,6 +38,10 @@ const { language, textDirection } = I18N;
 			<slot/>
 
 			<Schema/>
+
+			<Anticopy/>
+
+			<Opentab/>
 
 			<noscript>
 

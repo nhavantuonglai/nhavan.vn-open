@@ -21,7 +21,7 @@ const {
 	twitter = {},
 } = Astro.props;
 
-const imageProps = openGraph.images?.map((img) => typeof img === 'string' ? {
+const imageProps = openGraph.images?.map((img) => typeof img === 'string'? {
 	url: img,
 	alt: 'Diễn đàn viết lách nhà văn tương lai.',
 	width: 1200,
@@ -42,7 +42,7 @@ const defaultSeoProps: AstroSeoProps = {
 		description: description || METADATA?.description,
 		type: 'website',
 		locale: METADATA?.openGraph?.locale || 'vi_VN',
-		images: imageProps.length ? imageProps : [{
+		images: imageProps.length? imageProps : [{
 			url: METADATA?.openGraph?.image?.url || '',
 			width: METADATA?.openGraph?.image?.width,
 			height: METADATA?.openGraph?.image?.height,
@@ -61,7 +61,7 @@ const defaultSeoProps: AstroSeoProps = {
 
 const seoProps: AstroSeoProps = merge({}, defaultSeoProps, {
 	title,
-	titleTemplate: ignoreTitleTemplate ? '%s' : undefined,
+	titleTemplate: ignoreTitleTemplate? '%s' : undefined,
 	canonical,
 	noindex: robots?.index === false,
 	nofollow: robots?.follow === false,

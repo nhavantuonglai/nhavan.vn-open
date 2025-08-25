@@ -1,0 +1,35 @@
+---
+import Form from '~/components/widgets/form.astro';
+---
+
+<Form
+
+	title="Đăng ký thành viên"
+	content="Hãy điền thông tin để trở thành hội viên chính thức, dễ dàng gửi và đăng bài lên diễn đàn ngay hôm nay."
+
+	formFields={[
+
+		{
+			label: "Họ và tên",
+			type: "text",
+			name: "ho-va-ten",
+			required: true
+		},
+
+		{
+			label: "Email liên lạc",
+			type: "email",
+			name: "email",
+			required: true
+		},
+
+		{
+			label: "Đôi dòng chia sẻ",
+			type: "text",
+			name: "noi-dung",
+			required: true
+		},
+
+	]}
+
+/>

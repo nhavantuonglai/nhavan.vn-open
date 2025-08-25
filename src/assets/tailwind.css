@@ -18,6 +18,17 @@
 		font-variation-settings: "wdth" 100;
 	}
 
+	html, body {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+		overscroll-behavior: none;
+	}
+
+	html::-webkit-scrollbar,
+	body::-webkit-scrollbar {
+		display: none;
+	}
+
 	h1 { @apply text-3xl text-primary font-bold mb-6 leading-[1.5]; }
 	h2, h3, h4 { @apply text-2xl text-primary mb-6 leading-[1.5]; }
 	h2, h3 { @apply font-bold; }
@@ -34,6 +45,10 @@
 
 	pre {
 		@apply rounded-md p-3 mb-6 bg-gray-100 whitespace-pre-wrap break-words text-justify text-xl;
+	}
+
+	code {
+		@apply text-primary font-mono; 
 	}
 
 }

@@ -1,0 +1,16 @@
+---
+import Layout from '~/layouts/page.astro';
+
+import Time from '~/components/analytics/time.astro';
+
+const metadata = {
+	title: 'Bây giờ là mấy giờ mấy phút mấy giây?',
+	description: 'Bây giờ là mấy giờ mấy phút mấy giây cập nhật thời gian hiện tại nhanh chóng, chính xác, và tiện lợi để theo dõi, đo lường, cập nhật đồng hồ thuận tiện.',
+};
+---
+
+<Layout metadata={metadata}>
+
+	<Time/>
+
+</Layout>

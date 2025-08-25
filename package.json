@@ -1,7 +1,7 @@
 {
 	"name": "nhavantuonglai",
-	"version": "25.04.13",
-	"description": "Viết là nuôi dưỡng niềm đam mê, chữ để ươm mầm điều yêu thích. Học và hoàn thiện kỹ năng mỗi ngày không mong gì hơn đó là điều duy nhất người ta nhớ để nhắc về.",
+	"version": "25.08.08",
+	"description": "Nhà văn tương lai là diễn đàn dành cho các bạn trẻ đam mê thực hành viết lách. Đây là không gian tự do, thoải mái chia sẻ và khơi gợi niềm vui khi viết.",
 	"private": false,
 	"type": "module",
 	"packageManager": "npm@11",
@@ -23,16 +23,16 @@
 		"@astrojs/react": "4.2.3",
 		"@astrojs/rss": "4.0.11",
 		"@astrojs/sitemap": "3.3.0",
-		"@astrojs/vercel": "8.1.3",
 		"@astrolib/seo": "1.0.0-beta.8",
-		"apexcharts": "^3.54.1",
 		"astro": "^5.6.1",
-		"glob": "11.0.1",
+		"apexcharts": "^3.54.1",
 		"limax": "4.1.0",
-		"lodash.merge": "4.6.2",
 		"lru-cache": "11.1.0",
+		"glob": "11.0.1",
+		"lodash.merge": "4.6.2",
 		"rehype-plugin-image-native-lazy-loading": "1.2.0",
-		"unpic": "4.1.2"
+		"unpic": "4.1.2",
+		"apexcharts": "^3.37.2"
 	},
 	"peerDependencies": {
 		"react": "18.2.0",
