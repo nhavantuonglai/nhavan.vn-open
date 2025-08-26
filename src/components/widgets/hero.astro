@@ -6,7 +6,6 @@ import Button from '~/components/ui/button.astro';
 export interface Props {
 	title?: string;
 	subtitle?: string;
-	tagline?: string;
 	content?: string;
 	actions?: string | CallToAction[];
 	image?: string | { src: string; alt?: string; title?: string };
@@ -16,7 +15,6 @@ export interface Props {
 const {
 	title = await Astro.slots.render('title'),
 	subtitle = await Astro.slots.render('subtitle'),
-	tagline,
 	content = await Astro.slots.render('content'),
 	actions = await Astro.slots.render('actions'),
 	image,
@@ -35,23 +33,19 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn 
 
 			<div class="pb-10 md:pb-16 mx-auto lg:mx-0 w-full">
 
-				{tagline && (
-					<p class="text-base text-secondary font-bold tracking-wide uppercase text-left" set:html={tagline} />
-				)}
-
 				{title && (
 					<Fragment>
 						{headingLevel === 'h1' ? (
-							<h1 set:html={title} />
+							<h1 class="text-white" set:html={title} />
 						) : (
-							<h2 set:html={title} />
+							<h2 class="text-white" set:html={title} />
 						)}
 					</Fragment>
 				)}
 
 				<div class="w-full max-w-3xl mx-auto">
 					{subtitle && (
-						<p set:html={subtitle} />
+						<p class="text-white" set:html={subtitle} />
 					)}
 					{actions && (
 						<div class="max-w-xs sm:max-w-md flex flex-col sm:flex-row gap-4">

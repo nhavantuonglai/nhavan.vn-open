@@ -1,0 +1,238 @@
+---
+export interface Props {
+	id?: string;
+}
+
+const {
+	id = "hero-gallery"
+} = Astro.props;
+
+const sections = [
+	{
+		title: 'Thư viện ảnh film',
+		dataUrl: 'https://image.nhavantuonglai.com/thu-vien-anh-film.txt',
+		sectionId: 'film-gallery',
+	},
+];
+
+const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const generateUniqueRandomNumbers = (count, min, max) => {
+	const numbers = new Set();
+	while (numbers.size < count) {
+		numbers.add(getRandomInt(min, max));
+	}
+	return Array.from(numbers);
+};
+
+async function fetchImageUrls(url) {
+	try {
+		const response = await fetch(url);
+		const text = await response.text();
+		return text.split('\n').filter(url => url.trim());
+	} catch {
+		return [];
+	}
+}
+
+const createSeasonData = (indices, imageUrls) =>
+	indices.map(index => ({
+		src: imageUrls[index] || '',
+		alt: `Văn hay trong hiện tại, chữ tốt ở tương lai ${index + 1}.`
+	}));
+
+const shuffleArray = (array) => {
+	const shuffled = [...array];
+	for (let i = shuffled.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+	}
+	return shuffled;
+};
+
+const firstSection = sections[0];
+const imageUrls = await fetchImageUrls(firstSection.dataUrl);
+const totalUrls = imageUrls.length;
+const uniqueIndices = totalUrls > 0 ? generateUniqueRandomNumbers(16, 0, totalUrls - 1) : [];
+
+const springs = shuffleArray(createSeasonData(uniqueIndices.slice(0, 4), imageUrls));
+const summers = shuffleArray(createSeasonData(uniqueIndices.slice(4, 8), imageUrls));
+const autumns = shuffleArray(createSeasonData(uniqueIndices.slice(8, 12), imageUrls));
+const winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
+---
+
+<section id={id} class="relative not-prose w-full h-screen mb-6">
+
+	<div class="absolute inset-0 z-0">
+
+		<div class="gallery-container absolute inset-0">
+
+			<div class="gallery-row left-to-right">
+				<div class="gallery-track">
+
+					{springs.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+					{springs.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+				</div>
+			</div>
+
+			<div class="gallery-row right-to-left">
+				<div class="gallery-track">
+
+					{summers.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+					{summers.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+				</div>
+			</div>
+
+			<div class="gallery-row left-to-right">
+				<div class="gallery-track">
+
+					{autumns.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+					{autumns.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+				</div>
+			</div>
+
+			<div class="gallery-row right-to-left">
+				<div class="gallery-track">
+
+					{winters.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+					{winters.map((image) => image.src && (
+						<div class="gallery-item">
+							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
+						</div>
+					))}
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="overlay-container absolute inset-0 z-10">
+			<div class="flex w-full h-full">
+
+				<div class="w-4/5 h-full blur-gradient"></div>
+
+				<div class="w-1/5 h-full"></div>
+
+			</div>
+		</div>
+
+		<div class="absolute inset-0 z-20">
+			<slot/>
+		</div>
+
+	</div>
+
+</section>
+
+<style>
+
+	.gallery-container {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.gallery-row {
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+		height: 25%;
+	}
+
+	.gallery-track {
+		display: flex;
+		gap: 10px;
+		width: max-content;
+		height: 100%;
+	}
+
+	.gallery-item {
+		flex: 0 0 auto;
+		width: 300px;
+		height: 100%;
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.left-to-right .gallery-track {
+		animation: scroll-left 120s linear infinite;
+	}
+
+	.right-to-left .gallery-track {
+		animation: scroll-right 120s linear infinite;
+		transform: translateX(calc(-100% + 100vw));
+	}
+
+	.overlay-container {
+		width: 100%;
+		height: 100%;
+	}
+
+	.blur-gradient {
+		position: relative;
+		background-color: transparent;
+	}
+
+	.blur-gradient::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		backdrop-filter: blur(200px);
+		background-color: rgba(0, 0, 0, 0.2);
+		mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+		-webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+	}
+
+	@keyframes scroll-left {
+		0% { transform: translateX(0); }
+		100% { transform: translateX(calc(-100% / 2)); }
+	}
+
+	@keyframes scroll-right {
+		0% { transform: translateX(calc(-100% + 100vw)); }
+		100% { transform: translateX(calc(-50% + 100vw)); }
+	}
+
+</style>
