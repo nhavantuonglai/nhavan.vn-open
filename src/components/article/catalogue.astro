@@ -7,6 +7,8 @@ import { APP_BLOG } from 'nhavantuonglai:config';
 import Articlelist from '~/components/article/articlelist.astro';
 import Container from '~/components/ui/container.astro';
 
+import { Slideup } from '~/assets/framer.jsx';
+
 export interface Props {
 	linkText?: string;
 	linkUrl?: string | URL;
@@ -97,36 +99,40 @@ if (APP_BLOG.isEnabled) {
 }
 ---
 
-{blocks.length > 0 && blocks.map(b => {
+<Slideup client:load>
 
-	const tagLink = b.tagSlug ? `https://nhavan.vn/tags/${encodeURIComponent(b.tagSlug)}` : getBlogPermalink();
+	{blocks.length > 0 && blocks.map(b => {
 
-	return (
+		const tagLink = b.tagSlug ? `https://nhavan.vn/tags/${encodeURIComponent(b.tagSlug)}` : getBlogPermalink();
 
-		<Container id={id} containerClass={`${container} ${classes?.container || ''}`} bg={bg} class="mb-6 md:mb-62">
+		return (
 
-			<div class="flex flex-col lg:justify-between lg:flex-row mb-6">
+			<Container id={id} containerClass={`${container} ${classes?.container || ''}`} bg={bg} class="mb-6 md:mb-62">
 
-				<div>
+				<div class="flex flex-col lg:justify-between lg:flex-row mb-6">
 
-					<h2 set:html={b.title} />
+					<div>
 
-					{APP_BLOG.list.isEnabled && linkText && (
-						<a class="hover:text-primary block mb-6 lg:mb-0" href={tagLink} target="_blank">
-							{linkText} »
-						</a>
-					)}
+						<h2 set:html={b.title} />
+
+						{APP_BLOG.list.isEnabled && linkText && (
+							<a class="hover:text-primary block mb-6 lg:mb-0" href={tagLink} target="_blank">
+								{linkText} »
+							</a>
+						)}
+
+					</div>
+
+					{information && <p class="text-muted lg:text-sm lg:max-w-md" set:html={information} />}
 
 				</div>
 
-				{information && <p class="text-muted lg:text-sm lg:max-w-md" set:html={information} />}
+				<Articlelist posts={b.posts} layout="grid" variant="compact" />
 
-			</div>
+			</Container>
 
-			<Articlelist posts={b.posts} layout="grid" variant="compact" />
+		);
 
-		</Container>
+	})}
 
-	);
-
-})}
+<Slideup/>

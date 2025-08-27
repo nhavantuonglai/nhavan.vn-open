@@ -3,6 +3,7 @@ import Analytics from '~/components/widgets/analytics.astro';
 
 const title = "Công cụ nghe đài radio FM trực tuyến";
 const subtitle = "Hướng dẫn: Chọn kênh radio FM mà bạn muốn nghe trực tuyến, công cụ sẽ ngay lập tức phát kênh theo thời gian thực, giúp bạn cập nhật thông tin nhanh chóng, thư giãn trọn vẹn.";
+
 const channels = [
 	{ name: "VOV 1", url: "https://stream.vovmedia.vn/vov1" },
 	{ name: "VOV 2", url: "https://stream.vovmedia.vn/vov2" },
@@ -21,8 +22,6 @@ const channels = [
 	inputType="button"
 	outputType="audio"
 	channels={channels}
-
-	image="https://images.pexels.com/photos/32685784/pexels-photo-32685784.jpeg"
 
 />
 

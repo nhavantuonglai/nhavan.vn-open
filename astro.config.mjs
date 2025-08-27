@@ -25,45 +25,40 @@ const whenExternalScripts = (items = []) =>
 		: [];
 
 export default defineConfig({
-
 	output: 'static',
-
 	site: 'https://nhavan.vn',
-
 	integrations: [
-
 		react(),
 		tailwind({
 			applyBaseStyles: false,
 		}),
-
 		sitemap(),
-
 		mdx(),
-
 		...whenExternalScripts(() =>
 			partytown({
 				config: { forward: ['dataLayer.push'] },
 			})
 		),
-
 		astrowind(),
 	],
-
 	markdown: {
 		remarkPlugins: [readingTimeRemarkPlugin],
 		rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
 	},
-
 	vite: {
-
 		resolve: {
 			alias: {
 				'~': path.resolve(__dirname, './src'),
 			},
-			extensions: ['.js', '.ts']
+			extensions: ['.js', '.ts', '.jsx', '.tsx', '.mjs'],
 		},
-
+		optimizeDeps: {
+			include: ['framer-motion', 'motion-dom'],
+			esbuildOptions: {
+				loader: {
+					'.mjs': 'js',
+				},
+			},
+		},
 	},
-
 });

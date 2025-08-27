@@ -1,0 +1,121 @@
+<div id="notification" class="notification"></div>
+
+<script is:client:load>
+
+	const notificationElement = document.getElementById('notification');
+
+	let notificationTimeout = null;
+	let fadeTimeout = null;
+
+	const Notifications = {
+		loaded: 'Đã tải trang thành công.',
+		selection: (length) => `Đã bôi đen <strong class="text-primary">${length}</strong> ký tự.`,
+		copy: (length) => `Đã sao chép <strong class="text-primary">${length}</strong> ký tự.`,
+		time: (value, unit) => `Đã ở trên trang <strong class="text-primary">${value}</strong> ${unit}.`
+	};
+
+	function showNotification(message) {
+		if (notificationTimeout) {
+			clearTimeout(notificationTimeout);
+		}
+		if (fadeTimeout) {
+			clearTimeout(fadeTimeout);
+		}
+
+		notificationElement.innerHTML = message;
+		notificationElement.classList.add('show');
+		notificationElement.classList.remove('fade');
+
+		fadeTimeout = setTimeout(() => {
+			notificationElement.classList.add('fade');
+		}, 3000);
+
+		notificationTimeout = setTimeout(() => {
+			notificationElement.classList.remove('show', 'fade');
+		}, 5000);
+	}
+
+	const startTime = Date.now();
+
+	function checkOnlineTime() {
+		const currentTime = Date.now();
+		const timeSpent = Math.floor((currentTime - startTime) / 1000);
+
+		if (timeSpent === 10) {
+			showNotification(Notifications.time(10, 'giây'));
+		} else if (timeSpent === 30) {
+			showNotification(Notifications.time(30, 'giây'));
+		} else if (timeSpent === 60) {
+			showNotification(Notifications.time('01', 'phút'));
+		} else if (timeSpent === 300) {
+			showNotification(Notifications.time('05', 'phút'));
+		} else if (timeSpent > 300 && timeSpent % 600 === 0) {
+			const minutes = timeSpent / 60;
+			const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+			showNotification(Notifications.time(formattedMinutes, 'phút'));
+		}
+
+		setTimeout(checkOnlineTime, 1000);
+	}
+
+	checkOnlineTime();
+
+	setTimeout(() => {
+		showNotification(Notifications.loaded);
+	}, 1000);
+
+	document.addEventListener('selectionchange', () => {
+		const selection = window.getSelection();
+		const selectedText = selection.toString();
+		if (selectedText.length > 0) {
+			showNotification(Notifications.selection(selectedText.length));
+		}
+	});
+
+	document.addEventListener('copy', () => {
+		const selection = window.getSelection();
+		const copiedText = selection.toString();
+		const charCount = copiedText.length;
+		showNotification(Notifications.copy(charCount));
+	});
+
+</script>
+
+<style>
+
+	.notification {
+		@apply text-[color:var(--aw-color-text-default)] text-xl leading-snug;
+		position: fixed;
+		bottom: 10px;
+		left: 16px;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 0.5rem;
+		padding: 16px;
+		width: 250px;
+		max-width: calc(100vw - 32px);
+		line-height: 1.4;
+		word-wrap: break-word;
+		box-sizing: border-box;
+		display: none;
+		z-index: 99;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		border: 1px solid #e5e7eb;
+	}
+
+	@media (min-width: 640px) {
+		.notification {
+			bottom: 50px;
+			left: 24px;
+			max-width: calc(100vw - 48px);
+		}
+	}
+
+	.notification.show {
+		display: block;
+	}
+
+	.notification.fade {
+		opacity: 0;
+	}
+
+</style>

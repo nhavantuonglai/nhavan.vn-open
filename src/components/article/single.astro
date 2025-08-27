@@ -6,6 +6,8 @@ import { findImage } from '~/utils/images';
 import Tagslist from '~/components/article/tagslist.astro';
 import Catalogue from '~/components/article/catalogue.astro';
 
+import { Slideup } from '~/assets/framer.jsx';
+
 export interface Props {
 	post: Post;
 	url: string | URL;
@@ -22,102 +24,104 @@ const container = "px-4 sm:px-6";
 
 <section class={`max-w-8xl mx-auto py-20 ${container} pb-10`}>
 
-	</script>
+	<Slideup client:load>
 
-	<article class="grid grid-cols-1 md:grid-cols-3 gap-6">
+		<article class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-		<div class="md:col-span-2">
+			<div class="md:col-span-2">
 
-			<header>
+				<header>
 
-				<h1>
-					{post.title}
-				</h1>
-
-				<p>
-					{post.description}
-				</p>
-
-				<div class={`${flex} flex-col sm:flex-row sm:items-center`}>
+					<h1>
+						{post.title}
+					</h1>
 
 					<p>
-
-						<time datetime={post.pubDatetime} class="inline-block">
-							{`${new Date(post.pubDatetime)
-								.toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' })
-								.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, 'Đăng ngày $1 tháng $2 năm $3')}`}
-						</time>
-
-						{post.readingTime && (
-							<>
-								| <span>{post.readingTime}</span> phút đọc
-							</>
-						)}
-
-						| <span id="counter"></span> lượt xem.
-
-						<script client:load>
-							let count = localStorage.getItem('pageCounter');
-							if (count === null) {
-								count = Math.floor(Math.random() * (543 - 74 + 1)) + 45;
-							} else {
-								count = parseInt(count);
-							}
-							count += 1;
-							localStorage.setItem('pageCounter', count);
-							const counterElement = document.getElementById('counter');
-							counterElement.textContent = count;
-						</script>
-
+						{post.description}
 					</p>
 
-				</div>
+					<div class={`${flex} flex-col sm:flex-row sm:items-center`}>
 
-				{post.image && (
-					<div class="mb-6">
-						<img src={post.image} alt={post.title} title={post.title} loading="lazy" class="w-full h-auto rounded-md" />
+						<p>
+
+							<time datetime={post.pubDatetime} class="inline-block">
+								{`${new Date(post.pubDatetime)
+									.toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' })
+									.replace(/(\d{1,2})\/(\d{1,2})\/(\d{4})/, 'Đăng ngày $1 tháng $2 năm $3')}`}
+							</time>
+
+							{post.readingTime && (
+								<>
+									| <span>{post.readingTime}</span> phút đọc
+								</>
+							)}
+
+							| <span id="counter"></span> lượt xem.
+
+							<script client:load>
+								let count = localStorage.getItem('pageCounter');
+								if (count === null) {
+									count = Math.floor(Math.random() * (543 - 74 + 1)) + 45;
+								} else {
+									count = parseInt(count);
+								}
+								count += 1;
+								localStorage.setItem('pageCounter', count);
+								const counterElement = document.getElementById('counter');
+								counterElement.textContent = count;
+							</script>
+
+						</p>
+
 					</div>
-				)}
 
-			</header>
+					{post.image && (
+						<div class="mb-6">
+							<img src={post.image} alt={post.title} title={post.title} loading="lazy" class="w-full h-auto rounded-md" />
+						</div>
+					)}
 
-			<div class={`${section} img`} id="post-content">
+				</header>
 
-				{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
+				<div class={`${section} img`} id="post-content">
 
-			</div>
+					{Content ? <Content /> : <Fragment set:html={post.content || ''} />}
 
-			<div class={`${section} ${flex} flex-col sm:flex-row`}>
-
-				<Tagslist tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
-
-			</div>
-
-		</div>
-
-		<div class="md:col-span-1 hidden md:block">
-
-			<div id="index" class="toc mt-0"></div>
-
-		</div>
-
-		<div id="reading-progress-container" class="reading-progress-container">
-
-			<div class={`reading-progress-inner max-w-8xl mx-auto ${container} w-full`}>
-
-				<div class="reading-progress-info">
-					<span id="reading-percentage">0%</span>
 				</div>
 
-				<div class="reading-progress-bar">
-					<div id="reading-progress-fill" class="reading-progress-fill"></div>
+				<div class={`${section} ${flex} flex-col sm:flex-row`}>
+
+					<Tagslist tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+
 				</div>
 
 			</div>
 
-		</div>
+			<div class="md:col-span-1 hidden md:block">
 
-	</article>
+				<div id="index" class="toc mt-0"></div>
+
+			</div>
+
+			<div id="reading-progress-container" class="reading-progress-container">
+
+				<div class={`reading-progress-inner max-w-8xl mx-auto ${container} w-full`}>
+
+					<div class="reading-progress-info">
+						<span id="reading-percentage">0%</span>
+					</div>
+
+					<div class="reading-progress-bar">
+						<div id="reading-progress-fill" class="reading-progress-fill"></div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</article>
+
+	<Slideup/>
 
 </section>
 

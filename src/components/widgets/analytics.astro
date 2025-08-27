@@ -7,12 +7,12 @@ export interface Props {
 	content?: string;
 	image?: string | { src: string; alt?: string; title?: string };
 	id?: string;
-	inputType?: 'text' | 'button' | 'hidden';
-	outputType?: 'text' | 'audio' | 'h1';
-	outputFormat?: 'lowercase' | 'kebab-case' | 'count' | null;
+	typeinput?: 'text' | 'button' | 'hidden';
+	typeoutput?: 'text' | 'audio' | 'h1';
+	format?: 'lowercase' | 'kebab-case' | 'count' | null;
 	placeholder?: string;
 	channels?: Array<{ name: string; url: string }>;
-	headingLevel?: 'h1' | 'h2';
+	heading?: 'h1' | 'h2';
 }
 
 const {
@@ -21,16 +21,16 @@ const {
 	content = await Astro.slots.render('content'),
 	image,
 	id = 'default',
-	inputType = 'hidden',
-	outputType = 'text',
-	outputFormat = null,
+	typeinput = 'hidden',
+	typeoutput = 'text',
+	format = null,
 	placeholder = '',
 	channels = [],
-	headingLevel = 'h1',
+	heading = 'h1',
 } = Astro.props;
 
 const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn viết lách nhà văn tương lai.', title: 'Diễn đàn viết lách nhà văn tương lai.' } : image;
-const effectiveOutputType = inputType === 'hidden' ? 'h1' : 'text';
+const effectivetypeoutput = typeinput === 'hidden' ? 'h1' : 'text';
 const safe = id.replace(/[^a-zA-Z0-9_-]/g, '');
 const commonClasses = "w-full text-justify text-lg";
 const input = `${commonClasses} border border-gray-300 p-4 rounded-lg bg-white resize-none h-[150px]`;
@@ -38,17 +38,17 @@ const button = `${commonClasses} btn mb-6 font-medium leading-6 text-center`;
 const container = `${commonClasses} rounded-lg mb-6`;
 ---
 
-<Hero title={title} subtitle={subtitle} image={imageProps} headingLevel={headingLevel}>
+<Hero title={title} subtitle={subtitle} image={imageProps} heading={heading}>
 
 	<Fragment slot="content">
 
 		<div class={container}>
 
-			{inputType === 'text' && (
+			{typeinput === 'text' && (
 				<textarea id={`${safe}-input`} placeholder={placeholder} class={input}></textarea>
 			)}
 
-			{inputType === 'button' && (
+			{typeinput === 'button' && (
 				<div id={`${safe}-buttons`} class="flex flex-wrap gap-2">
 					{channels.map((channel) => (
 						<button class={button} data-url={channel.url}>{channel.name}</button>
@@ -58,15 +58,15 @@ const container = `${commonClasses} rounded-lg mb-6`;
 
 			<div class={container}>
 
-				{effectiveOutputType === 'text' && (
-					<p id={`${safe}-text-output`} class="text-justify"></p>
+				{effectivetypeoutput === 'text' && (
+					<p id={`${safe}-text-output`} class="text-justify text-white"></p>
 				)}
 
-				{effectiveOutputType === 'h1' && (
-					<h1 id={`${safe}-text-output`} class="text-left"></h1>
+				{effectivetypeoutput === 'h1' && (
+					<h1 id={`${safe}-text-output`} class="text-left text-white"></h1>
 				)}
 
-				{effectiveOutputType === 'audio' && (
+				{effectivetypeoutput === 'audio' && (
 					<div id={`${safe}-audio-output`} class={commonClasses}>
 						<audio id={`${safe}-audio-player`} class="w-full mb-6" controls>
 							<source id={`${safe}-audio-source`} src="" type="audio/mpeg" />

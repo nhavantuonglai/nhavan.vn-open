@@ -3,8 +3,9 @@ import Layout from '~/layouts/page.astro';
 
 import Hero from '~/components/content/hero.astro';
 import Catalogue from '~/components/article/catalogue.astro';
-
 import Form from '~/components/content/form.astro';
+
+import { Slideup } from '~/assets/framer.jsx';
 
 const metadata = {
 	title: 'Diễn đàn viết lách nhà văn tương lai',
@@ -15,12 +16,16 @@ const metadata = {
 
 	<Hero/>
 
-	<Catalogue tags="viet-lach"/>
+	<Slideup client:load>
 
-	<Catalogue tags="khoa-hoc"/>
+		<Catalogue tags="viet-lach"/>
 
-	<Catalogue tags="nghien-cuu"/>
+		<Catalogue tags="khoa-hoc"/>
 
-	<Form/>
+		<Catalogue tags="nghien-cuu"/>
+
+		<Form/>
+
+	<Slideup/>
 
 </Layout>

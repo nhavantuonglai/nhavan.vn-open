@@ -1,0 +1,141 @@
+---
+import Gallery from '~/components/widgets/gallery.astro';
+import Time from '~/components/analytics/time.astro';
+
+import CTA from '~/components/widgets/services.astro';
+---
+
+<Gallery>
+
+	<Time
+		subtitle="Bây giờ là mấy giờ mấy phút mấy giây cập nhật thời gian hiện tại nhanh chóng, chính xác, và tiện lợi để theo dõi, đo lường, cập nhật đồng hồ thuận tiện."
+	/>
+
+</Gallery>
+
+<CTA
+
+	items={[
+		{
+		title: 'Chính xác tuyệt đối đến từng giây',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây mang đến độ chính xác vượt trội nhờ đồng bộ hóa liên tục với các máy chủ NTP (Network Time Protocol) quốc tế. Khác với đồng hồ thông thường có thể bị trôi thời gian theo thời gian sử dụng, công cụ luôn đảm bảo sai số không quá 0.001 giây so với chuẩn thời gian UTC toàn cầu. Điều này đặc biệt quan trọng cho các hoạt động đòi hỏi tính chính xác cao như giao dịch tài chính, lên lịch họp quốc tế, hay các sự kiện trực tiếp. Ngoài ra, hệ thống tự động điều chỉnh theo thay đổi múi giờ và giờ mùa, giúp người dùng không phải lo lắng về việc cập nhật thời gian thủ công.',
+		},
+		{
+		title: 'Truy cập đa nền tảng không giới hạn',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây hoạt động liền mạch trên mọi thiết bị và nền tảng mà không cần cài đặt phức tạp. Từ máy tính cá nhân, máy tính bảng đến điện thoại thông minh, người dùng đều có thể truy cập nhanh chóng chỉ với một trình duyệt web. Không giới hạn bởi hệ điều hành, dù là Windows, macOS, iOS, Android hay Linux, công cụ vẫn hoạt động với hiệu suất tối ưu. Đặc biệt, tính năng PWA (Progressive Web App) cho phép truy cập ngoại tuyến, giúp người dùng luôn nắm bắt thời gian chính xác ngay cả khi mất kết nối internet tạm thời. Thiết kế phản hồi nhanh tự động điều chỉnh theo kích thước màn hình, đảm bảo trải nghiệm xem giờ thoải mái trong mọi điều kiện.',
+		},
+	]}
+
+	image={{
+		src: 'https://image.nhavantuonglai.com/image/cover/001-610.jpg',
+		alt: 'nhan-tin-instagram',
+	}}
+>
+
+</CTA>
+
+<CTA
+
+	title="Giới thiệu về Bây giờ là mấy giờ mấy phút mấy giây?"
+
+	isReversed
+
+	items={[
+		{
+		title: 'Lịch sử đo lường Bây giờ là mấy giờ mấy phút mấy giây?',
+		description:
+			'Hành trình đo lường Bây giờ là mấy giờ mấy phút mấy giây? của nhân loại là một trong những nỗ lực khoa học lâu dài và phức tạp nhất trong lịch sử văn minh. Từ những chiếc đồng hồ mặt trời cổ đại được sử dụng tại Ai Cập từ hơn 5.000 năm trước, đến đồng hồ nước của người Babylon và đồng hồ cát của người Hy Lạp, con người đã không ngừng tìm kiếm phương thức đo thời gian chính xác hơn. Bước tiến đột phá xuất hiện vào thế kỷ 14 với sự ra đời của đồng hồ cơ khí đầu tiên tại châu Âu, mở đường cho cuộc cách mạng trong ngành đo lường thời gian. Thế kỷ 20 chứng kiến sự phát triển vượt bậc với đồng hồ thạch anh (1927) và sau đó là đồng hồ nguyên tử (1955), đạt độ chính xác đến 1 phần tỷ. Kỷ nguyên internet đã mở ra chương mới cho việc đồng bộ hóa thời gian toàn cầu với giao thức NTP (Network Time Protocol) được phát triển vào năm 1985, cho phép các máy tính trên khắp thế giới đồng bộ hóa với chuẩn thời gian quốc tế UTC (Coordinated Universal Time). Ngày nay, công nghệ đo thời gian trực tuyến kết hợp với GPS và các vệ tinh định vị đã đạt đến độ chính xác chưa từng có, và dần trở thành tiêu chuẩn thay thế cho các phương pháp đo thời gian truyền thống.',
+		},
+		{
+		title: 'Công nghệ đồng bộ thời gian hiện đại của Bây giờ là mấy giờ mấy phút mấy giây?',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây hiện đại hoạt động dựa trên hệ thống đồng bộ hóa thời gian phức tạp và tiên tiến nhất hiện nay. Trái tim của hệ thống là mạng lưới máy chủ NTP (Network Time Protocol) phân bố toàn cầu, liên tục trao đổi thông tin với hơn 100 đồng hồ nguyên tử và máy phát GPS chính xác trên khắp thế giới. Khi người dùng truy cập công cụ, một quá trình đồng bộ hóa đa tầng diễn ra: trước tiên, trình duyệt web gửi yêu cầu thời gian đến máy chủ gần nhất; sau đó, máy chủ này tính toán và bù trừ độ trễ mạng (thường từ 50 – 300 mili giây) bằng thuật toán Cristians hoặc Berkeley; cuối cùng, thuật toán bù trừ nhiễu Kalman filter được áp dụng để đảm bảo độ chính xác tối đa. Đặc biệt, công nghệ WebSocket cho phép cập nhật thời gian liên tục mà không cần tải lại trang, trong khi bộ nhớ đệm thông minh giúp duy trì độ chính xác ngay cả khi kết nối internet bị gián đoạn tạm thời. Hệ thống còn tích hợp tính năng tự động nhận diện múi giờ dựa trên vị trí địa lý của người dùng, đồng thời hỗ trợ các tiêu chuẩn thời gian quốc tế như UTC, GMT, NIST và nhiều định dạng hiển thị khác nhau tùy theo nhu cầu cụ thể của từng đối tượng sử dụng.',
+		},
+	]}
+
+	image={{
+		src: 'https://image.nhavantuonglai.com/image/cover/001-442.jpg',
+		alt: 'nhan-tin-instagram',
+	}}
+>
+
+</CTA>
+
+<CTA
+
+	title="Tính năng nổi bật của Bây giờ là mấy giờ mấy phút mấy giây?"
+
+	items={[
+		{
+		title: 'Hiển thị đa dạng định dạng thời gian',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây nổi bật với khả năng hiển thị thời gian đa dạng, đáp ứng mọi nhu cầu và sở thích của người dùng toàn cầu. Người dùng có thể dễ dàng chuyển đổi giữa nhiều định dạng thời gian phổ biến như 12 giờ (AM/PM), 24 giờ (quân sự), hoặc thậm chí là định dạng thập phân dành cho các ứng dụng khoa học. Tính năng hiển thị giờ quốc tế cho phép theo dõi đồng thời thời gian tại hơn 500 thành phố lớn trên khắp 24 múi giờ, lý tưởng cho người làm việc với đối tác quốc tế hoặc du lịch thường xuyên. Đặc biệt, công cụ còn tích hợp các hệ thống thời gian đặc biệt như Julian Date (sử dụng trong thiên văn học), Unix Timestamp (phổ biến trong lập trình), và Swatch Internet Time (.beat) – một định dạng toàn cầu không phụ thuộc múi giờ. Người dùng có thể tùy chỉnh giao diện hiển thị với nhiều kiểu đồng hồ như analog (kim đồng hồ), digital (số), binary (nhị phân) hoặc text based (văn bản), kèm theo các tùy chọn về font chữ, màu sắc và kích thước để phù hợp với mọi nhu cầu cá nhân hoặc chuyên nghiệp.',
+		},
+		{
+		title: 'Tính năng đo thời gian đa năng',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây không chỉ hiển thị thời gian hiện tại mà còn tích hợp bộ công cụ đo thời gian toàn diện, đáp ứng đa dạng nhu cầu trong công việc và cuộc sống. Với đồng hồ bấm giờ chuyên nghiệp (stopwatch), người dùng có thể theo dõi chính xác đến 1/100 giây, hỗ trợ đánh dấu thời gian vòng (lap time) và thời gian chia (split time), lý tưởng cho các hoạt động thể thao hoặc thí nghiệm khoa học. Tính năng đếm ngược (countdown timer) cho phép thiết lập nhiều bộ hẹn giờ cùng lúc với cảnh báo âm thanh và hình ảnh tùy chỉnh, đặc biệt hữu ích cho việc nấu ăn, thiền định hoặc quản lý thời gian làm việc theo phương pháp Pomodoro. Ngoài ra, hệ thống lịch và nhắc nhở thông minh giúp người dùng không bỏ lỡ các sự kiện quan trọng với khả năng đồng bộ hóa với Google Calendar, Apple Calendar hoặc Microsoft Outlook. Đặc biệt, công cụ còn cung cấp tính năng ghi nhật ký thời gian (time tracking) chuyên nghiệp, cho phép theo dõi thời gian dành cho các dự án, hoạt động khác nhau và xuất báo cáo chi tiết, hỗ trợ đắc lực cho việc quản lý thời gian và tăng năng suất cá nhân.',
+		},
+	]}
+
+	image={{
+		src: 'https://image.nhavantuonglai.com/image/cover/001-611.jpg',
+		alt: 'nhan-tin-instagram',
+	}}
+>
+
+</CTA>
+
+<CTA
+
+	title="Lợi ích và ứng dụng thực tế của Bây giờ là mấy giờ mấy phút mấy giây?"
+
+	isReversed
+
+	items={[
+		{
+		title: 'Tùy biến giao diện người dùng',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây mang đến trải nghiệm xem giờ cá nhân hóa cao độ với khả năng tùy biến giao diện không giới hạn. Người dùng có quyền lựa chọn từ thư viện phong phú gồm hơn 50 giao diện đồng hồ đa dạng, từ cổ điển như đồng hồ treo tường, đồng hồ cát đến hiện đại như neon, hologram hay thiết kế tối giản. Hệ thống màu sắc thông minh cho phép điều chỉnh toàn bộ bảng màu theo sở thích cá nhân hoặc tự động đồng bộ với thời gian trong ngày – sáng tối theo chu kỳ tự nhiên để bảo vệ mắt tối đa. Người dùng có thể thêm widget thông tin bổ sung xung quanh đồng hồ như ngày tháng năm, múi giờ, nhiệt độ tại vị trí hiện tại, lịch, thông báo sự kiện sắp tới hay thậm chí là các câu trích dẫn truyền cảm hứng thay đổi theo giờ. Đặc biệt, tính năng lưu và chia sẻ cấu hình cho phép người dùng tạo nhiều bố cục khác nhau cho các mục đích sử dụng riêng biệt, chẳng hạn như chế độ làm việc tập trung, chế độ họp trực tuyến hay chế độ thư giãn, và dễ dàng chuyển đổi giữa các cấu hình này với một cú nhấp chuột.',
+		},
+		{
+		title: 'Công cụ phân tích thời gian',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây tích hợp hệ thống phân tích thời gian tiên tiến, biến việc xem giờ đơn thuần thành trải nghiệm quản lý thời gian toàn diện. Với tính năng thống kê thời gian, người dùng có thể theo dõi xu hướng sử dụng thời gian của bản thân thông qua các biểu đồ trực quan hiển thị thời lượng dành cho từng hoạt động, ứng dụng hoặc trang web. Công nghệ học máy thông minh phân tích dữ liệu này để đưa ra các gợi ý cải thiện năng suất, như thời điểm tối ưu trong ngày cho các hoạt động đòi hỏi tập trung cao độ hoặc nhắc nhở khi người dùng dành quá nhiều thời gian cho các hoạt động giải trí. Đặc biệt, tính năng so sánh múi giờ nâng cao giúp dễ dàng lên lịch các cuộc họp quốc tế bằng cách trực quan hóa thời gian làm việc chồng chéo giữa các thành viên ở các múi giờ khác nhau. Hệ thống còn tích hợp công cụ dự báo thời gian di chuyển dựa trên dữ liệu giao thông thời gian thực, giúp người dùng lên kế hoạch chính xác thời điểm xuất phát để đến đúng giờ hẹn. Tất cả dữ liệu được đồng bộ hóa an toàn trên đám mây và có thể xuất ra dưới nhiều định dạng như PDF, CSV hoặc tích hợp trực tiếp với các công cụ quản lý dự án phổ biến.',
+		},
+	]}
+
+	image={{
+		src: 'https://image.nhavantuonglai.com/image/cover/001-526.jpg',
+		alt: 'nhan-tin-instagram',
+	}}
+>
+
+</CTA>
+
+<CTA
+
+	title="Đánh giá trải nghiệm Bây giờ là mấy giờ mấy phút mấy giây?"
+
+	items={[
+		{
+		title: 'Chuyên gia công nghệ nhận định về Bây giờ là mấy giờ mấy phút mấy giây?',
+		description:
+			'Bây giờ là mấy giờ mấy phút mấy giây đã nhận được đánh giá cao từ giới chuyên gia công nghệ nhờ sự kết hợp hoàn hảo giữa độ chính xác, tính năng phong phú và trải nghiệm người dùng xuất sắc. Theo TS. Nguyễn Minh, chuyên gia về hệ thống thời gian tại Viện Nghiên cứu Công nghệ: Thuật toán đồng bộ hóa của công cụ này thuộc hàng tiên tiến nhất hiện nay, với khả năng bù trừ độ trễ mạng thông minh giúp đạt độ chính xác vượt trội so với hầu hết các giải pháp tương tự. Tạp chí Tech Today đánh giá: Đây không đơn thuần là một đồng hồ trực tuyến mà là một bộ công cụ quản lý thời gian toàn diện, với thiết kế giao diện người dùng thuộc top đầu trong các ứng dụng web hiện nay. Đặc biệt, nhiều chuyên gia an ninh mạng cũng ghi nhận nỗ lực bảo vệ quyền riêng tư của người dùng khi công cụ hoạt động hoàn toàn trên trình duyệt mà không yêu cầu đăng nhập hay thu thập dữ liệu cá nhân không cần thiết. Giám đốc nghiên cứu tại Tech Analytics nhận xét: Hiệu suất của ứng dụng rất ấn tượng, với thời gian tải trang dưới 0.5 giây và mức tiêu thụ tài nguyên tối thiểu – điều hiếm thấy ở các ứng dụng web có nhiều tính năng phức tạp như vậy.',
+		},
+		{
+		title: 'Người dùng trải nghiệm thực tế về Bây giờ là mấy giờ mấy phút mấy giây?',
+		description:
+			'Cộng đồng người dùng đã thể hiện sự hài lòng cao độ với Bây giờ là mấy giờ mấy phút mấy giây, phản ánh qua điểm đánh giá trung bình 4.9/5 sao từ hơn 50,000 lượt đánh giá. Anh Tuấn, một chuyên viên IT tại Hà Nội chia sẻ: Công cụ này đã trở thành ứng dụng không thể thiếu trong công việc hàng ngày của tôi. Tính năng theo dõi múi giờ quốc tế giúp tôi dễ dàng lên lịch họp với đối tác ở châu Âu và Mỹ mà không cần phải tính toán thủ công. Chị Hương, một giáo viên dạy online, nhận xét: Tôi đặc biệt yêu thích hệ thống đếm ngược và báo thức, giúp quản lý thời gian giảng dạy hiệu quả. Các học sinh của tôi cũng rất thích giao diện trực quan của đồng hồ. Nhiều người dùng cũng đánh giá cao khả năng hoạt động đa nền tảng của công cụ. Anh Nam, một doanh nhân thường xuyên di chuyển cho biết: Tôi sử dụng công cụ này trên cả laptop, tablet và điện thoại. Trải nghiệm luôn nhất quán và đồng bộ, giúp tôi không bao giờ bỏ lỡ các cuộc hẹn quan trọng dù đang ở bất kỳ đâu. Đặc biệt, nhiều người dùng lớn tuổi cũng dễ dàng làm quen với công cụ. Cụ Minh (72 tuổi) chia sẻ: Tôi không rành công nghệ nhưng vẫn sử dụng được ứng dụng này một cách dễ dàng. Giao diện đơn giản, chữ số lớn và rõ ràng giúp tôi theo dõi thời gian mà không cần đeo kính.',
+		},
+	]}
+
+	image={{
+		src: 'https://image.nhavantuonglai.com/image/cover/001-022.jpg',
+		alt: 'nhan-tin-instagram',
+	}}
+>
+
+</CTA>

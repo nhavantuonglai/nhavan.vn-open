@@ -1,35 +1,40 @@
 ---
 import Form from '~/components/widgets/form.astro';
+import { Slideup } from '~/assets/framer.jsx';
 ---
 
-<Form
+<Slideup client:load>
 
-	title="Đăng ký thành viên"
-	content="Hãy điền thông tin để trở thành hội viên chính thức, dễ dàng gửi và đăng bài lên diễn đàn ngay hôm nay."
+	<Form
 
-	formFields={[
+		title="Đăng ký thành viên"
+		content="Hãy điền thông tin để trở thành hội viên chính thức, dễ dàng gửi và đăng bài lên diễn đàn ngay hôm nay."
 
-		{
-			label: "Họ và tên",
-			type: "text",
-			name: "ho-va-ten",
-			required: true
-		},
+		formFields={[
 
-		{
-			label: "Email liên lạc",
-			type: "email",
-			name: "email",
-			required: true
-		},
+			{
+				label: "Họ và tên",
+				type: "text",
+				name: "ho-va-ten",
+				required: true
+			},
 
-		{
-			label: "Đôi dòng chia sẻ",
-			type: "text",
-			name: "noi-dung",
-			required: true
-		},
+			{
+				label: "Email liên lạc",
+				type: "email",
+				name: "email",
+				required: true
+			},
 
-	]}
+			{
+				label: "Đôi dòng chia sẻ",
+				type: "text",
+				name: "noi-dung",
+				required: true
+			},
 
-/>
+		]}
+
+	/>
+
+<Slideup/>

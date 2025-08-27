@@ -10,6 +10,7 @@ export interface Props {
 	actions?: string | CallToAction[];
 	image?: string | { src: string; alt?: string; title?: string };
 	headingLevel?: 'h1' | 'h2';
+	color?: 'white' | 'primary';
 }
 
 const {
@@ -19,7 +20,11 @@ const {
 	actions = await Astro.slots.render('actions'),
 	image,
 	headingLevel = 'h1',
+	color = 'primary',
 } = Astro.props;
+
+const colorheading = color === 'white' ? 'text-white' : 'text-primary';
+const colortext = color === 'white' ? 'text-white' : 'text-mute';
 
 const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn viết lách nhà văn tương lai.', title: 'Diễn đàn viết lách nhà văn tương lai.' } : image;
 ---
@@ -36,17 +41,19 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn 
 				{title && (
 					<Fragment>
 						{headingLevel === 'h1' ? (
-							<h1 class="text-white" set:html={title} />
+							<h1 class={colorheading} set:html={title} />
 						) : (
-							<h2 class="text-white" set:html={title} />
+							<h2 class={colortext} set:html={title} />
 						)}
 					</Fragment>
 				)}
 
 				<div class="w-full max-w-3xl mx-auto">
+
 					{subtitle && (
-						<p class="text-white" set:html={subtitle} />
+						<p class={colortext} set:html={subtitle} />
 					)}
+
 					{actions && (
 						<div class="max-w-xs sm:max-w-md flex flex-col sm:flex-row gap-4">
 							{Array.isArray(actions) ? (
@@ -60,7 +67,9 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn 
 							)}
 						</div>
 					)}
+
 					{content && <Fragment set:html={content} />}
+
 				</div>
 
 			</div>
