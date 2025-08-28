@@ -24,7 +24,7 @@ const container = "px-4 sm:px-6";
 
 <section class={`max-w-8xl mx-auto py-20 ${container} pb-10`}>
 
-	<Slideup client:load>
+	<Slideup client:visible>
 
 		<article class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -58,7 +58,7 @@ const container = "px-4 sm:px-6";
 
 							| <span id="counter"></span> lượt xem.
 
-							<script client:load>
+							<script client:visible>
 								let count = localStorage.getItem('pageCounter');
 								if (count === null) {
 									count = Math.floor(Math.random() * (543 - 74 + 1)) + 45;

@@ -30,9 +30,10 @@ const titledefault = "Bây giờ là mấy giờ?";
 			const minutes = padNumber(now.getMinutes());
 			const seconds = padNumber(now.getSeconds());
 
-			const result = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
-			resultOutput.textContent = result;
-			document.title = `${result} | nhavantuonglai`;
+			const headingtext = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
+			const titletext = `Bây giờ là ${hours} giờ ${minutes} phút ${seconds} giây`;
+			resultOutput.textContent = headingtext;
+			document.title = titletext ? `${titletext} | nhavantuonglai` : `${titledefault} | nhavantuonglai`;
 			
 			requestAnimationFrame(updateTime);
 		}

@@ -4,7 +4,7 @@
 
 Welcome to Article Open, the open-source version of Article, the core code powering [nhavan.vn](https://nhavan.vn/). Built with Astro 5.0 and Tailwind CSS, this template delivers a sleek, SEO-optimized, and user-friendly website ready for your next big project.
 
-![Vercel Website Deploy](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-01.jpg)
+![Vercel Website Deploy](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-01.jpg)
 
 ### ✨ Why choose Article Open?
 
@@ -36,7 +36,7 @@ Welcome to Article Open, the open-source version of Article, the core code power
 
 These tools ensure a robust, costefficient, and stable website with minimal overhead.
 
-![Vercel Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-02.jpg)
+![Vercel Deployment](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-02.jpg)
 
 ### 🚀 Get started: Deployment guide
 
@@ -74,7 +74,7 @@ gh repo clone nhavantuonglai/themes-open
 
 4. After deployment, customize your subdomain or add a custom domain in the Domain settings.
 
-![GitHub Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-03.jpg)
+![GitHub Deployment](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-03.jpg)
 
 ### 💻 Local development setup
 
@@ -106,7 +106,7 @@ http://localhost:4321/
 
 Edit files in the project folder to update content. Changes reflect instantly upon saving.
 
-![Local Development](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
+![Local Development](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
 
 ### 📜 Project evolution
 
@@ -130,7 +130,7 @@ View more [version](https://nhavan.vn/version).
 
 Chào mừng bạn đến với Article Open, phiên bản mã nguồn mở của Article, nền tảng cốt lõi của [nhavan.vn](https://nhavan.vn/). Được xây dựng bằng Astro 5.0 và Tailwind CSS, mẫu website này mang đến trải nghiệm thân thiện, tối ưu SEO và sẵn sàng cho dự án tiếp theo của bạn.
 
-![Vercel Website Deploy](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-01.jpg)
+![Vercel Website Deploy](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-01.jpg)
 
 ### ✨ Tại sao chọn Article Open?
 
@@ -164,7 +164,7 @@ Chào mừng bạn đến với Article Open, phiên bản mã nguồn mở củ
 
 Các công cụ được tối ưu để giảm chi phí, đảm bảo website vận hành ổn định và hiệu quả.
 
-![Vercel Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-02.jpg)
+![Vercel Deployment](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-02.jpg)
 
 ### 🚀 Hướng dẫn triển khai
 
@@ -202,7 +202,7 @@ gh repo clone nhavantuonglai/themes-open
 
 4. Sau khi triển khai, tùy chỉnh subdomain hoặc gán tên miền tùy chỉnh trong mục Domain.
 
-![GitHub Deployment](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-03.jpg)
+![GitHub Deployment](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-03.jpg)
 
 ### 💻 Hướng dẫn phát triển Local
 
@@ -234,7 +234,7 @@ http://localhost:4321/
 
 Chỉnh sửa nội dung bằng cách tìm file và thư mục tương ứng. Lưu thay đổi để giao diện tự động cập nhật.
 
-![Local Development](https://image.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
+![Local Development](https://data.nhavantuonglai.com/image/article/ma-nguon-mo-04.jpg)
 
 ### 📜 Lịch Sử Phát Triển
 

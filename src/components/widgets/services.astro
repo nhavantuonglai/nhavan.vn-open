@@ -19,7 +19,7 @@ const {
 
 ---
 
-<Slideup client:load>
+<Slideup client:visible>
 
 	<section class="relative md:-mt-[76px] not-prose">
 		<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
@@ -52,7 +52,7 @@ const {
 											<div class="flex-shrink-0 bg-primary text-white rounded-full h-8 w-8 flex items-center justify-center mr-4 z-10"></div>
 											<div class="w-full">
 
-												<h4>{item.title}</h4>
+												<h3>{item.title}</h3>
 
 												{item.description && <p>{item.description}</p>}
 
@@ -79,8 +79,8 @@ const {
 								<div class="relative m-auto max-w-4xl">
 									<Image
 										src={typeof image === 'string' ? image : image.src}
-										alt={typeof image === 'string' ? 'Văn hay trong hiện tại, chữ tốt ở tương lai.' : image.alt}
-										title={typeof image === 'string' ? 'Văn hay trong hiện tại, chữ tốt ở tương lai.' : image.title}
+										alt={typeof image === 'string' ? '' : image.alt}
+										title={typeof image === 'string' ? '' : image.title}
 									/>
 								</div>
 							)}

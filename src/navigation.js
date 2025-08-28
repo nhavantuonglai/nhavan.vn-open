@@ -11,7 +11,6 @@ export const headerData = {
 				{ text: "Giới thiệu", href: "/about" },
 				{
 					text: "Thông tin",
-					href: "/",
 					links: [
 						{ text: "Điều khoản", href: "/term" },
 						{ text: "Chính sách", href: "/policy" },
@@ -20,7 +19,6 @@ export const headerData = {
 				},
 				{
 					text: "Nguồn dữ liệu",
-					href: "/",
 					links: [
 						{ text: "RSS", href: "/rss.xml" },
 						{ text: "Sitemaps", href: "/sitemap-0.xml" },
@@ -126,34 +124,26 @@ export const headerData = {
 			links: [
 				{ text: "Tổng quát", href: "/tags/developer" },
 				{ text: "Blockchain", href: "/tags/blockchain" },
+				{ text: "Website", href: "/tags/website", },
+				{ text: "Bảo mật", href: "/tags/bao-mat", },
+			],
+		},
+
+		{
+			text: "Công cụ",
+			links: [
+				{ text: "Văn bản" },
 				{
-					text: "Website",
-					href: "/tags/website",
+					text: "Trực tuyến",
 					links: [
-						{ text: "Xây dựng website", href: "/tags/website-builder" },
-						{ text: "Tối ưu website", href: "/tags/toi-uu-website" },
-						{ text: "Giao diện website", href: "/tags/giao-dien-website" },
-						{ text: "Tương tác website", href: "/tags/tuong-tac-website" },
+						{ text: "Nghe Radio trực tuyến", href: "/analytics/radio" },
+						{ text: "Bây giờ là mấy giờ", href: "/analytics/time" },
+						{ text: "Đếm ngược Giao thừa", href: "/analytics/countdown" },
+						{ text: "Địa chỉ IP", href: "/analytics/address" },
 					],
 				},
-				{
-					text: "Phần mềm",
-					href: "/",
-					links: [
-						{ text: "Phần mềm Android", href: "/tags/phan-mem-android" },
-						{ text: "Phần mềm iOS", href: "/tags/phan-mem-ios" },
-						{ text: "Phần mềm Windos", href: "/tags/phan-mem-windos" },
-						{ text: "Phần mềm mở", href: "/tags/phan-mem-mo" },
-					],
-				},
-				{
-					text: "Bảo mật",
-					href: "/tags/bao-mat",
-					links: [
-						{ text: "Bảo mật dữ liệu", href: "/tags/bao-mat-du-lieu" },
-						{ text: "Bảo mật thông tin", href: "/tags/bao-mat-thong-tin" },
-					],
-				},
+				{ text: "AI" },
+				{ text: "Dữ liệu" },
 			],
 		},
 
