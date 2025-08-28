@@ -9,10 +9,20 @@ const {
 	showImages = false
 } = Astro.props;
 
+// Khởi tạo các mảng mùa ở scope toàn cục
 let springs = [];
 let summers = [];
 let autumns = [];
 let winters = [];
+
+// Helper function để render image set - định nghĩa ở scope toàn cục
+const renderImageSet = (images) => {
+	return images.map((image) => image.src && (
+		<div class="gallery-item">
+			<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
+		</div>
+	));
+};
 
 if (showImages) {
 	const sections = [
@@ -69,8 +79,7 @@ if (showImages) {
 	winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
 }
 
-// Helper component to avoid duplicate code
-// Create gallery data structure for cleaner rendering
+// Tạo allSeasons ở scope toàn cục để có thể sử dụng trong template
 const allSeasons = [
 	{ images: springs, direction: 'left-to-right', name: 'spring' },
 	{ images: summers, direction: 'right-to-left', name: 'summer' },
@@ -89,21 +98,9 @@ const allSeasons = [
 				{allSeasons.map((season, index) => (
 					<div class={`gallery-row ${season.direction} season-${index + 1}`}>
 						<div class="gallery-track">
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
+							{renderImageSet(season.images)}
+							{renderImageSet(season.images)}
+							{renderImageSet(season.images)}
 						</div>
 					</div>
 				))}
@@ -132,7 +129,6 @@ const allSeasons = [
 		document.addEventListener('DOMContentLoaded', function() {
 			const galleryContainer = document.getElementById('gallery-images');
 			if (galleryContainer) {
-				// Delay animation start for better performance
 				const animationDelay = 500;
 				
 				setTimeout(() => {
@@ -148,7 +144,6 @@ const allSeasons = [
 )}
 
 <style>
-	/* Main container styles */
 	.gallery-section {
 		position: relative;
 		width: 100%;
@@ -163,7 +158,6 @@ const allSeasons = [
 		z-index: 0;
 	}
 
-	/* Gallery container and layout */
 	.gallery-container {
 		position: absolute;
 		inset: 0;
@@ -203,7 +197,6 @@ const allSeasons = [
 		border-radius: 0.5rem;
 	}
 
-	/* Animation styles */
 	.left-to-right .gallery-track {
 		animation: scroll-left 120s linear infinite;
 	}
@@ -231,7 +224,6 @@ const allSeasons = [
 		}
 	}
 
-	/* Overlay styles */
 	.overlay-container {
 		position: absolute;
 		inset: 0;
@@ -268,21 +260,18 @@ const allSeasons = [
 		height: 100%;
 	}
 
-	/* Slot container */
 	.slot-container {
 		position: absolute;
 		inset: 0;
 		z-index: 20;
 	}
 
-	/* Performance optimizations */
 	@media (prefers-reduced-motion: reduce) {
 		.gallery-track {
 			animation: none;
 		}
 	}
 
-	/* Mobile optimizations */
 	@media (max-width: 768px) {
 		.gallery-item {
 			width: 250px;
