@@ -86,20 +86,20 @@ const allSeasons = [
 		{showImages && (
 			<div class="gallery-container" id="gallery-images">
 
-				{seasonsWithTripleSets.map((season, index) => (
+				{allSeasons.map((season, index) => (
 					<div class={`gallery-row ${season.direction} season-${index + 1}`}>
 						<div class="gallery-track">
-							{season.imageSet.map((image) => (
+							{season.images.map((image) => image.src && (
 								<div class="gallery-item">
 									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
 								</div>
 							))}
-							{season.imageSet.map((image) => (
+							{season.images.map((image) => image.src && (
 								<div class="gallery-item">
 									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
 								</div>
 							))}
-							{season.imageSet.map((image) => (
+							{season.images.map((image) => image.src && (
 								<div class="gallery-item">
 									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
 								</div>
