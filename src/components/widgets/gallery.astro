@@ -89,21 +89,9 @@ const allSeasons = [
 				{allSeasons.map((season, index) => (
 					<div class={`gallery-row ${season.direction} season-${index + 1}`}>
 						<div class="gallery-track">
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
+							{renderImageSet(season.images)}
+							{renderImageSet(season.images)}
+							{renderImageSet(season.images)}
 						</div>
 					</div>
 				))}
