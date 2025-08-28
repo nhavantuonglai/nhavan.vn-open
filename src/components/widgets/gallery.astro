@@ -17,7 +17,7 @@ let winters = [];
 if (showImages) {
 	const sections = [
 		{
-			title: 'Diá»…n Ä'Ã n viáº¿t lÃ¡ch nhÃ  vÄƒn tÆ°Æ¡ng lai.',
+			title: 'Diễn đàn viết lách nhà văn tương lai.',
 			dataUrl: 'https://data.nhavantuonglai.com/thu-vien-anh-nen.txt',
 			sectionId: 'film-gallery',
 		},
@@ -46,7 +46,7 @@ if (showImages) {
 	const createSeasonData = (indices, imageUrls) =>
 		indices.map(index => ({
 			src: imageUrls[index] || '',
-			alt: `Diá»…n Ä'Ã n viáº¿t lÃ¡ch nhÃ  vÄƒn tÆ°Æ¡ng lai ${index + 1}.`
+			alt: `Diễn đàn viết lách nhà văn tương lai ${index + 1}.`
 		}));
 
 	const shuffleArray = (array) => {
@@ -69,13 +69,23 @@ if (showImages) {
 	winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
 }
 
-// Helper component to avoid duplicate code
-// Create gallery data structure for cleaner rendering
+const GalleryRow = ({ images, direction, className = "" }) => (
+	<div class={`gallery-row ${direction} ${className}`}>
+		<div class="gallery-track">
+			{images.map((image) => image.src && (
+				<div class="gallery-item">
+					<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
+				</div>
+			))}
+		</div>
+	</div>
+);
+
 const allSeasons = [
-	{ images: springs, direction: 'left-to-right', name: 'spring' },
-	{ images: summers, direction: 'right-to-left', name: 'summer' },
-	{ images: autumns, direction: 'left-to-right', name: 'autumn' },
-	{ images: winters, direction: 'right-to-left', name: 'winter' }
+	{ images: springs, direction: 'left-to-right' },
+	{ images: summers, direction: 'right-to-left' },
+	{ images: autumns, direction: 'left-to-right' },
+	{ images: winters, direction: 'right-to-left' }
 ];
 ---
 
@@ -87,15 +97,11 @@ const allSeasons = [
 			<div class="gallery-container" id="gallery-images">
 
 				{allSeasons.map((season, index) => (
-					<div class={`gallery-row ${season.direction} season-${index + 1}`}>
-						<div class="gallery-track">
-							{season.images.map((image) => image.src && (
-								<div class="gallery-item">
-									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
-								</div>
-							))}
-						</div>
-					</div>
+					<GalleryRow 
+						images={season.images} 
+						direction={season.direction}
+						className={`season-${index + 1}`}
+					/>
 				))}
 
 			</div>
@@ -122,7 +128,6 @@ const allSeasons = [
 		document.addEventListener('DOMContentLoaded', function() {
 			const galleryContainer = document.getElementById('gallery-images');
 			if (galleryContainer) {
-				// Delay animation start for better performance
 				const animationDelay = 500;
 				
 				setTimeout(() => {
@@ -138,7 +143,6 @@ const allSeasons = [
 )}
 
 <style>
-	/* Main container styles */
 	.gallery-section {
 		position: relative;
 		width: 100%;
@@ -153,7 +157,6 @@ const allSeasons = [
 		z-index: 0;
 	}
 
-	/* Gallery container and layout */
 	.gallery-container {
 		position: absolute;
 		inset: 0;
@@ -193,7 +196,6 @@ const allSeasons = [
 		border-radius: 0.5rem;
 	}
 
-	/* Animation styles */
 	.left-to-right .gallery-track {
 		animation: scroll-left 120s linear infinite;
 	}
@@ -221,7 +223,6 @@ const allSeasons = [
 		}
 	}
 
-	/* Overlay styles */
 	.overlay-container {
 		position: absolute;
 		inset: 0;
@@ -258,21 +259,18 @@ const allSeasons = [
 		height: 100%;
 	}
 
-	/* Slot container */
 	.slot-container {
 		position: absolute;
 		inset: 0;
 		z-index: 20;
 	}
 
-	/* Performance optimizations */
 	@media (prefers-reduced-motion: reduce) {
 		.gallery-track {
 			animation: none;
 		}
 	}
 
-	/* Mobile optimizations */
 	@media (max-width: 768px) {
 		.gallery-item {
 			width: 250px;
@@ -286,4 +284,5 @@ const allSeasons = [
 			width: 15%;
 		}
 	}
+
 </style>
