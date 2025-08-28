@@ -17,7 +17,7 @@ let winters = [];
 if (showImages) {
 	const sections = [
 		{
-			title: 'Diễn đàn viết lách nhà văn tương lai.',
+			title: 'Diá»…n Ä'Ã n viáº¿t lÃ¡ch nhÃ  vÄƒn tÆ°Æ¡ng lai.',
 			dataUrl: 'https://data.nhavantuonglai.com/thu-vien-anh-nen.txt',
 			sectionId: 'film-gallery',
 		},
@@ -46,7 +46,7 @@ if (showImages) {
 	const createSeasonData = (indices, imageUrls) =>
 		indices.map(index => ({
 			src: imageUrls[index] || '',
-			alt: `Diễn đàn viết lách nhà văn tương lai ${index + 1}.`
+			alt: `Diá»…n Ä'Ã n viáº¿t lÃ¡ch nhÃ  vÄƒn tÆ°Æ¡ng lai ${index + 1}.`
 		}));
 
 	const shuffleArray = (array) => {
@@ -89,6 +89,16 @@ const allSeasons = [
 				{allSeasons.map((season, index) => (
 					<div class={`gallery-row ${season.direction} season-${index + 1}`}>
 						<div class="gallery-track">
+							{season.images.map((image) => image.src && (
+								<div class="gallery-item">
+									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
+								</div>
+							))}
+							{season.images.map((image) => image.src && (
+								<div class="gallery-item">
+									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
+								</div>
+							))}
 							{season.images.map((image) => image.src && (
 								<div class="gallery-item">
 									<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
@@ -200,7 +210,7 @@ const allSeasons = [
 
 	.right-to-left .gallery-track {
 		animation: scroll-right 120s linear infinite;
-		transform: translateX(calc(-100% + 100vw));
+		transform: translateX(calc(-66.666% + 100vw - 6.67px));
 	}
 
 	@keyframes scroll-left {
@@ -208,16 +218,16 @@ const allSeasons = [
 			transform: translateX(0); 
 		}
 		100% { 
-			transform: translateX(calc(-50% - 5px)); 
+			transform: translateX(calc(-33.333% - 6.67px)); 
 		}
 	}
 
 	@keyframes scroll-right {
 		0% { 
-			transform: translateX(calc(-100% + 100vw)); 
+			transform: translateX(calc(-66.666% + 100vw - 6.67px)); 
 		}
 		100% { 
-			transform: translateX(calc(-50% + 100vw - 5px)); 
+			transform: translateX(calc(-33.333% + 100vw - 6.67px)); 
 		}
 	}
 
