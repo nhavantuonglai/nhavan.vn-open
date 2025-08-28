@@ -28,7 +28,7 @@ const safe = id.replace(/[^a-zA-Z0-9_-]/g, '');
 const classes = {
   container: 'w-full text-justify text-lg rounded-lg mb-6',
   output: 'w-full text-justify',
-  buttons: 'flex flex-wrap justify-center gap-4',
+  buttons: 'flex justify-between flex-wrap',
 };
 ---
 
@@ -70,7 +70,7 @@ const classes = {
             <div id={`${safe}-buttons`} class={classes.buttons}>
               {channels.map((channel, index) => (
                 <Button
-                  class="px-4 py-2 font-medium leading-6 text-center transition-colors flex-1 min-w-[120px] max-w-[200px]"
+                  class="px-4 py-2 font-medium leading-6 text-center transition-colors"
                   data-url={channel.url}
                   data-index={index}
                 >
