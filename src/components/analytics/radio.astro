@@ -1,103 +1,101 @@
 ---
 import Analytics from '~/components/widgets/analytics.astro';
 
-const title = "Công cụ nghe đài radio FM trực tuyến";
+const title = "Nghe radio trực tuyến";
 const subtitle = "Hướng dẫn: Chọn kênh radio FM mà bạn muốn nghe trực tuyến, công cụ sẽ ngay lập tức phát kênh theo thời gian thực, giúp bạn cập nhật thông tin nhanh chóng, thư giãn trọn vẹn.";
 
 const channels = [
-  { name: "VOV 1", url: "https://stream.vovmedia.vn/vov1" },
-  { name: "VOV 2", url: "https://stream.vovmedia.vn/vov2" },
-  { name: "VOV 3", url: "https://stream.vovmedia.vn/vov3" },
-  { name: "VOV 5", url: "https://stream.vovmedia.vn/vov5" },
-  { name: "VOV Giao Thông", url: "https://media.kythuatvov.vn:7025/;stream/" },
-  { name: "VOV Mekong", url: "https://stream.vovmedia.vn/vovmekong" },
-  { name: "Hà Nội", url: "https://live.mediatech.vn/live/285fbc845578c6641d5a4c40534a0d1864b/chunklist.m3u8" },
-  { name: "HTV", url: "https://liveradio.vn:8443/;stream.nsv" },
-  { name: "BBC World", url: "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service" },
-  { name: "CNN", url: "http://tunein.streamguys1.com/cnn" },
-  { name: "NPR", url: "https://npr-ice.streamguys1.com/live.mp3" },
-  { name: "Free Asia", url: "https://rfa-inbound-live.s3.amazonaws.com/vietnamese.m3u8" },
-  { name: "Capital FM", url: "http://media-ssl.musicradio.com/CapitalMP3" },
-  { name: "Kiss FM", url: "http://icecast.thisisdax.com/KissFMMP3" },
-  { name: "Heart FM", url: "http://media-ssl.musicradio.com/HeartLondonMP3" },
-  { name: "Magic FM", url: "http://stream.magicfm.co.uk/magic.mp3" },
-  { name: "NHK World", url: "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263951/live.m3u8" },
-  { name: "KBS World", url: "http://serpentine-kbsworld.akamaized.net/hls/live/218543/kbsworld_web_kor/master.m3u8" },
-  { name: "CRI Hit", url: "http://sk.cri.cn/915.mp3" },
-  { name: "Taiwan", url: "http://mediafile.rti.org.tw/live/radio/RAW-VietnameseRADIO.mp3" }
+	{ name: "VOV 1", url: "https://stream.vovmedia.vn/vov1" },
+	{ name: "VOV 2", url: "https://stream.vovmedia.vn/vov2" },
+	{ name: "VOV 3", url: "https://stream.vovmedia.vn/vov3" },
+	{ name: "VOV 5", url: "https://stream.vovmedia.vn/vov5" },
+	{ name: "VOV Giao Thông", url: "https://media.kythuatvov.vn:7025/;stream/" },
+	{ name: "VOV Mekong", url: "https://stream.vovmedia.vn/vovmekong" },
+	{ name: "Hà Nội", url: "https://live.mediatech.vn/live/285fbc845578c6641d5a4c40534a0d1864b/chunklist.m3u8" },
+	{ name: "HTV", url: "https://liveradio.vn:8443/;stream.nsv" },
+	{ name: "BBC World", url: "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service" },
+	{ name: "CNN", url: "http://tunein.streamguys1.com/cnn" },
+	{ name: "NPR", url: "https://npr-ice.streamguys1.com/live.mp3" },
+	{ name: "Free Asia", url: "https://rfa-inbound-live.s3.amazonaws.com/vietnamese.m3u8" },
+	{ name: "Capital FM", url: "http://media-ssl.musicradio.com/CapitalMP3" },
+	{ name: "Kiss FM", url: "http://icecast.thisisdax.com/KissFMMP3" },
+	{ name: "Heart FM", url: "http://media-ssl.musicradio.com/HeartLondonMP3" },
+	{ name: "Magic FM", url: "http://stream.magicfm.co.uk/magic.mp3" },
+	{ name: "NHK World", url: "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263951/live.m3u8" },
+	{ name: "KBS World", url: "http://serpentine-kbsworld.akamaized.net/hls/live/218543/kbsworld_web_kor/master.m3u8" },
+	{ name: "CRI Hit", url: "http://sk.cri.cn/915.mp3" },
+	{ name: "Taiwan", url: "http://mediafile.rti.org.tw/live/radio/RAW-VietnameseRADIO.mp3" }
 ];
 ---
 
 <Analytics
-  title={title}
-  subtitle={subtitle}
-  id="radio"
-  channels={channels}
+
+	title={title}
+	subtitle={subtitle}
+
+	id="radio"
+	channels={channels}
+
 />
 
 <script client:load>
-  document.addEventListener('DOMContentLoaded', () => {
-    const safeId = 'radio';
-    const buttons = document.querySelectorAll(`#${safeId}-buttons button`);
-    const audioPlayer = document.getElementById(`${safeId}-audio-player`);
-    const audioSource = document.getElementById(`${safeId}-audio-source`);
-    const statusOutput = document.getElementById(`${safeId}-status`);
 
-    if (!audioPlayer || !audioSource || !buttons.length || !statusOutput) return;
+	document.addEventListener('DOMContentLoaded', () => {
+		const safeId = 'radio';
+		const buttons = document.querySelectorAll(`#${safeId}-buttons button`);
+		const audioPlayer = document.getElementById(`${safeId}-audio-player`);
+		const audioSource = document.getElementById(`${safeId}-audio-source`);
 
-    let currentChannelIndex = -1;
+		if (!audioPlayer || !audioSource || !buttons.length) return;
 
-    const updateButtonStyle = async (button, index, isActive = false) => {
-      const url = button.dataset.url;
-      if (!url) return;
+		let currentChannelIndex = -1;
+		let currentChannelName = '';
 
-      button.classList.remove('text-primary', 'text-white', 'text-muted', 'bg-white', 'bg-primary');
+		const updateButtonStyle = async (button, index, isActive = false) => {
+			const url = button.dataset.url;
+			if (!url) return;
 
-      if (isActive) {
-        button.classList.add('bg-primary', 'text-white');
-      } else {
-        try {
-          const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
-          const isOnline = response.ok;
-          button.classList.add(isOnline ? 'text-primary' : 'text-muted', 'bg-white');
-        } catch {
-          button.classList.add('text-muted', 'bg-white');
-        }
-      }
-    };
+			button.classList.remove('text-primary', 'text-white', 'text-muted', 'bg-white', 'bg-primary');
 
-    buttons.forEach((button, index) => updateButtonStyle(button, index));
+			if (isActive) {
+				button.classList.add('bg-primary', 'text-white');
+			} else {
+				try {
+					const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+					const isOnline = response.ok;
+					button.classList.add(isOnline ? 'text-primary' : 'text-muted', 'bg-white');
+				} catch {
+					button.classList.add('text-muted', 'bg-white');
+				}
+			}
+		};
 
-    buttons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        const url = button.dataset.url;
-        if (!url) return;
+		buttons.forEach((button, index) => updateButtonStyle(button, index));
 
-        if (currentChannelIndex === index && audioSource.src === url) {
-          audioPlayer.paused ? audioPlayer.play().catch(() => {}) : audioPlayer.pause();
-          statusOutput.textContent = audioPlayer.paused ? '' : `Đang phát: ${button.textContent}`;
-        } else {
-          currentChannelIndex = index;
-          audioSource.src = url;
-          audioPlayer.load();
-          audioPlayer.play().catch(() => {});
-          statusOutput.textContent = `Đang phát: ${button.textContent}`;
-        }
+		buttons.forEach((button, index) => {
+			button.addEventListener('click', () => {
+				const url = button.dataset.url;
+				if (!url) return;
 
-        buttons.forEach((btn, idx) => {
-          const isActive = idx === currentChannelIndex && !audioPlayer.paused;
-          updateButtonStyle(btn, idx, isActive);
-        });
-      });
-    });
+				if (currentChannelIndex === index && audioSource.src === url) {
+					audioPlayer.paused ? audioPlayer.play().catch(() => {}) : audioPlayer.pause();
+					currentChannelName = audioPlayer.paused ? '' : button.textContent;
+				} else {
+					currentChannelIndex = index;
+					audioSource.src = url;
+					audioPlayer.load();
+					audioPlayer.play().catch(() => {});
+					currentChannelName = button.textContent;
+				}
 
-    const output = document.getElementById(`${safeId}-status`);
-    if (output) {
-      const observer = new MutationObserver(() => {
-        const title = output.textContent || '';
-        document.title = title ? `${title} | nhavantuonglai` : 'Công cụ nghe đài radio FM trực tuyến | nhavantuonglai';
-      });
-      observer.observe(output, { childList: true, characterData: true, subtree: true });
-    }
-  });
+				document.title = currentChannelName ? `Nghe ${currentChannelName} trực tuyến | nhavantuonglai` : 'Nghe radio trực tuyến | nhavantuonglai';
+
+				buttons.forEach((btn, idx) => {
+					const isActive = idx === currentChannelIndex && !audioPlayer.paused;
+					updateButtonStyle(btn, idx, isActive);
+				});
+			});
+		});
+	});
+
 </script>

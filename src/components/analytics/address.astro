@@ -5,52 +5,57 @@ const subtitle = "Hướng dẫn: Địa chỉ IP của tôi là gì? cho phép 
 ---
 
 <Analytics
-  subtitle={subtitle}
-  id="address"
-  type="hidden"
+
+	subtitle={subtitle}
+
+	id="address"
+	type="hidden"
+
 />
 
 <script client:load>
-  document.addEventListener('DOMContentLoaded', () => {
-    const ipAddressOutput = document.getElementById('address-text-output');
 
-    if (!ipAddressOutput) return;
+	document.addEventListener('DOMContentLoaded', () => {
+		const ipAddressOutput = document.getElementById('address-text-output');
 
-    let lastFetchTime = 0;
-    const fetchInterval = 5000;
+		if (!ipAddressOutput) return;
 
-    async function fetchIP() {
-      const now = Date.now();
+		let lastFetchTime = 0;
+		const fetchInterval = 5000;
 
-      if (now - lastFetchTime < fetchInterval) {
-        requestAnimationFrame(fetchIP);
-        return;
-      }
+		async function fetchIP() {
+			const now = Date.now();
 
-      ipAddressOutput.textContent = 'Đang tìm kiếm địa chỉ IP…';
+			if (now - lastFetchTime < fetchInterval) {
+				requestAnimationFrame(fetchIP);
+				return;
+			}
 
-      try {
-        const response = await fetch('https://ipinfo.io/json?token=87aa8f284fb4f6');
-        const data = await response.json();
+			ipAddressOutput.textContent = 'Đang tìm kiếm địa chỉ IP…';
 
-        ipAddressOutput.textContent = `IP của bạn là ${data.ip || 'Không xác định'}.`;
-        lastFetchTime = now;
-      } catch (error) {
-        ipAddressOutput.textContent = 'Tính năng tạm thời không khả dụng, vui lòng thử lại sau.';
-      }
+			try {
+				const response = await fetch('https://ipinfo.io/json?token=87aa8f284fb4f6');
+				const data = await response.json();
 
-      requestAnimationFrame(fetchIP);
-    }
+				ipAddressOutput.textContent = `Địa chỉ IP của tôi là ${data.ip || 'Không xác định'}.`;
+				lastFetchTime = now;
+			} catch (error) {
+				ipAddressOutput.textContent = 'Tính năng không khả dụng.';
+			}
 
-    requestAnimationFrame(fetchIP);
+			requestAnimationFrame(fetchIP);
+		}
 
-    const output = document.getElementById('address-text-output');
-    if (output) {
-      const observer = new MutationObserver(() => {
-        const title = output.textContent || '';
-        document.title = title ? `${title} | nhavantuonglai` : 'Địa chỉ IP của tôi là gì? | nhavantuonglai';
-      });
-      observer.observe(output, { childList: true, characterData: true, subtree: true });
-    }
-  });
+		requestAnimationFrame(fetchIP);
+
+		const output = document.getElementById('address-text-output');
+		if (output) {
+			const observer = new MutationObserver(() => {
+				const title = output.textContent || '';
+				document.title = title ? `${title} | nhavantuonglai` : 'Địa chỉ IP của tôi là gì? | nhavantuonglai';
+			});
+			observer.observe(output, { childList: true, characterData: true, subtree: true });
+		}
+	});
+
 </script>
