@@ -11,6 +11,7 @@ export interface Props {
 	image?: string | { src: string; alt?: string; title?: string };
 	headingLevel?: 'h1' | 'h2';
 	color?: 'white' | 'primary';
+	standalone?: boolean;
 }
 
 const {
@@ -21,16 +22,33 @@ const {
 	image,
 	headingLevel = 'h1',
 	color = 'primary',
+	standalone = false
 } = Astro.props;
 
-const colorheading = color === 'white' ? 'text-white' : 'text-primary';
-const colortext = color === 'white' ? 'text-white' : 'text-mute';
+const colorClasses = {
+	white: {
+		heading: 'text-white',
+		text: 'text-white'
+	},
+	primary: {
+		heading: 'text-primary',
+		text: 'text-mute'
+	}
+};
 
-const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn viết lách nhà văn tương lai.', title: 'Diễn đàn viết lách nhà văn tương lai.' } : image;
+const { heading: colorheading, text: colortext } = colorClasses[color];
+
+const imageProps = typeof image === 'string' 
+	? { src: image, alt: 'Diễn đàn viết lách nhà văn tương lai.', title: 'Diễn đàn viết lách nhà văn tương lai.' } 
+	: image;
+
+const hasActions = actions && (Array.isArray(actions) ? actions.length > 0 : true);
 ---
 
-<section class="relative w-full h-screen not-prose">
-	<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+<section class={standalone ? "relative w-full h-screen not-prose" : "relative w-full h-screen not-prose"}>
+	
+	{standalone && <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>}
+	
 	<div class="relative max-w-7xl mx-auto px-4 sm:px-6">
 
 		<div class="pt-0 md:pt-[120px] pointer-events-none"></div>
@@ -54,7 +72,7 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn 
 						<p class={colortext} set:html={subtitle} />
 					)}
 
-					{actions && (
+					{hasActions && (
 						<div class="max-w-xs sm:max-w-md flex flex-col sm:flex-row gap-4">
 							{Array.isArray(actions) ? (
 								actions.map((action, index) => (
@@ -74,13 +92,14 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn 
 
 			</div>
 
-			{image && (
+			{imageProps && (
 				<div class="pb-10 md:pb-16 mx-auto lg:mx-0 w-full">
 					<div class="relative m-auto max-w-5xl">
 						<CommonImage
 							src={imageProps.src}
 							alt={imageProps.alt}
 							title={imageProps.title}
+							loading="eager"
 						/>
 					</div>
 				</div>
@@ -89,3 +108,29 @@ const imageProps = typeof image === 'string' ? { src: image, alt: 'Diễn đàn 
 		</div>
 	</div>
 </section>
+
+<script>
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const heroReadyEvent = new CustomEvent('heroReady');
+		document.dispatchEvent(heroReadyEvent);
+		const heroSection = document.querySelector('section');
+		
+		if (heroSection) {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const galleryImages = document.getElementById('gallery-images');
+						if (galleryImages) {
+							galleryImages.style.opacity = '1';
+						}
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.1 });
+			
+			observer.observe(heroSection);
+		}
+	});
+
+</script>

@@ -1,153 +1,161 @@
 ---
 export interface Props {
 	id?: string;
+	showImages?: boolean;
 }
 
 const {
-	id = "hero-gallery"
+	id = "hero-gallery",
+	showImages = false
 } = Astro.props;
 
-const sections = [
-	{
-		title: 'Thư viện ảnh film',
-		dataUrl: 'https://image.nhavantuonglai.com/thu-vien-anh-film.txt',
-		sectionId: 'film-gallery',
-	},
-];
+let springs = [];
+let summers = [];
+let autumns = [];
+let winters = [];
 
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+if (showImages) {
+	const sections = [
+		{
+			title: 'Diễn đàn viết lách nhà văn tương lai.',
+			dataUrl: 'https://data.nhavantuonglai.com/thu-vien-anh-nen.txt',
+			sectionId: 'film-gallery',
+		},
+	];
 
-const generateUniqueRandomNumbers = (count, min, max) => {
-	const numbers = new Set();
-	while (numbers.size < count) {
-		numbers.add(getRandomInt(min, max));
+	const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+	const generateUniqueRandomNumbers = (count, min, max) => {
+		const numbers = new Set();
+		while (numbers.size < count) {
+			numbers.add(getRandomInt(min, max));
+		}
+		return Array.from(numbers);
+	};
+
+	async function fetchImageUrls(url) {
+		try {
+			const response = await fetch(url);
+			const text = await response.text();
+			return text.split('\n').filter(url => url.trim());
+		} catch {
+			return [];
+		}
 	}
-	return Array.from(numbers);
-};
 
-async function fetchImageUrls(url) {
-	try {
-		const response = await fetch(url);
-		const text = await response.text();
-		return text.split('\n').filter(url => url.trim());
-	} catch {
-		return [];
-	}
+	const createSeasonData = (indices, imageUrls) =>
+		indices.map(index => ({
+			src: imageUrls[index] || '',
+			alt: `Diễn đàn viết lách nhà văn tương lai ${index + 1}.`
+		}));
+
+	const shuffleArray = (array) => {
+		const shuffled = [...array];
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+		}
+		return shuffled;
+	};
+
+	const firstSection = sections[0];
+	const imageUrls = await fetchImageUrls(firstSection.dataUrl);
+	const totalUrls = imageUrls.length;
+	const uniqueIndices = totalUrls > 0 ? generateUniqueRandomNumbers(16, 0, totalUrls - 1) : [];
+
+	springs = shuffleArray(createSeasonData(uniqueIndices.slice(0, 4), imageUrls));
+	summers = shuffleArray(createSeasonData(uniqueIndices.slice(4, 8), imageUrls));
+	autumns = shuffleArray(createSeasonData(uniqueIndices.slice(8, 12), imageUrls));
+	winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
 }
-
-const createSeasonData = (indices, imageUrls) =>
-	indices.map(index => ({
-		src: imageUrls[index] || '',
-		alt: `Văn hay trong hiện tại, chữ tốt ở tương lai ${index + 1}.`
-	}));
-
-const shuffleArray = (array) => {
-	const shuffled = [...array];
-	for (let i = shuffled.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-	}
-	return shuffled;
-};
-
-const firstSection = sections[0];
-const imageUrls = await fetchImageUrls(firstSection.dataUrl);
-const totalUrls = imageUrls.length;
-const uniqueIndices = totalUrls > 0 ? generateUniqueRandomNumbers(16, 0, totalUrls - 1) : [];
-
-const springs = shuffleArray(createSeasonData(uniqueIndices.slice(0, 4), imageUrls));
-const summers = shuffleArray(createSeasonData(uniqueIndices.slice(4, 8), imageUrls));
-const autumns = shuffleArray(createSeasonData(uniqueIndices.slice(8, 12), imageUrls));
-const winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
 ---
 
 <section id={id} class="relative not-prose w-full h-screen mb-6">
 
 	<div class="absolute inset-0 z-0">
 
-		<div class="gallery-container absolute inset-0">
+		{showImages && (
+			<div class="gallery-container absolute inset-0" id="gallery-images">
 
-			<div class="gallery-row left-to-right">
-				<div class="gallery-track">
+				<div class="gallery-row left-to-right">
+					<div class="gallery-track">
 
-					{springs.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{springs.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
-					{springs.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{springs.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
+					</div>
 				</div>
-			</div>
 
-			<div class="gallery-row right-to-left">
-				<div class="gallery-track">
+				<div class="gallery-row right-to-left">
+					<div class="gallery-track">
 
-					{summers.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{summers.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
-					{summers.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{summers.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
+					</div>
 				</div>
-			</div>
 
-			<div class="gallery-row left-to-right">
-				<div class="gallery-track">
+				<div class="gallery-row left-to-right">
+					<div class="gallery-track">
 
-					{autumns.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{autumns.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
-					{autumns.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{autumns.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
+					</div>
 				</div>
-			</div>
 
-			<div class="gallery-row right-to-left">
-				<div class="gallery-track">
+				<div class="gallery-row right-to-left">
+					<div class="gallery-track">
 
-					{winters.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{winters.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
-					{winters.map((image) => image.src && (
-						<div class="gallery-item">
-							<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" />
-						</div>
-					))}
+						{winters.map((image) => image.src && (
+							<div class="gallery-item">
+								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
+							</div>
+						))}
 
+					</div>
 				</div>
-			</div>
 
-		</div>
+			</div>
+		)}
 
 		<div class="overlay-container absolute inset-0 z-10">
 			<div class="flex w-full h-full">
-
 				<div class="w-4/5 h-full blur-gradient"></div>
-
 				<div class="w-1/5 h-full"></div>
-
 			</div>
 		</div>
 
@@ -158,6 +166,24 @@ const winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), image
 	</div>
 
 </section>
+
+{showImages && (
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const galleryContainer = document.getElementById('gallery-images');
+			if (galleryContainer) {
+				setTimeout(() => {
+					const animations = galleryContainer.querySelectorAll('.gallery-track');
+					animations.forEach(track => {
+						track.style.animationPlayState = 'running';
+					});
+				}, 500);
+			}
+		});
+	</script>
+
+)}
 
 <style>
 
@@ -182,6 +208,7 @@ const winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), image
 		gap: 10px;
 		width: max-content;
 		height: 100%;
+		animation-play-state: paused; /* Pause initially */
 	}
 
 	.gallery-item {
