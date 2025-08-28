@@ -51,6 +51,8 @@ const titledefault = "Còn bao nhiêu ngày đến Tết dương lịch 2026?";
 
 			const titletext = result.replace(/(\d+ ngày).*/, '$1 đến Tết dương lịch 2026');
 			document.title = titletext ? `${titletext} | nhavantuonglai` : `${titledefault} | nhavantuonglai`;
+			
+			requestAnimationFrame(updateCountdown);
 		}
 
 		requestAnimationFrame(updateCountdown);

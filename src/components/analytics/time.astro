@@ -32,7 +32,9 @@ const titledefault = "Bây giờ là mấy giờ?";
 
 			const result = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
 			resultOutput.textContent = result;
-			document.title = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây | nhavantuonglai`;
+			document.title = `${result} | nhavantuonglai`;
+			
+			requestAnimationFrame(updateTime);
 		}
 
 		requestAnimationFrame(updateTime);
