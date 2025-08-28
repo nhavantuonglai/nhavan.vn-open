@@ -126,7 +126,7 @@ const classes = {
 		if (output) {
 			const observer = new MutationObserver(() => {
 				const title = output.textContent || '';
-				document.title = title ? `${title} | nhavantuonglai` : 'nhavantuonglai';
+				document.title = title ? `${title} | nhavantuonglai` : 'Nhà văn tương lai';
 			});
 			observer.observe(output, { childList: true, characterData: true, subtree: true });
 		}
