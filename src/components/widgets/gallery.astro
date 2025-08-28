@@ -68,98 +68,53 @@ if (showImages) {
 	autumns = shuffleArray(createSeasonData(uniqueIndices.slice(8, 12), imageUrls));
 	winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
 }
+
+const GalleryRow = ({ images, direction, className = "" }) => (
+	<div class={`gallery-row ${direction} ${className}`}>
+		<div class="gallery-track">
+			{images.map((image) => image.src && (
+				<div class="gallery-item">
+					<img src={image.src} alt={image.alt} class="gallery-image" width="300" height="200" loading="lazy" />
+				</div>
+			))}
+		</div>
+	</div>
+);
+
+const allSeasons = [
+	{ images: springs, direction: 'left-to-right' },
+	{ images: summers, direction: 'right-to-left' },
+	{ images: autumns, direction: 'left-to-right' },
+	{ images: winters, direction: 'right-to-left' }
+];
 ---
 
-<section id={id} class="relative not-prose w-full h-screen mb-6">
+<section id={id} class="gallery-section">
 
-	<div class="absolute inset-0 z-0">
+	<div class="gallery-background">
 
 		{showImages && (
-			<div class="gallery-container absolute inset-0" id="gallery-images">
+			<div class="gallery-container" id="gallery-images">
 
-				<div class="gallery-row left-to-right">
-					<div class="gallery-track">
-
-						{springs.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-						{springs.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-					</div>
-				</div>
-
-				<div class="gallery-row right-to-left">
-					<div class="gallery-track">
-
-						{summers.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-						{summers.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-					</div>
-				</div>
-
-				<div class="gallery-row left-to-right">
-					<div class="gallery-track">
-
-						{autumns.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-						{autumns.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-					</div>
-				</div>
-
-				<div class="gallery-row right-to-left">
-					<div class="gallery-track">
-
-						{winters.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-						{winters.map((image) => image.src && (
-							<div class="gallery-item">
-								<img src={image.src} alt={image.alt} class="rounded-lg" width="300" height="200" loading="lazy" />
-							</div>
-						))}
-
-					</div>
-				</div>
+				{allSeasons.map((season, index) => (
+					<GalleryRow 
+						images={season.images} 
+						direction={season.direction}
+						className={`season-${index + 1}`}
+					/>
+				))}
 
 			</div>
 		)}
 
-		<div class="overlay-container absolute inset-0 z-10">
-			<div class="flex w-full h-full">
-				<div class="w-4/5 h-full blur-gradient"></div>
-				<div class="w-1/5 h-full"></div>
+		<div class="overlay-container">
+			<div class="overlay-content">
+				<div class="blur-section"></div>
+				<div class="clear-section"></div>
 			</div>
 		</div>
 
-		<div class="absolute inset-0 z-20">
+		<div class="slot-container">
 			<slot/>
 		</div>
 
@@ -173,12 +128,14 @@ if (showImages) {
 		document.addEventListener('DOMContentLoaded', function() {
 			const galleryContainer = document.getElementById('gallery-images');
 			if (galleryContainer) {
+				const animationDelay = 500;
+				
 				setTimeout(() => {
 					const animations = galleryContainer.querySelectorAll('.gallery-track');
 					animations.forEach(track => {
 						track.style.animationPlayState = 'running';
 					});
-				}, 500);
+				}, animationDelay);
 			}
 		});
 	</script>
@@ -186,21 +143,36 @@ if (showImages) {
 )}
 
 <style>
+	.gallery-section {
+		position: relative;
+		width: 100%;
+		height: 100vh;
+		margin-bottom: 1.5rem;
+		overflow: hidden;
+	}
+
+	.gallery-background {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+	}
 
 	.gallery-container {
+		position: absolute;
+		inset: 0;
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+		overflow: hidden;
 	}
 
 	.gallery-row {
-		overflow: hidden;
 		position: relative;
 		width: 100%;
 		height: 25%;
+		overflow: hidden;
 	}
 
 	.gallery-track {
@@ -208,7 +180,7 @@ if (showImages) {
 		gap: 10px;
 		width: max-content;
 		height: 100%;
-		animation-play-state: paused; /* Pause initially */
+		animation-play-state: paused;
 	}
 
 	.gallery-item {
@@ -217,10 +189,11 @@ if (showImages) {
 		height: 100%;
 	}
 
-	.gallery-item img {
+	.gallery-image {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		border-radius: 0.5rem;
 	}
 
 	.left-to-right .gallery-track {
@@ -232,17 +205,46 @@ if (showImages) {
 		transform: translateX(calc(-100% + 100vw));
 	}
 
+	@keyframes scroll-left {
+		0% { 
+			transform: translateX(0); 
+		}
+		100% { 
+			transform: translateX(calc(-50% - 5px)); 
+		}
+	}
+
+	@keyframes scroll-right {
+		0% { 
+			transform: translateX(calc(-100% + 100vw)); 
+		}
+		100% { 
+			transform: translateX(calc(-50% + 100vw - 5px)); 
+		}
+	}
+
 	.overlay-container {
+		position: absolute;
+		inset: 0;
+		z-index: 10;
 		width: 100%;
 		height: 100%;
 	}
 
-	.blur-gradient {
+	.overlay-content {
+		display: flex;
+		width: 100%;
+		height: 100%;
+	}
+
+	.blur-section {
+		width: 80%;
+		height: 100%;
 		position: relative;
 		background-color: transparent;
 	}
 
-	.blur-gradient::before {
+	.blur-section::before {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -252,14 +254,35 @@ if (showImages) {
 		-webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
 	}
 
-	@keyframes scroll-left {
-		0% { transform: translateX(0); }
-		100% { transform: translateX(calc(-100% / 2)); }
+	.clear-section {
+		width: 20%;
+		height: 100%;
 	}
 
-	@keyframes scroll-right {
-		0% { transform: translateX(calc(-100% + 100vw)); }
-		100% { transform: translateX(calc(-50% + 100vw)); }
+	.slot-container {
+		position: absolute;
+		inset: 0;
+		z-index: 20;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gallery-track {
+			animation: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.gallery-item {
+			width: 250px;
+		}
+		
+		.blur-section {
+			width: 85%;
+		}
+		
+		.clear-section {
+			width: 15%;
+		}
 	}
 
 </style>
