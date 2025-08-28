@@ -2,35 +2,40 @@
 import Analytics from '~/components/widgets/analytics.astro';
 
 const subtitle = "Hướng dẫn: Bây giờ là mấy giờ mấy phút mấy giây? cập nhật thời gian hiện tại nhanh chóng, chính xác, và tiện lợi để theo dõi, đo lường, cập nhật đồng hồ thuận tiện.";
-const defaultTitle = "Bây giờ là mấy giờ?";
+const default = "Bây giờ là mấy giờ?";
 
 ---
 
 <Analytics
-  subtitle={subtitle}
-  id="time"
-  type="hidden"
+
+	subtitle={subtitle}
+
+	id="time"
+	type="hidden"
+
 />
 
 <script client:visible>
-  document.addEventListener('DOMContentLoaded', () => {
-    const resultOutput = document.getElementById('time-text-output');
 
-    function padNumber(num) {
-      return num < 10 ? `0${num}` : num;
-    }
+	document.addEventListener('DOMContentLoaded', () => {
+		const resultOutput = document.getElementById('time-text-output');
 
-    function updateTime() {
-      const now = new Date();
-      const hours = padNumber(now.getHours());
-      const minutes = padNumber(now.getMinutes());
-      const seconds = padNumber(now.getSeconds());
+		function padNumber(num) {
+			return num < 10 ? `0${num}` : num;
+		}
 
-      const result = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
-      resultOutput.textContent = result;
-      document.title = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây | nhavantuonglai`;
-    }
+		function updateTime() {
+			const now = new Date();
+			const hours = padNumber(now.getHours());
+			const minutes = padNumber(now.getMinutes());
+			const seconds = padNumber(now.getSeconds());
 
-    requestAnimationFrame(updateTime);
-  });
+			const result = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
+			resultOutput.textContent = result;
+			document.title = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây | nhavantuonglai`;
+		}
+
+		requestAnimationFrame(updateTime);
+	});
+
 </script>
