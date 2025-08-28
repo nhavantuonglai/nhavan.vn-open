@@ -42,11 +42,12 @@ const channels = [
 
 	document.addEventListener('DOMContentLoaded', () => {
 		const safeId = 'radio';
+		const heading = document.getElementById(`${safeId}-heading`);
 		const buttons = document.querySelectorAll(`#${safeId}-buttons button`);
 		const audioPlayer = document.getElementById(`${safeId}-audio-player`);
 		const audioSource = document.getElementById(`${safeId}-audio-source`);
 
-		if (!audioPlayer || !audioSource || !buttons.length) return;
+		if (!audioPlayer || !audioSource || !buttons.length || !heading) return;
 
 		let currentChannelIndex = -1;
 		let currentChannelName = '';
@@ -88,6 +89,7 @@ const channels = [
 					currentChannelName = button.textContent;
 				}
 
+				heading.textContent = currentChannelName ? `Nghe ${currentChannelName} trực tuyến.` : '';
 				document.title = currentChannelName ? `Nghe ${currentChannelName} trực tuyến | nhavantuonglai` : `${titledefault} | nhavantuonglai`;
 
 				buttons.forEach((btn, idx) => {
