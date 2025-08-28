@@ -28,6 +28,7 @@ const safe = id.replace(/[^a-zA-Z0-9_-]/g, '');
 const classes = {
   container: 'w-full text-justify text-lg rounded-lg mb-6',
   output: 'w-full text-justify',
+  buttons: 'flex flex-wrap justify-center gap-4',
 };
 ---
 
@@ -53,7 +54,6 @@ const classes = {
                 <audio id={`${safe}-audio-player`} class="hidden">
                   <source id={`${safe}-audio-source`} src="" type="audio/mpeg" />
                 </audio>
-                <div id={`${safe}-status`} class="text-white"></div>
               </div>
             ) : (
               <h1 id={`${safe}-text-output`} class={`${classes.output} text-white`}></h1>
@@ -67,10 +67,10 @@ const classes = {
       {channels.length > 0 ? (
         <div class="pb-10 md:pb-16 mx-auto lg:mx-0 w-full">
           <div class="relative m-auto max-w-5xl">
-            <div id={`${safe}-buttons`} class="flex flex-wrap justify-between gap-2">
+            <div id={`${safe}-buttons`} class={classes.buttons}>
               {channels.map((channel, index) => (
                 <Button
-                  class={`px-4 py-2 font-medium leading-6 text-center transition-colors ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
+                  class="px-4 py-2 font-medium leading-6 text-center transition-colors flex-1 min-w-[120px] max-w-[200px]"
                   data-url={channel.url}
                   data-index={index}
                 >
@@ -120,7 +120,7 @@ const classes = {
       observer.observe(heroSection);
     }
 
-    const output = document.getElementById(`${safe}-text-output`) || document.getElementById(`${safe}-status`);
+    const output = document.getElementById(`${safe}-text-output`);
     if (output) {
       const observer = new MutationObserver(() => {
         const title = output.textContent || '';
