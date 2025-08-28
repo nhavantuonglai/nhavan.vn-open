@@ -17,7 +17,7 @@ let winters = [];
 if (showImages) {
 	const sections = [
 		{
-			title: 'Diá»…n Ä'Ã n viáº¿t lÃ¡ch nhÃ  vÄƒn tÆ°Æ¡ng lai.',
+			title: 'Diễn đàn viết lách nhà văn tương lai.',
 			dataUrl: 'https://data.nhavantuonglai.com/thu-vien-anh-nen.txt',
 			sectionId: 'film-gallery',
 		},
@@ -46,7 +46,7 @@ if (showImages) {
 	const createSeasonData = (indices, imageUrls) =>
 		indices.map(index => ({
 			src: imageUrls[index] || '',
-			alt: `Diá»…n Ä'Ã n viáº¿t lÃ¡ch nhÃ  vÄƒn tÆ°Æ¡ng lai ${index + 1}.`
+			alt: `Diễn đàn viết lách nhà văn tương lai ${index + 1}.`
 		}));
 
 	const shuffleArray = (array) => {
