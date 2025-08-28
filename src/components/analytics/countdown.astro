@@ -5,53 +5,57 @@ const subtitle = "Còn bao nhiêu ngày nữa đến Tết dương lịch 2026? 
 ---
 
 <Analytics
-
-	subtitle={subtitle}
-
-	id="countdown"
-	inputType="hidden"
-
+  subtitle={subtitle}
+  id="countdown"
+  type="hidden"
 />
 
 <script client:load>
+  document.addEventListener('DOMContentLoaded', () => {
+    const resultOutput = document.getElementById('countdown-text-output');
 
-	document.addEventListener('DOMContentLoaded', () => {
-		const resultOutput = document.getElementById('countdown-text-output');
+    if (!resultOutput) return;
 
-		if (!resultOutput) return;
+    function padNumber(num) {
+      return num < 10 ? `0${num}` : num;
+    }
 
-		function padNumber(num) {
-			return num < 10 ? `0${num}` : num;
-		}
+    function updateCountdown() {
+      const now = new Date(),
+            newYear = new Date(2026, 0, 1),
+            diff = newYear - now;
 
-		function updateCountdown() {
-			const now = new Date(),
-						newYear = new Date(2026, 0, 1),
-						diff = newYear - now;
+      if (diff <= 0) {
+        resultOutput.textContent = 'Chúc mừng năm mới!';
+        return;
+      }
 
-			if (diff <= 0) {
-				resultOutput.textContent = 'Chúc mừng năm mới!';
-				return;
-			}
+      const seconds = Math.floor(diff / 1000) % 60,
+            minutes = Math.floor(diff / 60000) % 60,
+            hours = Math.floor(diff / 3600000) % 24,
+            days = Math.floor(diff / 86400000);
 
-			const seconds = Math.floor(diff / 1000) % 60,
-						minutes = Math.floor(diff / 60000) % 60,
-						hours = Math.floor(diff / 3600000) % 24,
-						days = Math.floor(diff / 86400000);
+      let result = 'Còn ';
+      if (days > 0) result += `${padNumber(days)} ngày `;
+      if (hours > 0) result += `${padNumber(hours)} giờ `;
+      if (minutes > 0) result += `${padNumber(minutes)} phút `;
+      if (seconds > 0) result += `${padNumber(seconds)} giây `;
+      result += 'nữa là đến Tết dương lịch 2026.';
 
-			let result = 'Còn ';
-			if (days > 0) result += `${padNumber(days)} ngày `;
-			if (hours > 0) result += `${padNumber(hours)} giờ `;
-			if (minutes > 0) result += `${padNumber(minutes)} phút `;
-			if (seconds > 0) result += `${padNumber(seconds)} giây `;
-			result += 'nữa là đến Tết dương lịch 2026.';
+      resultOutput.textContent = result;
 
-			resultOutput.textContent = result;
+      requestAnimationFrame(updateCountdown);
+    }
 
-			requestAnimationFrame(updateCountdown);
-		}
+    requestAnimationFrame(updateCountdown);
 
-		requestAnimationFrame(updateCountdown);
-	});
-
+    const output = document.getElementById('countdown-text-output');
+    if (output) {
+      const observer = new MutationObserver(() => {
+        const title = output.textContent || '';
+        document.title = title ? `${title} | nhavantuonglai` : 'Còn bao nhiêu ngày đến Tết dương lịch 2026? | nhavantuonglai';
+      });
+      observer.observe(output, { childList: true, characterData: true, subtree: true });
+    }
+  });
 </script>

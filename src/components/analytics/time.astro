@@ -5,40 +5,44 @@ const subtitle = "Hướng dẫn: Bây giờ là mấy giờ mấy phút mấy g
 ---
 
 <Analytics
-
-	subtitle={subtitle}
-
-	id="time"
-	inputType="hidden"
-
+  subtitle={subtitle}
+  id="time"
+  type="hidden"
 />
 
-<script client:load>
+<script client:visible>
+  document.addEventListener('DOMContentLoaded', () => {
+    const resultOutput = document.getElementById('time-text-output');
 
-	document.addEventListener('DOMContentLoaded', () => {
-		const resultOutput = document.getElementById('time-text-output');
+    if (!resultOutput) {
+      document.body.textContent = 'Tính năng tạm thời không khả dụng, vui lòng thử lại sau.';
+      return;
+    }
 
-		if (!resultOutput) {
-			document.body.textContent = 'Tính năng tạm thời không khả dụng, vui lòng thử lại sau.';
-			return;
-		}
+    function padNumber(num) {
+      return num < 10 ? `0${num}` : num;
+    }
 
-		function padNumber(num) {
-			return num < 10 ? `0${num}` : num;
-		}
+    function updateTime() {
+      const now = new Date(),
+            hours = padNumber(now.getHours()),
+            minutes = padNumber(now.getMinutes()),
+            seconds = padNumber(now.getSeconds());
 
-		function updateTime() {
-			const now = new Date(),
-						hours = padNumber(now.getHours()),
-						minutes = padNumber(now.getMinutes()),
-						seconds = padNumber(now.getSeconds());
+      resultOutput.textContent = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
 
-			resultOutput.textContent = `Bây giờ là: ${hours} giờ ${minutes} phút ${seconds} giây.`;
+      requestAnimationFrame(updateTime);
+    }
 
-			requestAnimationFrame(updateTime);
-		}
+    requestAnimationFrame(updateTime);
 
-		requestAnimationFrame(updateTime);
-	});
-
+    const output = document.getElementById('time-text-output');
+    if (output) {
+      const observer = new MutationObserver(() => {
+        const title = output.textContent || '';
+        document.title = title ? `${title} | nhavantuonglai` : 'Bây giờ là mấy giờ? | nhavantuonglai';
+      });
+      observer.observe(output, { childList: true, characterData: true, subtree: true });
+    }
+  });
 </script>
