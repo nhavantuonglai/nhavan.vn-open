@@ -1,22 +1,20 @@
 ---
 export interface Props {
 	id?: string;
-	showImages?: boolean;
+	showimage?: boolean;
 }
 
 const {
 	id = "hero-gallery",
-	showImages = false
+	showimage = false
 } = Astro.props;
 
-// Khởi tạo các mảng mùa ở scope toàn cục
 let springs = [];
 let summers = [];
 let autumns = [];
 let winters = [];
 
-// Helper function để render image set - định nghĩa ở scope toàn cục
-const renderImageSet = (images) => {
+const imageseasons = (images) => {
 	return images.map((image) => {
 		if (image.src) {
 			return `<div class="gallery-item">
@@ -27,7 +25,7 @@ const renderImageSet = (images) => {
 	}).join('');
 };
 
-if (showImages) {
+if (showimage) {
 	const sections = [
 		{
 			title: 'Diễn đàn viết lách nhà văn tương lai.',
@@ -82,8 +80,7 @@ if (showImages) {
 	winters = shuffleArray(createSeasonData(uniqueIndices.slice(12, 16), imageUrls));
 }
 
-// Tạo allSeasons ở scope toàn cục để có thể sử dụng trong template
-const allSeasons = [
+const seasons = [
 	{ images: springs, direction: 'left-to-right', name: 'spring' },
 	{ images: summers, direction: 'right-to-left', name: 'summer' },
 	{ images: autumns, direction: 'left-to-right', name: 'autumn' },
@@ -95,12 +92,12 @@ const allSeasons = [
 
 	<div class="gallery-background">
 
-		{showImages && (
+		{showimage && (
 			<div class="gallery-container" id="gallery-images">
 
-				{allSeasons.map((season, index) => (
+				{seasons.map((season, index) => (
 					<div class={`gallery-row ${season.direction} season-${index + 1}`}>
-						<div class="gallery-track" set:html={renderImageSet(season.images) + renderImageSet(season.images) + renderImageSet(season.images)}></div>
+						<div class="gallery-track" set:html={imageseasons(season.images) + imageseasons(season.images) + imageseasons(season.images)}></div>
 					</div>
 				))}
 
@@ -122,7 +119,7 @@ const allSeasons = [
 
 </section>
 
-{showImages && (
+{showimage && (
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
@@ -143,6 +140,7 @@ const allSeasons = [
 )}
 
 <style>
+
 	.gallery-section {
 		position: relative;
 		width: 100%;
@@ -284,4 +282,5 @@ const allSeasons = [
 			width: 15%;
 		}
 	}
+
 </style>
